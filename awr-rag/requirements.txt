@@ -1,0 +1,9 @@
+sentence-transformers
+qdrant-client
+beautifulsoup4
+lxml
+python-dotenv
+openai
+fastapi
+uvicorn
+rich
