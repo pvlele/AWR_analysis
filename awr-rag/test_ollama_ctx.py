@@ -1,8 +1,12 @@
 from openai import OpenAI
 import sys
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 client = OpenAI(
-    base_url="http://localhost:12434/engines/llama.cpp/v1",
+    base_url=os.getenv("MODEL_BASE_URL"),
     api_key="ollama",
     timeout=600
 )
@@ -13,7 +17,7 @@ long_context = "test " * 3000
 print("Testing with flat extra_body...")
 try:
     response = client.chat.completions.create(
-        model="ai/gemma3:4B-Q4_0",
+        model=os.getenv("MODEL_NAME"),
         messages=[
             {"role": "user", "content": f"Context: {long_context}\n\nTask: Explain the context briefly based on the above."}
         ],
@@ -31,7 +35,7 @@ except Exception as e:
 print("\nTesting with nested options in extra_body...")
 try:
     response = client.chat.completions.create(
-        model="ai/gemma3:4B-Q4_0",
+        model=os.getenv("MODEL_NAME"),
         messages=[
             {"role": "user", "content": f"Context: {long_context}\n\nTask: Explain the context briefly based on the above."}
         ],

@@ -1,13 +1,17 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 from reasoning.prompts import SYSTEM_PROMPT, USER_TEMPLATE
 
+load_dotenv()
+
 client = OpenAI(
-    base_url="http://localhost:12434/engines/llama.cpp/v1",
+    base_url=os.getenv("MODEL_BASE_URL"),
     api_key="ollama",
     timeout=1800
 )
 
-def analyze(question, retrieved_chunks):
+def analyze(question, retrieved_chunks, model_name=None):
     context = "\n\n".join(
         chunk.payload["text"] for chunk in retrieved_chunks
     )
@@ -18,7 +22,7 @@ def analyze(question, retrieved_chunks):
     )
 
     response = client.chat.completions.create(
-        model="ai/gemma3:4B-Q4_0",
+        model=model_name or os.getenv("MODEL_NAME"),
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}

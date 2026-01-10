@@ -19,4 +19,4 @@ class Retriever:
                     results.append(hit)
                     seen_texts.add(text)
         
-        return results[:2] # Hard limit total chunks
+        return results[:5] # Hard limit total chunks
