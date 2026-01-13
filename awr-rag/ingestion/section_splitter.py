@@ -17,10 +17,15 @@ def split_sections(awr_text: str) -> dict:
 
     for line in awr_text.splitlines():
         line = line.strip()
-        if any(sec in line for sec in AWR_SECTIONS):
+        # Check if the line *starts with* one of the section headers.
+        # This is safer than 'in' which matches substrings anywhere.
+        matched_section = next((sec for sec in AWR_SECTIONS if line.startswith(sec)), None)
+
+        if matched_section:
             sections[current] = "\n".join(buffer)
-            current = line
+            current = matched_section
             buffer = []
+
         buffer.append(line)
 
     sections[current] = "\n".join(buffer)
