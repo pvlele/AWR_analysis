@@ -1,0 +1,48 @@
+AWR Analysis Report
+===================
+Date: 2026-01-17 13:44:53
+Model: ai/gemma3:4B-Q4_0
+Base URL: http://localhost:12434/v1
+
+Configuration Settings:
+-----------------------
+Timeout: 1800
+Chunk Size: 1500
+Chunk Overlap: 150
+Retrieval Limit: 5
+Queries Per Search: 10
+
+Analysis:
+---------
+Okay, let’s analyze the AWR data to determine the primary causes of the database slowdown.
+
+**Overall Slowdown Summary:**
+
+The database experienced significant performance issues, primarily due to excessive wait events related to CPU and buffer contention. The elapsed time of 121.57 minutes and 1,942.31 minutes of DB time indicate a prolonged period of inefficiency.
+
+**Key Wait Events & Their Causes:**
+
+1.  **`buffer busy waits`**: This is the most prevalent wait event, occurring 6,633,272 times during the observed period. This indicates that the database was frequently waiting for data to become available in the buffer cache. This is a direct consequence of high I/O activity and insufficient buffer capacity.
+
+2.  **`CPU + Wait for CPU`**: This event occurred frequently (over 14,000 times) and is closely tied to the `buffer busy waits`.  The database was spending a significant amount of time waiting for CPU resources to process I/O requests.
+
+3.  **`enq: TX - row lock contention`**:  This event (125,206 waits) indicates that processes were competing for row locks, leading to delays in transaction processing.
+
+4.  **`enq: TX - index contention`**: This event (147,065 waits) suggests that processes were competing for index locks, also contributing to transaction delays.
+
+5.  **`resmgr:cpu quantum`**: This event (180,880 waits) shows that the resource manager was frequently preempting processes, indicating a high degree of CPU contention.
+
+**Detailed Breakdown & Observations:**
+
+*   **High CPU Utilization:** The `DB CPU` wait event (90,086 waits) and the overall CPU usage (39.2%) demonstrate that the CPU was heavily utilized.
+*   **Significant I/O Activity:** The `Read IO requests` and `Write IO requests` metrics show a high volume of I/O operations.
+*   **Large SQL Statements:** The AWR reports show that the `ADDM:897425771_1_663` and `ADDM:897425771_1_664` SQL statements were executed frequently.  These statements likely represent the core workload driving the performance issues.
+*   **PL/SQL Execution:** The `PL/SQL Execution` metric indicates a significant amount of PL/SQL code was being executed, which can contribute to overhead.
+*   **Index Usage:** The `INV.MTL_MATERIAL_TRANSACTIONS_U2 (INDEX)` and `APPLSYS.WF_ITEM_ACTIVITY_STATUSES_N1 (INDEX)` events show that indexes were being used, which is generally good, but the contention around them is a problem.
+
+**Summary of Findings:**
+
+The primary cause of the database slowdown is a combination of:
+
+*   **High I/O Load:**  The database is being bombarded with I/O requests, leading to excessive `buffer busy waits`.
+*   **CPU Contention:**  Processes are competing for CPU resources, resulting in `CPU + Wait for CPU

@@ -1,0 +1,29 @@
+AWR Analysis Report
+===================
+Date: 2026-01-13 11:36:13
+Model: ai/llama3.1:8B-Q4_K_M
+Base URL: http://localhost:12434/v1
+
+Configuration Settings:
+-----------------------
+Timeout: 1800
+Chunk Size: 1500
+Chunk Overlap: 150
+Retrieval Limit: 5
+Queries Per Search: 10
+
+Analysis:
+---------
+Based on the provided AWR data, the database was slow due to high CPU usage and contention for resources.
+
+The top 10 foreground events by total wait time show that the database spent a significant amount of time waiting for CPU (DB CPU) and buffer busy waits (Concurrency). The average wait time for buffer busy waits was 2.01 ms, which indicates that the database was experiencing high contention for buffer resources.
+
+The top wait classes by total wait time show that the database spent a significant amount of time waiting for Concurrency (14.0% of DB time) and Application (1.9% of DB time). The Concurrency wait class includes events such as buffer busy waits, latch contention, and enqueue contention.
+
+The top events by total wait time show that the database spent a significant amount of time waiting for enq: TX - row lock contention (Application) and enq: TX - index contention (Concurrency). These events indicate that the database was experiencing contention for row locks and index locks.
+
+The CPU usage was high, with the instance CPU percentage busy being 91.7% and the %DB time waiting for CPU (Resource Manager) being 1.6%. This indicates that the database was experiencing high CPU contention.
+
+The load average was relatively low, with the load average begin and end being 1.23 and 0.77, respectively. This suggests that the system was not experiencing high system load.
+
+In summary, the database was slow due to high CPU usage and contention for resources, including buffer busy waits, latch contention, and enqueue contention.
