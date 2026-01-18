@@ -18,7 +18,7 @@ def _generate_response(model_name, messages):
     return client.chat.completions.create(
         model=model_name or Config.MODEL_NAME,
         messages=messages,
-        temperature=0,
+        temperature=0.5,
         extra_body={
             "num_predict": 4096,
             "num_ctx": 8192,

@@ -45,3 +45,6 @@ data/embeddings/*
 # System
 .DS_Store
 Thumbs.db
+
+# Outputs
+outputs/

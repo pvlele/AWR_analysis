@@ -15,8 +15,8 @@ class Config:
     CHUNK_OVERLAP = 150
 
     # Retrieval Settings
-    RETRIEVAL_LIMIT = 5
-    QUERIES_PER_SEARCH = 10
+    RETRIEVAL_LIMIT = 6
+    QUERIES_PER_SEARCH = 6
     VECTOR_STORE_PATH = "./qdrant_data"
 
     # Offline Mode Settings
