@@ -10,7 +10,8 @@ logger = setup_logger(__name__)
 client = OpenAI(
     base_url=Config.MODEL_BASE_URL,
     api_key="ollama",
-    timeout=Config.TIMEOUT
+    timeout=Config.TIMEOUT,
+    default_headers=Config.HEADERS
 )
 
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))

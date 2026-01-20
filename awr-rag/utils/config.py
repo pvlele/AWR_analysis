@@ -9,6 +9,12 @@ class Config:
     # MODEL_NAME = "ai/llama3.1:8B-Q4_K_M"
     MODEL_NAME = "ai/gemma3:4B-Q4_0"
     TIMEOUT = 1800
+    
+    # Request Headers
+    HEADERS = {
+        # "Authorization": "Bearer your-token",
+        # "User-Agent": "AWR-RAG-Client/1.0"
+    }
 
     # Ingestion Settings
     CHUNK_SIZE = 1500
