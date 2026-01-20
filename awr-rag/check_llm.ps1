@@ -10,7 +10,11 @@ $MaxTokens = 100
 
 # Define headers here
 $Headers = @{
-    # "Authorization" = "Bearer your-token"
+    "Authorization"     = "Bearer dummy-token-123"
+    "User-Agent"        = "AWR-RAG-Check/1.0"
+    "X-Custom-Header-1" = "Value1"
+    "X-Custom-Header-2" = "Value2"
+    "X-Request-ID"      = "req-abc-123"
 }
 
 # Payload

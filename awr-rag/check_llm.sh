@@ -16,7 +16,11 @@ MAX_TOKENS=100
 # Define headers here
 HEADER_ARGS=(
     -H "Content-Type: application/json"
-    # -H "Authorization: Bearer your-token"
+    -H "Authorization: Bearer dummy-token-123"
+    -H "User-Agent: AWR-RAG-Check/1.0"
+    -H "X-Custom-Header-1: Value1"
+    -H "X-Custom-Header-2: Value2"
+    -H "X-Request-ID: req-abc-123"
 )
 
 # JSON Payload
