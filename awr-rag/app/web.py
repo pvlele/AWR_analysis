@@ -28,6 +28,11 @@ templates = Jinja2Templates(directory="app/templates")
 UPLOAD_DIR = "data/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+# Global state for interactive mode
+store = None
+embedder = None
+processed_files_list = []
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -39,11 +44,9 @@ async def shutdown():
     os.kill(os.getpid(), signal.SIGINT)
     return {"message": "Server shutting down..."}
 
-@app.post("/analyze")
-async def analyze_awr(
-    query: str = Form(...),
-    files: List[UploadFile] = File(...)
-):
+@app.post("/ingest")
+async def ingest_files(files: List[UploadFile] = File(...)):
+    global store, embedder, processed_files_list
     saved_file_paths = []
     
     try:
@@ -62,35 +65,57 @@ async def analyze_awr(
              return JSONResponse(status_code=400, content={"error": "No valid content found in uploaded files."})
 
         # 3. Embed & Store
+        # Initialize embedder and store if not exists, or recreate for new ingestion
         embedder = Embedder()
-        store = VectorStore()
+        store = VectorStore(recreate=True) # Recreate for new upload batch
         
-        # Note: in a real app you might want to use a persistent collection or session ID
-        # For now, we overwrite/add to the default collection
+        logger.info("Generating embeddings...")
         embeddings = embedder.embed([c["text"] for c in chunks])
         store.upsert(embeddings, chunks)
         
+        processed_files_list = [os.path.basename(p) for p in saved_file_paths]
+        
+        return {"message": f"Successfully processed {len(processed_files_list)} files.", "files": processed_files_list}
+
+    except Exception as e:
+        logger.error(f"Ingestion failed: {e}")
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/config")
+async def get_config():
+    from utils.config import Config
+    return {
+        "models": Config.AVAILABLE_MODELS,
+        "default_model": Config.MODEL_NAME
+    }
+
+@app.post("/chat")
+async def chat(query: str = Form(...), model: str = Form(None)):
+    global store, embedder
+    
+    if not store or not embedder:
+        return JSONResponse(status_code=400, content={"error": "No data ingested. Please upload files first."})
+
+    try:
         # 4. Retrieval
         queries = rewrite(query)
         retriever = Retriever(store, embedder)
         results = retriever.retrieve(queries)
         
         # 5. Analysis
-        answer = analyze(query, results)
+        # Use provided model or default
+        answer = analyze(query, results, model_name=model)
         
         return {
             "question": query,
             "answer": answer,
-            "processed_files": [os.path.basename(p) for p in saved_file_paths]
+            "processed_files": processed_files_list,
+            "model_used": model
         }
 
     except Exception as e:
-        logger.error(f"Analysis failed: {e}")
+        logger.error(f"Chat failed: {e}")
         return JSONResponse(status_code=500, content={"error": str(e)})
-
-    finally:
-        # Cleanup uploaded files? Optional. For now keep them for debug.
-        pass
 
 def run():
     uvicorn.run("app.web:app", host="0.0.0.0", port=8000, reload=True)

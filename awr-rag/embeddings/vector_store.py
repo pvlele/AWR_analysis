@@ -2,14 +2,24 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct
 
 class VectorStore:
-    def __init__(self, collection="awr"):
+    def __init__(self, collection="awr", recreate=True):
         self.client = QdrantClient(":memory:")
         self.collection = collection
 
-        self.client.recreate_collection(
-            collection_name=collection,
-            vectors_config={"size": 384, "distance": "Cosine"}
-        )
+        if recreate:
+            self.client.recreate_collection(
+                collection_name=collection,
+                vectors_config={"size": 384, "distance": "Cosine"}
+            )
+        else:
+             # Check if collection exists, if not create it
+             try:
+                 self.client.get_collection(collection)
+             except Exception:
+                 self.client.recreate_collection(
+                    collection_name=collection,
+                    vectors_config={"size": 384, "distance": "Cosine"}
+                )
 
     def upsert(self, embeddings, chunks):
         points = []

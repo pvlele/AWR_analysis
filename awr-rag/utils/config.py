@@ -8,6 +8,11 @@ class Config:
     MODEL_BASE_URL = "http://localhost:12434/v1"
     # MODEL_NAME = "ai/llama3.1:8B-Q4_K_M"
     MODEL_NAME = "ai/gemma3:4B-Q4_0"
+    AVAILABLE_MODELS = [
+        "ai/gemma3:4B-Q4_0",
+        "ai/llama3.1:8B-Q4_K_M",
+        "ai/gpt-oss:20B-F16"
+    ]
     TIMEOUT = 1800
     
     # Request Headers

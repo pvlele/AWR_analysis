@@ -64,10 +64,6 @@ def main():
         
     logger.info(f"Found {len(expanded_files)} files to process: {expanded_files}")
 
-    if not question:
-        question = "Why was the database slow?"
-        logger.info(f"No query specified, defaulting to: {question}")
-
     logger.info("Starting AWR Analysis...")
     try:
         # Pass list of files
@@ -82,7 +78,7 @@ def main():
 
     try:
         embedder = Embedder()
-        store = VectorStore()
+        store = VectorStore(recreate=True)
 
         logger.info("Generating embeddings...")
         embeddings = embedder.embed([c["text"] for c in chunks])
@@ -92,6 +88,33 @@ def main():
         logger.error(f"Embedding/Storage failed: {e}")
         return
 
+    # Interactive Loop
+    if question:
+        # Initial question if provided
+        process_question(question, store, embedder)
+    else:
+        print("\nReady for analysis. Type 'exit' or 'quit' to stop.\n")
+
+    while True:
+        try:
+            print("\n---------------------------------------------------------")
+            user_input = input("Enter your question (or 'exit' to quit): ").strip()
+            if user_input.lower() in ['exit', 'quit']:
+                print("Exiting...")
+                break
+            
+            if not user_input:
+                continue
+
+            process_question(user_input, store, embedder)
+        
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            break
+        except Exception as e:
+            logger.error(f"Error processing question: {e}")
+
+def process_question(question, store, embedder):
     queries = rewrite(question)
     logger.info(f"Generated queries: {queries}")
 
