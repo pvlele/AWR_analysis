@@ -24,7 +24,7 @@ def main():
         help="List of AWR HTML/Text files or directories to analyze. Defaults to 'data/raw' if not provided.", 
         required=False
     )
-    parser.add_argument("--query", type=str, help="Analysis question", required=False)
+    parser.add_argument("-q", "--query", type=str, help="Analysis question", required=False)
     # Maintain backward compatibility if possible or just rely on args
     
     args = parser.parse_args()

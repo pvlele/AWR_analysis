@@ -1,32 +1,33 @@
 # check_llm.ps1
 
-# Base URL for the Chat Completions API
-$Url = "http://localhost:12434/v1/chat/completions"
+# Base URL from config
+# Base URL from config
+$Url = "http://localhost:12435/v1/chat/completions"
 
-# Configuration
-$Model = "ai/gemma3:4B-Q4_0"
+# Configuration from config
+$Model = "llama3.1:8B-Q4_K_M"
 $MessageContent = "Hello, are you running?"
-$MaxTokens = 100
+# $MaxTokens = 100 # Moved to options
 
 # Define headers here
 $Headers = @{
-    "Authorization"     = "Bearer dummy-token-123"
-    "User-Agent"        = "AWR-RAG-Check/1.0"
-    "X-Custom-Header-1" = "Value1"
-    "X-Custom-Header-2" = "Value2"
-    "X-Request-ID"      = "req-abc-123"
+    "Authorization" = "Bearer my-token1"
+    "User-Agent"    = "AWR-RAG-Check/1.0"
 }
 
-# Payload
+# Payload (Chat format matching analyzer.py)
 $Body = @{
-    model      = $Model
-    messages   = @(
+    model    = $Model
+    messages = @(
         @{
             role    = "user"
             content = $MessageContent
         }
     )
-    max_tokens = $MaxTokens
+    stream   = $false
+    options  = @{
+        num_predict = 100
+    }
 }
 
 $JsonBody = $Body | ConvertTo-Json -Depth 3

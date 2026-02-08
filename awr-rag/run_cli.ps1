@@ -1,7 +1,7 @@
 # Get the absolute path to the project root (assuming awr-rag is one level deep)
 $ScriptDir = $PSScriptRoot
-$ProjectRoot = Split-Path -Parent $ScriptDir
-$VenvPython = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
+# $ProjectRoot = Split-Path -Parent $ScriptDir # Old logic assuming parent venv
+$VenvPython = Join-Path $ScriptDir ".venv\Scripts\python.exe"
 
 # check if python exists in the expected location
 if (-not (Test-Path $VenvPython)) {

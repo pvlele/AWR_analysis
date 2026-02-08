@@ -118,7 +118,7 @@ async def chat(query: str = Form(...), model: str = Form(None)):
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 def run():
-    uvicorn.run("app.web:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app.web:app", host="0.0.0.0", port=8088, reload=True)
 
 if __name__ == "__main__":
     run()

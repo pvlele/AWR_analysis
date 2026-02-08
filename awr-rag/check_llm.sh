@@ -1,40 +1,29 @@
 #!/bin/bash
 # check_llm.sh
 
-# Load environment entries if needed, but for now we'll stick to a simple check
-# You might want to source .env to get the Config.MODEL_BASE_URL if it varies.
-# For this script we will default to the localhost address used in Config.
+# Base URL from config
+# Base URL from config
+# URL="http://localhost:11434/api/chat"
+URL="http://localhost:12435/v1/chat/completions"
 
-# Base URL for the Chat Completions API
-URL="http://localhost:12434/v1/chat/completions"
+# Configuration from config
+MODEL="llama3.1:8B-Q4_K_M"
+PROMPT="Hello, are you running?"
 
-# Configuration
-MODEL="ai/gemma3:4B-Q4_0"
-MESSAGE_CONTENT="Hello, are you running?"
-MAX_TOKENS=100
-
-# Define headers here
-HEADER_ARGS=(
-    -H "Content-Type: application/json"
-    -H "Authorization: Bearer dummy-token-123"
-    -H "User-Agent: AWR-RAG-Check/1.0"
-    -H "X-Custom-Header-1: Value1"
-    -H "X-Custom-Header-2: Value2"
-    -H "X-Request-ID: req-abc-123"
-)
-
-# JSON Payload
-# Using a heredoc for cleaner JSON formatting within the script
+# JSON Payload (Chat format matching analyzer.py)
 DATA=$(cat <<EOF
 {
   "model": "$MODEL",
   "messages": [
     {
       "role": "user",
-      "content": "$MESSAGE_CONTENT"
+      "content": "$PROMPT"
     }
   ],
-  "max_tokens": $MAX_TOKENS
+  "stream": false,
+  "options": {
+      "num_predict": 100
+  }
 }
 EOF
 )
@@ -43,5 +32,9 @@ echo "Sending POST request to $URL..."
 echo "Payload: $DATA"
 
 # Send request
-curl -s "${HEADER_ARGS[@]}" -d "$DATA" "$URL" | head -n 20
+curl -s \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer my-token1" \
+    -H "User-Agent: AWR-RAG-Check/1.0" \
+    -d "$DATA" "$URL" | head -n 20
 echo "" # Newline for formatting

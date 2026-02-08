@@ -52,3 +52,5 @@ outputs/*
 *.txt
 *.html
 *.log
+awr_chunks.json
+**/awr_chunks.json

@@ -5,19 +5,25 @@ load_dotenv()
 
 class Config:
     # Model Settings
-    MODEL_BASE_URL = "http://localhost:12434/v1"
-    # MODEL_NAME = "ai/llama3.1:8B-Q4_K_M"
-    MODEL_NAME = "ai/gemma3:4B-Q4_0"
+    # MODEL_BASE_URL = "http://localhost:11434/api/chat"
+    MODEL_BASE_URL = "http://localhost:12435/v1/chat/completions"
+    MODEL_NAME = "llama3.1:8B-Q4_K_M"
+    # MODEL_NAME = "gpt-oss:20b"
     AVAILABLE_MODELS = [
-        "ai/gemma3:4B-Q4_0",
-        "ai/llama3.1:8B-Q4_K_M",
-        "ai/gpt-oss:20B-F16"
+        "llama3.1:8B-Q4_K_M",
+        "gemma3:4B",
+        "smollm2:latest"
     ]
     TIMEOUT = 1800
     
+    # Context Logic
+    CONTEXT_SIZE = 4096
+    NUM_PREDICT = 4096
+    NUM_THREADS = 4
+    
     # Request Headers
     HEADERS = {
-        # "Authorization": "Bearer your-token",
+        "Authorization": f"Bearer {os.getenv('LLM_TOKEN', '')}",
         # "User-Agent": "AWR-RAG-Client/1.0"
     }
 
@@ -37,3 +43,4 @@ class Config:
 # Set environment variables for libraries that read them directly
 os.environ["HF_HUB_OFFLINE"] = str(Config.HF_HUB_OFFLINE)
 os.environ["TRANSFORMERS_OFFLINE"] = str(Config.TRANSFORMERS_OFFLINE)
+os.environ["OLLAMA_NUM_THREADS"] = str(Config.NUM_THREADS)

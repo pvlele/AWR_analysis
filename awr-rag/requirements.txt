@@ -1,13 +1,10 @@
-langchain
-langchain-community
 beautifulsoup4
 lxml
 python-dotenv
-chromadb
-tiktoken
 qdrant-client
 sentence-transformers
-ollama
 fastapi
 uvicorn
 python-multipart
+tenacity
+requests
