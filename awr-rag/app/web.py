@@ -10,6 +10,8 @@ import logging
 
 # App logic imports
 from ingestion.ingest import ingest_awr
+from ingestion.metadata_parser import extract_metadata
+from ingestion.awr_parser import load_awr
 from embeddings.embedder import Embedder
 from embeddings.vector_store import VectorStore
 from retrieval.query_rewriter import rewrite
@@ -60,7 +62,25 @@ async def ingest_files(files: List[UploadFile] = File(...)):
         logger.info(f"Processing {len(saved_file_paths)} files provided by user.")
 
         # 2. Ingest
-        chunks = ingest_awr(saved_file_paths)
+        all_chunks = []
+        for file_path in saved_file_paths:
+            try:
+                raw_text = load_awr(file_path)
+                meta = extract_metadata(raw_text)
+                
+                ingest_meta = {
+                    "db_name": meta.get("db_name", "UNKNOWN"),
+                    "instance": "1",
+                    "snap_begin": meta.get("start_time"),
+                    "snap_end": meta.get("end_time")
+                }
+                
+                file_chunks = ingest_awr(file_path, ingest_meta)
+                all_chunks.extend(file_chunks)
+            except Exception as e:
+                logger.error(f"Failed to ingest {file_path}: {e}")
+
+        chunks = all_chunks
         if not chunks:
              return JSONResponse(status_code=400, content={"error": "No valid content found in uploaded files."})
 
@@ -99,7 +119,7 @@ async def chat(query: str = Form(...), model: str = Form(None)):
     try:
         # 4. Retrieval
         queries = rewrite(query)
-        retriever = Retriever(store, embedder)
+        retriever = Retriever(store)
         results = retriever.retrieve(queries)
         
         # 5. Analysis

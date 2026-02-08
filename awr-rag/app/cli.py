@@ -4,6 +4,8 @@ load_dotenv()
 import argparse
 import sys
 from ingestion.ingest import ingest_awr
+from ingestion.metadata_parser import extract_metadata
+from ingestion.awr_parser import load_awr
 from embeddings.embedder import Embedder
 from embeddings.vector_store import VectorStore
 from retrieval.query_rewriter import rewrite
@@ -66,11 +68,38 @@ def main():
 
     logger.info("Starting AWR Analysis...")
     try:
-        # Pass list of files
-        chunks = ingest_awr(expanded_files)
-        if not chunks:
+        # Iterate files and ingest individually
+        all_chunks = []
+        for file_path in expanded_files:
+            try:
+                logger.info(f"Ingesting {file_path}...")
+                
+                # 1. Load content for metadata extraction
+                raw_text = load_awr(file_path)
+                
+                # 2. Extract metadata
+                meta = extract_metadata(raw_text)
+                
+                # 3. Map to expected keys
+                ingest_meta = {
+                    "db_name": meta.get("db_name", "UNKNOWN"),
+                    "instance": "1",
+                    "snap_begin": meta.get("start_time"),
+                    "snap_end": meta.get("end_time")
+                }
+                
+                # 4. Ingest
+                file_chunks = ingest_awr(file_path, ingest_meta)
+                all_chunks.extend(file_chunks)
+                
+            except Exception as e:
+                logger.error(f"Failed to ingest {file_path}: {e}")
+
+        if not all_chunks:
             logger.error("No chunks generated from input files.")
             return
+
+        chunks = all_chunks
             
     except Exception as e:
         logger.error(f"Ingestion failed: {e}")
@@ -118,8 +147,14 @@ def process_question(question, store, embedder):
     queries = rewrite(question)
     logger.info(f"Generated queries: {queries}")
 
-    retriever = Retriever(store, embedder)
+    retriever = Retriever(store)
     results = retriever.retrieve(queries)
+    print("\nRetrieved chunks:")
+    for r in results:
+        print("-", r.payload["metadata"]["section"])
+        print(r.payload["text"][:300])
+        print("-" * 60)
+
     logger.info(f"Retrieved {len(results)} chunks.")
 
     answer = analyze(question, results)

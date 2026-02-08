@@ -75,6 +75,7 @@ def _create_chunk_obj(text, section, idx, metadata):
         "metadata": {
             **metadata,
             "section": section,
-            "chunk_index": idx
+            "chunk_index": idx,
+            "type": "AWR" 
         }
     }
