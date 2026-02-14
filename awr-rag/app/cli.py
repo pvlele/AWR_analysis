@@ -182,7 +182,7 @@ Analysis:
     
     output_file_path = os.path.join(output_dir, f"analysis_report_{file_timestamp}.txt")
     
-    with open(output_file_path, "w") as f:
+    with open(output_file_path, "w", encoding="utf-8") as f:
         f.write(output_content)
 
     print("\nanalysis:\n")
