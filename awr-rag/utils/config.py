@@ -6,34 +6,39 @@ load_dotenv()
 class Config:
     # Model Settings
     # MODEL_BASE_URL = "http://localhost:11434/api/chat"
-    MODEL_BASE_URL = "http://localhost:12435/v1/chat/completions"
-    MODEL_NAME = "llama3.1:8B-Q4_K_M"
-    # MODEL_NAME = "gpt-oss:20b"
+    MODEL_BASE_URL = "http://localhost:12435/v1/"
+    MODEL_API_PATH = "chat/completions"
+    MODEL_NAME = "docker.io/ai/llama3.1:8B-Q4_K_M"
     AVAILABLE_MODELS = [
-        "llama3.1:8B-Q4_K_M",
-        "gemma3:4B",
-        "smollm2:latest"
+        "docker.io/ai/llama3.1:8B-Q4_K_M",
+        "docker.io/ai/gemma3:4B",
+        "docker.io/ai/smollm2:latest"
     ]
-    TIMEOUT = 1800
+    TIMEOUT = 1200
+    
+    # Embedding Settings
+    # Use same base URL as model for simplicity if possible, or define separately
+    EMBEDDING_API_PATH = "embeddings" 
+    EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
     
     # Context Logic
     CONTEXT_SIZE = 4096
-    NUM_PREDICT = 4096
+    NUM_PREDICT = 1024
     NUM_THREADS = 4
     
     # Request Headers
     HEADERS = {
-        "Authorization": f"Bearer {os.getenv('LLM_TOKEN', '')}",
+        "Authorization": f"Bearer {os.getenv('TOKEN', '')}",
         # "User-Agent": "AWR-RAG-Client/1.0"
     }
 
     # Ingestion Settings
-    CHUNK_SIZE = 1500
+    CHUNK_SIZE = 2000
     CHUNK_OVERLAP = 150
 
     # Retrieval Settings
-    RETRIEVAL_LIMIT = 15
-    QUERIES_PER_SEARCH = 6
+    RETRIEVAL_LIMIT = 8
+    QUERIES_PER_SEARCH = 10
     VECTOR_STORE_PATH = "./qdrant_data"
 
     # Offline Mode Settings

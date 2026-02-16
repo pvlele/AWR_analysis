@@ -7,7 +7,7 @@
 URL="http://localhost:12435/v1/chat/completions"
 
 # Configuration from config
-MODEL="llama3.1:8B-Q4_K_M"
+MODEL="docker.io/ai/llama3.1:8B-Q4_K_M"
 PROMPT="Hello, are you running?"
 
 # JSON Payload (Chat format matching analyzer.py)

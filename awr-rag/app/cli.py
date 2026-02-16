@@ -70,7 +70,9 @@ def main():
     try:
         # Iterate files and ingest individually
         all_chunks = []
-        for file_path in expanded_files:
+        file_snapshot_map = [] # Track which file maps to which snapshot ID
+
+        for idx, file_path in enumerate(expanded_files):
             try:
                 logger.info(f"Ingesting {file_path}...")
                 
@@ -80,12 +82,18 @@ def main():
                 # 2. Extract metadata
                 meta = extract_metadata(raw_text)
                 
+                # Generate a simple snapshot ID based on index or file name
+                # Required for comparison identification
+                snap_id = f"snap_{idx+1}"
+                file_snapshot_map.append(snap_id)
+
                 # 3. Map to expected keys
                 ingest_meta = {
                     "db_name": meta.get("db_name", "UNKNOWN"),
                     "instance": "1",
                     "snap_begin": meta.get("start_time"),
-                    "snap_end": meta.get("end_time")
+                    "snap_end": meta.get("end_time"),
+                    "snapshot_id": snap_id 
                 }
                 
                 # 4. Ingest
@@ -120,7 +128,7 @@ def main():
     # Interactive Loop
     if question:
         # Initial question if provided
-        process_question(question, store, embedder)
+        process_question(question, store, embedder, file_snapshot_map)
     else:
         print("\nReady for analysis. Type 'exit' or 'quit' to stop.\n")
 
@@ -135,7 +143,7 @@ def main():
             if not user_input:
                 continue
 
-            process_question(user_input, store, embedder)
+            process_question(user_input, store, embedder, file_snapshot_map)
         
         except KeyboardInterrupt:
             print("\nExiting...")
@@ -143,19 +151,42 @@ def main():
         except Exception as e:
             logger.error(f"Error processing question: {e}")
 
-def process_question(question, store, embedder):
+def process_question(question, store, embedder, snapshot_ids):
     queries = rewrite(question)
     logger.info(f"Generated queries: {queries}")
 
     retriever = Retriever(store)
-    results = retriever.retrieve(queries)
-    print("\nRetrieved chunks:")
-    for r in results:
-        print("-", r.payload["metadata"]["section"])
-        print(r.payload["text"][:300])
-        print("-" * 60)
+    from retrieval.retriever import is_comparison_question
+    
+    # Check modification for comparison
+    use_comparison = is_comparison_question(question) and len(snapshot_ids) == 2
+    
+    if use_comparison:
+        print(f"Comparison mode detected between {snapshot_ids[0]} and {snapshot_ids[1]}")
+        results = retriever.retrieve(queries, snapshot_ids=snapshot_ids)
+        # Results is a dict
+        
+        print("\nRetrieved chunks for Comparison:")
+        for sid, chunks in results.items():
+            print(f"--- Snapshot {sid} ---")
+            for r in chunks:
+                print(f"- {r.payload['metadata']['section']}")
+    else:
+        results = retriever.retrieve(queries)
+        print("\nRetrieved chunks:")
+        for r in results:
+            print("-", r.payload["metadata"]["section"])
+            print(r.payload["text"][:300])
+            print("-" * 60)
 
-    logger.info(f"Retrieved {len(results)} chunks.")
+    # Calculate count for logging (list vs dict)
+    count = 0
+    if isinstance(results, dict):
+        count = sum(len(v) for v in results.values())
+    else:
+        count = len(results)
+
+    logger.info(f"Retrieved {count} chunks.")
 
     answer = analyze(question, results)
     
@@ -171,6 +202,7 @@ Date: {timestamp}
 Question: {question}
 Model: {Config.MODEL_NAME}
 Base URL: {Config.MODEL_BASE_URL}
+API Path: {Config.MODEL_API_PATH}
 
 Analysis:
 ---------

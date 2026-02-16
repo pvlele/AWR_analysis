@@ -22,21 +22,28 @@ logger = setup_logger(__name__)
 
 def rewrite(question: str) -> list[str]:
     q = question.lower()
-    queries = []
+    queries = [question]  # Start with original
 
-    # Always check top waits
-    queries.append("Top wait events and DB time")
-
+    # Add specific domain queries based on keywords
     if "cpu" in q:
-        queries.append("SQL ordered by CPU time")
-    if "io" in q or "read" in q or "write" in q:
-        queries.append("IO waits and disk reads")
-    if "slow" in q or "performance" in q:
-        queries.append("SQL ordered by elapsed time")
-    if "lock" in q or "contention" in q or "block" in q:
-        queries.append("enq TX row lock contention")
+        queries.append("SQL ordered by CPU Time")
+    if any(x in q for x in ["io", "read", "write", "disk"]):
+        queries.append("SQL ordered by User I/O Wait Time")
+    if any(x in q for x in ["slow", "performance", "wait", "latency"]):
+        queries.append("Top Timed Events")
+        queries.append("SQL ordered by Elapsed Time")
+    if any(x in q for x in ["lock", "contention", "block"]):
+        queries.append("Segments by Row Lock Waits")
 
-    return list(set(queries))
+    # Dedup while preserving order
+    seen = set()
+    ordered_queries = []
+    for qry in queries:
+        if qry not in seen:
+            ordered_queries.append(qry)
+            seen.add(qry)
+
+    return ordered_queries
 
 # def rewrite(question: str) -> list[str]:
 #    return QueryRewriter().rewrite(question)

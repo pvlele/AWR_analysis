@@ -1,90 +1,750 @@
 [
   {
-    "text": "WORKLOAD REPOSITORY REPORT\n\nHost Name: PROD_DB\nDate: 08-Jan-26",
+    "text": "Section: HEADER\n\nAWR Report for DB: HHMLPROD, Inst: HHMLPROD, Snaps: 80404-80407\n\nWORKLOAD REPOSITORY report for\n\n| DB Name | DB Id | Instance | Inst num | Startup Time | Release | RAC |\n| HHMLPROD | 169052300 | HHMLPROD | 1 | 25-Jan-15 21:01 | 11.2.0.3.0 | NO |\n\n| Host Name | Platform | CPUs | Cores | Sockets | Memory (GB) |\n| PRDSDB | AIX-Based Systems (64-bit) | 128 | 32 |  | 369.00 |\n\n|  | Snap Id | Snap Time | Sessions | Cursors/Session |\n| Begin Snap: | 80404 | 28-Jan-15 17:00:56 | 229 | 3.1 |\n| End Snap: | 80407 | 28-Jan-15 18:30:25 | 2877 | 15.1 |\n| Elapsed: |  | 89.48 (mins) |  |  |\n| DB Time: |  | 130,079.68 (mins) |  |  |\n\nReport Summary\n\nCache Sizes\n\n|  | Begin | End |  |  |\n| Buffer Cache: | 44,032M | 44,032M | Std Block Size: | 8K |\n| Shared Pool Size: | 26,624M | 26,624M | Log Buffer: | 147,608K |",
     "metadata": {
       "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
       "section": "HEADER",
-      "chunk_index": 0
+      "chunk_index": 0,
+      "type": "AWR"
     }
   },
   {
-    "text": "Load Profile\n~~~~~~~~~~~~\nPer Second       Per Transaction\n---------------       ---------------\nDB Time(s):              4.5                  0.2\nDB CPU(s):              1.2                  0.1\nRedo size (bytes):        2,453,243             54,321.2\nLogical reads (blocks):           45,231              1,234.5\nBlock changes:                   5,231                123.4\nPhysical reads (blocks):           1,231                 34.5\nPhysical writes (blocks):            231                  5.6\nUser calls:              231                  5.6\nParses:                   45                  1.2\nHard parses:                    1                  0.0",
+    "text": "Section: Load Profile\n\nLoad Profile\n\n|  | Per Second | Per Transaction | Per Exec | Per Call |\n| DB Time(s): | 1,453.7 | 19.1 | 0.95 | 0.34 |\n| DB CPU(s): | 19.5 | 0.3 | 0.01 | 0.00 |\n| Redo size: | 436,055.8 | 5,742.2 |  |  |\n| Logical reads: | 275,202.0 | 3,624.0 |  |  |\n| Block changes: | 2,103.0 | 27.7 |  |  |\n| Physical reads: | 12,729.5 | 167.6 |  |  |\n| Physical writes: | 174.0 | 2.3 |  |  |\n| User calls: | 4,334.1 | 57.1 |  |  |\n| Parses: | 435.8 | 5.7 |  |  |\n| Hard parses: | 2.8 | 0.0 |  |  |\n| W/A MB processed: | 1.2 | 0.0 |  |  |\n| Logons: | 10.0 | 0.1 |  |  |\n| Executes: | 1,531.1 | 20.2 |  |  |\n| Rollbacks: | 0.2 | 0.0 |  |  |\n| Transactions: | 75.9 |  |  |  |",
     "metadata": {
       "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
       "section": "Load Profile",
-      "chunk_index": 0
+      "chunk_index": 0,
+      "type": "AWR"
     }
   },
   {
-    "text": "Instance Efficiency Percentages\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuffer Nowait %:   99.98       Redo NoWait %:  100.00\nBuffer  Hit   %:   98.50    In-memory Sort %:  100.00\nLibrary Hit   %:   99.95        Soft Parse %:   99.50\nExecute to Parse %:   85.23         Latch Hit %:   99.99\nParse CPU to Parse Elapsd %:   60.23     % Non-Parse CPU:   95.23",
+    "text": "Section: Instance Efficiency Percentages (Target 100%)\n\nInstance Efficiency Percentages (Target 100%)\n\n| Buffer Nowait %: | 99.66 | Redo NoWait %: | 100.00 |\n| Buffer  Hit   %: | 95.38 | In-memory Sort %: | 100.00 |\n| Library Hit   %: | 98.97 | Soft Parse %: | 99.36 |\n| Execute to Parse %: | 71.53 | Latch Hit %: | 87.23 |\n| Parse CPU to Parse Elapsd %: | 1.10 | % Non-Parse CPU: | 40.83 |\n\nShared Pool Statistics\n\n|  | Begin | End |\n| Memory Usage %: | 62.43 | 11.35 |\n| % SQL with executions>1: | 96.69 | 79.82 |\n| % Memory for SQL w/exec>1: | 95.55 | 74.19 |",
     "metadata": {
       "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
-      "section": "Instance Efficiency Percentages",
-      "chunk_index": 0
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Instance Efficiency Percentages (Target 100%)",
+      "chunk_index": 0,
+      "type": "AWR"
     }
   },
   {
-    "text": "Top 10 Foreground Events by Total Wait Time\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nTotal Wait       Wait   % DB\nEvent                                 Waits   Time (s)    Avg(ms)   time\n------------------------------ ----------- ----------- ---------- ------\ndb file sequential read             43,213       4,231       97.9   34.2\ndb file scattered read              12,321       1,231       99.9   12.1\nlog file sync                        5,231         431       82.4    4.3\nCPU time                                         3,231               31.2",
+    "text": "Section: Top 5 Timed Foreground Events\n\nTop 5 Timed Foreground Events\n\n| Event | Waits | Time(s) | Avg wait (ms) | % DB time | Wait Class |\n| cursor: pin S | 33,263 | 3,964,993 | 119201 | 50.80 | Concurrency |\n| cursor: pin S wait on X | 33,204 | 2,727,359 | 82139 | 34.94 | Concurrency |\n| latch: row cache objects | 14,562,577 | 457,394 | 31 | 5.86 | Concurrency |\n| enq: TX - row lock contention | 4,107 | 190,748 | 46445 | 2.44 | Application |\n| row cache lock | 2,473 | 118,354 | 47858 | 1.52 | Concurrency |\n\nHost CPU (CPUs:  128 Cores:   32 Sockets: )\n\n| Load Average Begin | Load Average End | %User | %System | %WIO | %Idle |\n| 34.93 | 20.53 | 44.2 | 19.8 | 1.3 | 36.0 |\n\nInstance CPU\n\n| %Total CPU | %Busy CPU | %DB time waiting for CPU (Resource Manager) |\n| 15.3 | 23.8 | 0.0 |",
     "metadata": {
       "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
-      "section": "Top 10 Foreground Events by Total Wait Time",
-      "chunk_index": 0
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Top 5 Timed Foreground Events",
+      "chunk_index": 0,
+      "type": "AWR"
     }
   },
   {
-    "text": "SQL ordered by Elapsed Time\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSQL Id        Elapsed Time(s)  CPU Time(s)    Executions  Elap per Exec (s)\n------------- ----------------  ------------  ------------  ------------------\na1b2c3d4e5f6           1234.56       1100.23        10,000                0.12\ng7h8i9j0k1l2            987.65        900.12           500                1.97",
+    "text": "Section: Memory Statistics\n\nMemory Statistics\n\nMemory Dynamic Components\n\nMemory Resize Operations Summary\n\nMemory Resize Ops\n\nProcess Memory Summary\n\nSGA Memory Summary\n\nSGA breakdown difference\n\nBack to Top\n\nMemory Dynamic Components\n\nMin/Max sizes since instance startup\n\nOper Types/Modes: INItializing,GROw,SHRink,STAtic/IMMediate,DEFerred\n\nordered by Component\n\n| Component | Begin Snap Size (Mb) | Current Size (Mb) | Min Size (Mb) | Max Size (Mb) | Oper Count | Last Op Typ/Mod |\n| ASM Buffer Cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| DEFAULT 16K buffer cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| DEFAULT 2K buffer cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| DEFAULT 32K buffer cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| DEFAULT 4K buffer cache | 1,024.00 | 1,024.00 | 1,024.00 | 1,024.00 | 0 | INI/ |\n| DEFAULT 8K buffer cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| DEFAULT buffer cache | 44,032.00 | 44,032.00 | 44,032.00 | 44,032.00 | 0 | INI/ |\n| KEEP buffer cache | 512.00 | 512.00 | 512.00 | 512.00 | 0 | INI/ |\n| PGA Target | 41,216.00 | 41,216.00 | 41,216.00 | 41,216.00 | 0 | STA/ |\n| RECYCLE buffer cache | 0.00 | 0.00 | 0.00 | 0.00 | 0 | STA/ |\n| SGA Target | 76,544.00 | 76,544.00 | 76,544.00 | 76,544.00 | 0 | STA/ |\n| Shared IO Pool | 512.00 | 512.00 | 512.00 | 512.00 | 0 | STA/ |\n| java pool | 1,792.00 | 1,792.00 | 1,792.00 | 1,792.00 | 0 | STA/ |\n| large pool | 1,024.00 | 1,024.00 | 1,024.00 | 1,024.00 | 0 | STA/ |\n| shared pool | 26,624.00 | 26,624.00 | 26,624.00 | 26,624.00 | 0 | STA/ |\n| streams pool | 512.00 | 512.00 | 512.00 | 512.00 | 0 | STA/ |",
     "metadata": {
       "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
-      "section": "SQL ordered by Elapsed Time",
-      "chunk_index": 0
-    }
-  },
-  {
-    "text": "SQL ordered by CPU Time\n~~~~~~~~~~~~~~~~~~~~~~~\nSQL Id        Elapsed Time(s)  CPU Time(s)    Executions  CPU per Exec (s)\n------------- ----------------  ------------  ------------  ------------------\na1b2c3d4e5f6           1234.56       1100.23        10,000                0.11",
-    "metadata": {
-      "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
-      "section": "SQL ordered by CPU Time",
-      "chunk_index": 0
-    }
-  },
-  {
-    "text": "IO Statistics\n~~~~~~~~~~~~~\nFunction Name       Reads:  Reqs   Data    Writes: Reqs   Data    Waits: Count   Time\n------------------ ------- ------ -------  -------- ------ ------  ------- ------ ------\nBuffer Cache Reads   12345  12345    100M         0      0      0    12345  123s",
-    "metadata": {
-      "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
-      "section": "IO Statistics",
-      "chunk_index": 0
-    }
-  },
-  {
-    "text": "Memory Statistics\n~~~~~~~~~~~~~~~~~\nHost Mem (MB): 32000    SGA (MB): 16000    PGA (MB): 4000",
-    "metadata": {
-      "db_name": null,
-      "start_time": null,
-      "end_time": null,
-      "source_file": "awr_12345.txt",
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
       "section": "Memory Statistics",
-      "chunk_index": 0
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Segment Statistics\n\nSegment Statistics\n\nSegments by Logical Reads\n\nSegments by Physical Reads\n\nSegments by Physical Read Requests\n\nSegments by UnOptimized Reads\n\nSegments by Optimized Reads\n\nSegments by Direct Physical Reads\n\nSegments by Physical Writes\n\nSegments by Physical Write Requests\n\nSegments by Direct Physical Writes\n\nSegments by Table Scans\n\nSegments by DB Blocks Changes\n\nSegments by Row Lock Waits\n\nSegments by ITL Waits\n\nSegments by Buffer Busy Waits\n\nBack to Top\n\nSegments by Logical Reads\n\nTotal Logical Reads:   1,477,584,997\n\nCaptured Segments account for   69.8% of Total\n\n| Owner | Tablespace    Name | Object Name | Subobject   Name | Obj. Type | Logical Reads | %Total |\n| SIEBEL | SIEBEL_DATA | S_CONTACT |  | TABLE | 273,329,840 | 18.50 |\n| SIEBEL | SIEBEL_INDEX1 | S_ORDER_P1 |  | INDEX | 65,002,192 | 4.40 |\n| SIEBEL | SIEBEL_DATA | S_INVOICE |  | TABLE | 63,628,400 | 4.31 |\n| SIEBEL | SIEBEL_DATA | S_SRM_REQUEST |  | TABLE | 57,568,048 | 3.90 |\n| SIEBEL | SIEBEL_DATA | S_ORG_EXT |  | TABLE | 52,033,168 | 3.52 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Segment Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Dictionary Cache Statistics\n\nDictionary Cache Statistics",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Dictionary Cache Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Library Cache Statistics\n\nLibrary Cache Statistics",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Library Cache Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Time Model Statistics\n\nTime Model Statistics\n\nTotal time in database user-calls (DB Time): 7804780.8s\n\nStatistics including the word \"background\" measure background process\ntime, and so do not contribute to the DB time statistic\n\nOrdered by % or DB time desc, Statistic name\n\n| Statistic Name | Time (s) | % of DB Time |\n| parse time elapsed | 6,180,469.59 | 79.19 |\n| sql execute elapsed time | 2,128,958.31 | 27.28 |\n| hard parse elapsed time | 525,370.84 | 6.73 |\n| DB CPU | 104,465.73 | 1.34 |\n| hard parse (sharing criteria) elapsed time | 26,854.40 | 0.34 |\n| hard parse (bind mismatch) elapsed time | 3,837.65 | 0.05 |\n| connection management call elapsed time | 2,769.13 | 0.04 |\n| PL/SQL execution elapsed time | 1,701.09 | 0.02 |\n| RMAN cpu time (backup/restore) | 157.13 | 0.00 |\n| PL/SQL compilation elapsed time | 122.19 | 0.00 |\n| failed parse elapsed time | 28.29 | 0.00 |\n| repeated bind elapsed time | 1.42 | 0.00 |\n| sequence load elapsed time | 0.50 | 0.00 |\n| inbound PL/SQL rpc elapsed time | 0.37 | 0.00 |\n| DB time | 7,804,780.83 |  |\n| background elapsed time | 12,716.22 |  |\n| background cpu time | 612.88 |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nOperating System Statistics\n\n*TIME statistic values are diffed.      All others display actual values.  End Value is displayed if different\n\nordered by statistic type (CPU Use, Virtual Memory, Hardware Config), Name\n\n| Statistic | Value | End Value |\n| AVG_BUSY_TIME | 344,051 |  |\n| AVG_IDLE_TIME | 193,394 |  |\n| AVG_IOWAIT_TIME | 6,947 |  |\n| AVG_SYS_TIME | 106,159 |  |\n| AVG_USER_TIME | 237,679 |  |\n| BUSY_TIME | 44,065,306 |  |\n| IDLE_TIME | 24,773,141 |  |\n| IOWAIT_TIME | 906,539 |  |\n| SYS_TIME | 13,614,882 |  |\n| USER_TIME | 30,450,424 |  |\n| LOAD | 35 | 21 |\n| OS_CPU_WAIT_TIME | 396,935,100 |  |\n| VM_IN_BYTES | 232,677,957,632 |  |\n| VM_OUT_BYTES | 16,639,823,872 |  |\n| PHYSICAL_MEMORY_BYTES | 396,210,733,056 |  |\n| NUM_CPUS | 128 |  |\n| NUM_CPU_CORES | 32 |  |\n| NUM_LCPUS | 128 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Time Model Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Time Model Statistics\n\n| PHYSICAL_MEMORY_BYTES | 396,210,733,056 |  |\n| NUM_CPUS | 128 |  |\n| NUM_CPU_CORES | 32 |  |\n| NUM_LCPUS | 128 |  |\n| NUM_VCPUS | 32 |  |\n| GLOBAL_RECEIVE_SIZE_MAX | 1,048,576 |  |\n| GLOBAL_SEND_SIZE_MAX | 1,048,576 |  |\n| TCP_RECEIVE_SIZE_DEFAULT | 16,384 |  |\n| TCP_RECEIVE_SIZE_MAX | 9,223,372,036,854,775,807 |  |\n| TCP_RECEIVE_SIZE_MIN | 4,096 |  |\n| TCP_SEND_SIZE_DEFAULT | 16,384 |  |\n| TCP_SEND_SIZE_MAX | 9,223,372,036,854,775,807 |  |\n| TCP_SEND_SIZE_MIN | 4,096 |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nOperating System Statistics - Detail\n\n| Snap Time | Load | %busy | %user | %sys | %idle | %iowait |\n| 28-Jan 17:00:56 | 34.93 |  |  |  |  |  |\n| 28-Jan 17:31:00 | 718.26 | 23.92 | 16.34 | 7.58 | 76.08 | 2.49 |\n| 28-Jan 17:51:32 | 755.38 | 81.75 | 55.06 | 26.70 | 18.25 | 1.54 |\n| 28-Jan 18:30:25 | 20.53 | 88.74 | 62.36 | 26.39 | 11.26 | 0.15 |\n\nBack to Wait Events Statistics\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Time Model Statistics",
+      "chunk_index": 1,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Class\n\nForeground Wait Class\n\ns  - second, ms - millisecond -    1000th of a second\n\nordered by wait time desc, waits desc\n\n%Timeouts: value of 0 indicates value was < .5%.  Value of null is truly 0\n\nCaptured Time accounts for         98.1%  of Total DB time   7,804,780.83 (s)\n\nTotal FG Wait Time:         7,553,646.60 (s)  DB CPU time:     104,465.73 (s)\n\n| Wait Class | Waits | %Time -outs | Total Wait Time (s) | Avg wait (ms) | %DB time |\n| Concurrency | 17,936,429 | 0 | 7,297,755 | 407 | 93.50 |\n| Application | 5,632 | 0 | 190,756 | 33870 | 2.44 |\n| DB CPU |  |  | 104,466 |  | 1.34 |\n| User I/O | 73,140,108 | 0 | 58,497 | 1 | 0.75 |\n| Other | 698,744 | 1 | 5,772 | 8 | 0.07 |\n| Commit | 47,816 | 0 | 586 | 12 | 0.01 |\n| Network | 20,621,428 | 0 | 265 | 0 | 0.00 |\n| Configuration | 273 | 16 | 13 | 49 | 0.00 |\n| System I/O | 24,970 | 0 | 2 | 0 | 0.00 |\n| Administrative | 5 | 0 | 0 | 19 | 0.00 |\n\nBack to Wait Events Statistics\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Class",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\nForeground Wait Events\n\ns  - second, ms - millisecond -    1000th of a second\n\nOnly events with Total Wait Time (s) >= .001 are shown\n\nordered by wait time desc, waits desc (idle events last)\n\n%Timeouts: value of 0 indicates value was < .5%.  Value of null is truly 0\n\n| Event | Waits | %Time -outs | Total Wait Time (s) | Avg wait (ms) | Waits /txn | % DB time |\n| cursor: pin S | 33,263 | 0 | 3,964,993 | 119201 | 0.08 | 50.80 |\n| cursor: pin S wait on X | 33,204 | 0 | 2,727,359 | 82139 | 0.08 | 34.94 |\n| latch: row cache objects | 14,562,577 | 0 | 457,394 | 31 | 35.72 | 5.86 |\n| enq: TX - row lock contention | 4,107 | 0 | 190,748 | 46445 | 0.01 | 2.44 |\n| row cache lock | 2,473 | 0 | 118,354 | 47858 | 0.01 | 1.52 |\n| db file sequential read | 67,891,703 | 0 | 56,088 | 1 | 166.51 | 0.72 |\n| library cache lock | 18,480 | 0 | 19,596 | 1060 | 0.05 | 0.25 |\n| latch: cache buffers chains | 3,147,009 | 0 | 8,941 | 3 | 7.72 | 0.11 |\n| latch: cache buffer handles | 670,482 | 0 | 3,379 | 5 | 1.64 | 0.04 |\n| read by other session | 4,440,786 | 0 | 1,782 | 0 | 10.89 | 0.02 |\n| inactive session | 1,741 | 100 | 1,739 | 999 | 0.00 | 0.02 |\n| library cache: mutex X | 119,975 | 0 | 779 | 6 | 0.29 | 0.01 |\n| log file sync | 47,816 | 0 | 586 | 12 | 0.12 | 0.01 |\n| Disk file operations I/O | 785,822 | 0 | 521 | 1 | 1.93 | 0.01 |\n| latch free | 7,812 | 0 | 242 | 31 | 0.02 | 0.00 |\n| buffer busy waits | 14,973 | 0 | 227 | 15 | 0.04 | 0.00 |\n| latch: enqueue hash chains | 2,579 | 0 | 221 | 86 | 0.01 | 0.00 |\n| SQL*Net message to client | 19,898,431 | 0 | 146 | 0 | 48.80 | 0.00 |\n| kksfbc child completion | 1,539 | 95 | 80 | 52 | 0.00 | 0.00 |\n| enq: TX - index contention | 3,220 | 0 | 79 | 24 | 0.01 | 0.00 |\n| SQL*Net more data to client | 521,091 | 0 | 69 | 0 | 1.28 | 0.00 |\n| db file scattered read | 6,730 | 0 | 52 | 8 | 0.02 | 0.00 |\n| db file parallel read | 14,579 | 0 | 52 | 4 | 0.04 | 0.00 |\n| SQL*Net more data from client | 201,906 | 0 | 50 | 0 | 0.50 | 0.00 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| db file parallel read | 14,579 | 0 | 52 | 4 | 0.04 | 0.00 |\n| SQL*Net more data from client | 201,906 | 0 | 50 | 0 | 0.50 | 0.00 |\n| latch: object queue header operation | 1,358 | 0 | 38 | 28 | 0.00 | 0.00 |\n| latch: shared pool | 823 | 0 | 29 | 36 | 0.00 | 0.00 |\n| wait list latch free | 11,642 | 0 | 24 | 2 | 0.03 | 0.00 |\n| rdbms ipc reply | 14 | 64 | 20 | 1455 | 0.00 | 0.00 |\n| latch: cache buffers lru chain | 415 | 0 | 10 | 23 | 0.00 | 0.00 |\n| imm op | 9 | 78 | 9 | 995 | 0.00 | 0.00 |\n| SQL*Net break/reset to client | 1,522 | 0 | 7 | 5 | 0.00 | 0.00 |\n| undo segment extension | 44 | 100 | 7 | 159 | 0.00 | 0.00 |\n| latch: undo global data | 95 | 0 | 6 | 60 | 0.00 | 0.00 |\n| enq: TX - allocate ITL entry | 48 | 0 | 4 | 79 | 0.00 | 0.00 |\n| cursor: mutex S | 97 | 0 | 3 | 34 | 0.00 | 0.00 |\n| log file switch completion | 93 | 0 | 2 | 23 | 0.00 | 0.00 |\n| enq: WL - contention | 1 | 0 | 2 | 1637 | 0.00 | 0.00 |\n| control file sequential read | 24,444 | 0 | 2 | 0 | 0.06 | 0.00 |\n| direct path sync | 187 | 0 | 2 | 8 | 0.00 | 0.00 |\n| latch: active service list | 72 | 0 | 1 | 15 | 0.00 | 0.00 |\n| Wait for Table Lock | 1 | 100 | 1 | 1000 | 0.00 | 0.00 |\n| enq: HW - contention | 76 | 0 | 0 | 5 | 0.00 | 0.00 |\n| buffer deadlock | 746 | 100 | 0 | 0 | 0.00 | 0.00 |\n| control file parallel write | 394 | 0 | 0 | 1 | 0.00 | 0.00 |\n| enq: TX - contention | 10 | 0 | 0 | 20 | 0.00 | 0.00 |\n| library cache load lock | 58 | 0 | 0 | 3 | 0.00 | 0.00 |\n| switch logfile command | 5 | 0 | 0 | 19 | 0.00 | 0.00 |\n| enq: RO - fast object reuse | 2 | 0 | 0 | 44 | 0.00 | 0.00 |\n| latch: call allocation | 216 | 0 | 0 | 0 | 0.00 | 0.00 |\n| direct path write | 245 | 0 | 0 | 0 | 0.00 | 0.00 |\n| direct path read | 56 | 0 | 0 | 1 | 0.00 | 0.00 |\n| cursor: mutex X | 275 | 0 | 0 | 0 | 0.00 | 0.00 |\n| enq: PR - contention | 1 | 0 | 0 | 34 | 0.00 | 0.00 |\n| enq: CF - contention | 2 | 0 | 0 | 11 | 0.00 | 0.00 |\n| cursor: pin X | 2 | 0 | 0 | 10 | 0.00 | 0.00 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 1,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| enq: CF - contention | 2 | 0 | 0 | 11 | 0.00 | 0.00 |\n| cursor: pin X | 2 | 0 | 0 | 10 | 0.00 | 0.00 |\n| latch: redo writing | 8 | 0 | 0 | 1 | 0.00 | 0.00 |\n| enq: SQ - contention | 4 | 0 | 0 | 1 | 0.00 | 0.00 |\n| enq: FB - contention | 1 | 0 | 0 | 1 | 0.00 | 0.00 |\n| enq: CU - contention | 1 | 0 | 0 | 1 | 0.00 | 0.00 |\n| latch: messages | 4 | 0 | 0 | 0 | 0.00 | 0.00 |\n| SQL*Net message from client | 19,893,791 | 0 | 4,428,526 | 223 | 48.79 |  |\n| jobq slave wait | 9,813 | 100 | 4,904 | 500 | 0.02 |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nBackground Wait Events\n\nordered by wait time desc, waits desc (idle events last)\n\nOnly events with Total Wait Time (s) >= .001 are shown\n\n%Timeouts: value of 0 indicates value was < .5%.  Value of null is truly 0\n\n| Event | Waits | %Time -outs | Total Wait Time (s) | Avg wait (ms) | Waits /txn | % bg time |\n| db file parallel write | 88,063 | 0 | 1,842 | 21 | 0.22 | 14.49 |\n| os thread startup | 646 | 0 | 1,617 | 2504 | 0.00 | 12.72 |\n| log file parallel write | 149,412 | 0 | 548 | 4 | 0.37 | 4.31 |\n| enq: PR - contention | 58 | 0 | 341 | 5883 | 0.00 | 2.68 |\n| Backup: MML write backup piece | 29,171 | 0 | 245 | 8 | 0.07 | 1.93 |\n| io done | 8,770 | 96 | 181 | 21 | 0.02 | 1.42 |\n| LGWR wait for redo copy | 9,532 | 0 | 178 | 19 | 0.02 | 1.40 |\n| imm op | 138 | 83 | 152 | 1099 | 0.00 | 1.19 |\n| latch: cache buffers lru chain | 1,790 | 0 | 141 | 79 | 0.00 | 1.11 |\n| Backup: MML initialization | 2 | 0 | 123 | 61607 | 0.00 | 0.97 |\n| latch free | 2,809 | 0 | 96 | 34 | 0.01 | 0.75 |\n| latch: object queue header operation | 1,577 | 0 | 93 | 59 | 0.00 | 0.73 |\n| latch: row cache objects | 1,172 | 0 | 82 | 70 | 0.00 | 0.65 |\n| Log archive I/O | 51 | 0 | 72 | 1414 | 0.00 | 0.57 |\n| enq: PV - syncstart | 4 | 0 | 60 | 14968 | 0.00 | 0.47 |\n| log file sequential read | 441 | 0 | 53 | 120 | 0.00 | 0.42 |\n| control file parallel write | 3,444 | 0 | 36 | 10 | 0.01 | 0.28 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 2,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| log file sequential read | 441 | 0 | 53 | 120 | 0.00 | 0.42 |\n| control file parallel write | 3,444 | 0 | 36 | 10 | 0.01 | 0.28 |\n| db file async I/O submit | 88,003 | 0 | 30 | 0 | 0.22 | 0.23 |\n| latch: redo allocation | 343 | 0 | 27 | 78 | 0.00 | 0.21 |\n| log file sync | 460 | 0 | 22 | 49 | 0.00 | 0.18 |\n| Backup: MML commit backup piece | 8 | 0 | 19 | 2408 | 0.00 | 0.15 |\n| db file sequential read | 18,809 | 0 | 19 | 1 | 0.05 | 0.15 |\n| latch: redo writing | 68 | 0 | 18 | 267 | 0.00 | 0.14 |\n| reliable message | 3,514 | 0 | 16 | 5 | 0.01 | 0.13 |\n| Disk file operations I/O | 4,533 | 0 | 12 | 3 | 0.01 | 0.10 |\n| direct path write | 323 | 0 | 9 | 27 | 0.00 | 0.07 |\n| Backup: MML query backup piece | 8 | 0 | 6 | 730 | 0.00 | 0.05 |\n| latch: shared pool | 84 | 0 | 5 | 64 | 0.00 | 0.04 |\n| latch: checkpoint queue latch | 20 | 0 | 4 | 224 | 0.00 | 0.04 |\n| Backup: MML shutdown | 4 | 0 | 4 | 1002 | 0.00 | 0.03 |\n| SQL*Net break/reset to client | 1,770 | 0 | 3 | 2 | 0.00 | 0.02 |\n| latch: active service list | 248 | 0 | 3 | 12 | 0.00 | 0.02 |\n| latch activity | 30 | 97 | 3 | 98 | 0.00 | 0.02 |\n| Backup: MML create a backup piece | 6 | 0 | 3 | 464 | 0.00 | 0.02 |\n| latch: cache buffers chains | 46 | 0 | 2 | 51 | 0.00 | 0.02 |\n| latch: call allocation | 642 | 0 | 2 | 4 | 0.00 | 0.02 |\n| direct path sync | 144 | 0 | 2 | 15 | 0.00 | 0.02 |\n| direct path read | 7 | 0 | 2 | 295 | 0.00 | 0.02 |\n| SQL*Net message to client | 152,113 | 0 | 2 | 0 | 0.37 | 0.01 |\n| slave exit | 6 | 33 | 1 | 167 | 0.00 | 0.01 |\n| control file sequential read | 11,895 | 0 | 1 | 0 | 0.03 | 0.01 |\n| latch: enqueue hash chains | 3 | 0 | 1 | 269 | 0.00 | 0.01 |\n| db file scattered read | 91 | 0 | 1 | 9 | 0.00 | 0.01 |\n| undo segment extension | 9 | 100 | 1 | 72 | 0.00 | 0.01 |\n| RMAN backup & recovery I/O | 89 | 0 | 1 | 6 | 0.00 | 0.00 |\n| buffer busy waits | 39 | 0 | 0 | 10 | 0.00 | 0.00 |\n| asynch descriptor resize | 53,750 | 100 | 0 | 0 | 0.13 | 0.00 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 3,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| buffer busy waits | 39 | 0 | 0 | 10 | 0.00 | 0.00 |\n| asynch descriptor resize | 53,750 | 100 | 0 | 0 | 0.13 | 0.00 |\n| control file single write | 92 | 0 | 0 | 3 | 0.00 | 0.00 |\n| RMAN Tape slave I/O | 29,195 | 0 | 0 | 0 | 0.07 | 0.00 |\n| cursor: pin S | 1 | 0 | 0 | 160 | 0.00 | 0.00 |\n| latch: messages | 30 | 0 | 0 | 4 | 0.00 | 0.00 |\n| SQL*Net more data from client | 135 | 0 | 0 | 1 | 0.00 | 0.00 |\n| ADR block file read | 19 | 0 | 0 | 4 | 0.00 | 0.00 |\n| enq: HW - contention | 1 | 0 | 0 | 50 | 0.00 | 0.00 |\n| log file single write | 44 | 0 | 0 | 1 | 0.00 | 0.00 |\n| cursor: pin S wait on X | 2 | 0 | 0 | 16 | 0.00 | 0.00 |\n| SQL*Net more data to client | 135 | 0 | 0 | 0 | 0.00 | 0.00 |\n| Parameter File I/O | 4 | 0 | 0 | 4 | 0.00 | 0.00 |\n| latch: cache buffer handles | 10 | 0 | 0 | 1 | 0.00 | 0.00 |\n| enq: TX - row lock contention | 1 | 0 | 0 | 13 | 0.00 | 0.00 |\n| library cache: mutex X | 6 | 0 | 0 | 2 | 0.00 | 0.00 |\n| enq: CR - block range reuse ckpt | 1 | 0 | 0 | 9 | 0.00 | 0.00 |\n| ADR block file write | 8 | 0 | 0 | 1 | 0.00 | 0.00 |\n| db file parallel read | 4 | 0 | 0 | 1 | 0.00 | 0.00 |\n| ADR file lock | 12 | 0 | 0 | 0 | 0.00 | 0.00 |\n| read by other session | 2 | 0 | 0 | 1 | 0.00 | 0.00 |\n| ARCH wait for archivelog lock | 15 | 0 | 0 | 0 | 0.00 | 0.00 |\n| wait list latch free | 1 | 0 | 0 | 1 | 0.00 | 0.00 |\n| rdbms ipc message | 198,531 | 25 | 157,871 | 795 | 0.49 |  |\n| dispatcher timer | 900 | 100 | 54,005 | 60005 | 0.00 |  |\n| Space Manager: slave idle wait | 3,359 | 93 | 16,087 | 4789 | 0.01 |  |\n| DIAG idle wait | 8,103 | 100 | 8,111 | 1001 | 0.02 |  |\n| Streams AQ: waiting for time management or cleanup tasks | 15 | 67 | 7,475 | 498335 | 0.00 |  |\n| SQL*Net message from client | 205,164 | 0 | 7,143 | 35 | 0.50 |  |\n| Streams AQ: qmn coordinator idle wait | 431 | 45 | 5,348 | 12407 | 0.00 |  |\n| Streams AQ: qmn slave idle wait | 193 | 0 | 5,348 | 27708 | 0.00 |  |\n| smon timer | 86 | 5 | 5,149 | 59877 | 0.00 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 4,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| Streams AQ: qmn slave idle wait | 193 | 0 | 5,348 | 27708 | 0.00 |  |\n| smon timer | 86 | 5 | 5,149 | 59877 | 0.00 |  |\n| pmon timer | 2,740 | 27 | 2,788 | 1017 | 0.01 |  |\n| i/o slave wait | 42,392 | 1 | 900 | 21 | 0.10 |  |\n| class slave wait | 495 | 0 | 3 | 6 | 0.00 |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nWait Event Histogram\n\nUnits for Total Waits column: K is 1000, M is 1000000, G is 1000000000\n\n% of Waits: value of .0 indicates value was <.05%; value of null is truly 0\n\n% of Waits: column heading of <=1s is truly <1024ms, >1s is truly >=1024ms\n\nOrdered by Event (idle events last)\n\n|  |  | % of Waits |\n| Event | Total Waits | <1ms | <2ms | <4ms | <8ms | <16ms | <32ms | <=1s | >1s |\n| ADR block file read | 19 | 31.6 | 10.5 | 5.3 | 42.1 | 10.5 |  |  |  |\n| ADR block file write | 8 | 75.0 | 25.0 |  |  |  |  |  |  |\n| ADR file lock | 12 | 91.7 | 8.3 |  |  |  |  |  |  |\n| ARCH wait for archivelog lock | 16 | 100.0 |  |  |  |  |  |  |  |\n| Backup: MML commit backup piece | 8 |  |  |  |  |  |  | 50.0 | 50.0 |\n| Backup: MML create a backup piece | 6 |  |  |  |  |  |  | 100.0 |  |\n| Backup: MML extended initialization | 2 | 100.0 |  |  |  |  |  |  |  |\n| Backup: MML initialization | 2 |  |  |  |  |  |  |  | 100.0 |\n| Backup: MML query backup piece | 8 |  |  |  |  |  |  | 87.5 | 12.5 |\n| Backup: MML shutdown | 4 |  |  |  |  |  |  | 100.0 |  |\n| Backup: MML write backup piece | 29.2K | 49.3 | 47.2 | 2.6 | .5 | .2 | .1 | .1 | .0 |\n| Disk file operations I/O | 790.1K | 96.9 | 1.7 | .7 | .3 | .1 | .1 | .2 | .0 |\n| LGWR wait for redo copy | 9530 | 89.8 | 2.4 | 1.7 | .8 | .6 | .5 | 4.1 | .1 |\n| Log archive I/O | 51 | 5.9 |  | 3.9 | 5.9 | 3.9 |  | 56.9 | 23.5 |\n| Parameter File I/O | 4 | 50.0 |  |  | 50.0 |  |  |  |  |\n| RMAN Tape slave I/O | 29.2K | 100.0 | .0 |  |  |  | .0 | .0 |  |\n| RMAN backup & recovery I/O | 219 | 86.8 | .9 | 1.4 | 2.3 | .9 | 5.9 | 1.8 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 5,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| RMAN Tape slave I/O | 29.2K | 100.0 | .0 |  |  |  | .0 | .0 |  |\n| RMAN backup & recovery I/O | 219 | 86.8 | .9 | 1.4 | 2.3 | .9 | 5.9 | 1.8 |  |\n| SQL*Net break/reset to client | 3292 | 80.1 | 5.9 | 5.5 | 4.5 | 2.1 | .7 | 1.2 | .0 |\n| SQL*Net message to client | 20M | 100.0 | .0 | .0 | .0 | .0 | .0 | .0 | .0 |\n| SQL*Net more data from client | 202K | 97.9 | .7 | .8 | .4 | .2 | .1 | .0 | .0 |\n| SQL*Net more data to client | 520.8K | 99.5 | .3 | .1 | .1 | .0 | .0 | .0 | .0 |\n| Wait for Table Lock | 1 |  |  |  |  |  |  | 100.0 |  |\n| asynch descriptor resize | 53.7K | 100.0 | .0 | .0 | .0 | .0 |  |  |  |\n| buffer busy waits | 15K | 59.6 | 6.4 | 7.0 | 6.1 | 6.0 | 5.2 | 9.7 | .0 |\n| buffer deadlock | 746 | 89.8 | 5.9 | 3.4 | .3 | .3 | .3 | .1 |  |\n| control file parallel write | 3838 | 55.7 | 5.3 | 7.3 | 15.0 | 12.0 | 1.7 | 3.0 | .1 |\n| control file sequential read | 36.3K | 99.6 | .1 | .1 | .1 | .1 | .0 | .0 |  |\n| control file single write | 92 | 45.7 |  | 3.3 | 50.0 |  |  | 1.1 |  |\n| cursor: mutex S | 97 | 69.1 | 4.1 | 5.2 |  | 12.4 |  | 9.3 |  |\n| cursor: mutex X | 274 | 95.6 | 3.3 | .7 |  | .4 |  |  |  |\n| cursor: pin S | 33.2K | 11.9 | 2.1 | 1.9 | 1.4 | 7.9 | .5 | 1.0 | 73.3 |\n| cursor: pin S wait on X | 33K | .1 | .2 | .3 | .3 | .7 | .7 | 4.2 | 93.5 |\n| cursor: pin X | 2 | 50.0 |  |  |  |  | 50.0 |  |  |\n| db file async I/O submit | 88K | 95.5 | 3.6 | .7 | .0 | .0 | .0 | .0 |  |\n| db file parallel read | 14.6K | 21.6 | 27.9 | 35.2 | 10.4 | 2.9 | .9 | 1.1 |  |\n| db file parallel write | 88.1K | 25.8 | 11.5 | 18.8 | 22.7 | 10.9 | 3.4 | 6.8 | .1 |\n| db file scattered read | 6821 | 31.6 | 32.5 | 18.1 | 12.4 | 3.6 | .7 | .9 | .2 |\n| db file sequential read | 67.7M | 86.5 | 8.4 | 3.6 | 1.0 | .3 | .1 | .1 | .0 |\n| direct path read | 64 | 76.6 | 9.4 | 3.1 | 1.6 | 1.6 |  | 7.8 |  |\n| direct path sync | 331 | 48.6 | 35.3 | 4.8 | 1.8 | 2.7 | 2.1 | 4.5 |  |\n| direct path write | 568 | 65.8 | 14.1 | 6.0 | 2.1 | .5 | 1.6 | 9.9 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 6,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| direct path sync | 331 | 48.6 | 35.3 | 4.8 | 1.8 | 2.7 | 2.1 | 4.5 |  |\n| direct path write | 568 | 65.8 | 14.1 | 6.0 | 2.1 | .5 | 1.6 | 9.9 |  |\n| enq: CF - contention | 2 |  |  | 50.0 |  |  | 50.0 |  |  |\n| enq: CR - block range reuse ckpt | 1 |  |  |  |  | 100.0 |  |  |  |\n| enq: CU - contention | 1 |  | 100.0 |  |  |  |  |  |  |\n| enq: FB - contention | 1 |  | 100.0 |  |  |  |  |  |  |\n| enq: HW - contention | 77 | 58.4 | 18.2 | 14.3 | 5.2 | 1.3 |  | 2.6 |  |\n| enq: PR - contention | 59 |  |  |  | 1.7 |  |  | 15.3 | 83.1 |\n| enq: PV - syncstart | 4 |  |  |  |  |  |  |  | 100.0 |\n| enq: RO - fast object reuse | 2 |  |  |  |  |  |  | 100.0 |  |\n| enq: SQ - contention | 4 | 75.0 |  | 25.0 |  |  |  |  |  |\n| enq: TX - allocate ITL entry | 48 | 8.3 | 6.3 | 6.3 | 10.4 | 8.3 | 2.1 | 58.3 |  |\n| enq: TX - contention | 10 | 10.0 | 40.0 | 30.0 | 10.0 |  |  | 10.0 |  |\n| enq: TX - index contention | 3220 | 5.6 | 7.0 | 11.6 | 16.1 | 17.5 | 15.7 | 26.6 |  |\n| enq: TX - row lock contention | 4015 | 22.9 | 2.7 | 36.5 | 23.9 | 5.4 | 2.3 | 3.7 | 2.6 |\n| enq: WL - contention | 1 |  |  |  |  |  |  |  | 100.0 |\n| imm op | 147 |  |  |  |  |  |  | 64.6 | 35.4 |\n| inactive session | 1741 | .2 |  |  |  |  |  | 99.5 | .3 |\n| io done | 8608 | 2.3 | .1 | 1.2 | .2 | .3 | 94.0 | 2.0 | .0 |\n| kksfbc child completion | 1523 | 2.9 |  |  |  |  |  | 97.1 |  |\n| latch activity | 30 |  |  |  |  |  |  | 100.0 |  |\n| latch free | 10.6K | 53.9 | 4.4 | 4.0 | 18.2 | 6.2 | 5.2 | 7.9 | .2 |\n| latch: active service list | 320 | 71.6 | 2.2 | 2.5 | 20.0 | .3 | .6 | 2.8 |  |\n| latch: cache buffer handles | 670.5K | 64.9 | 11.9 | 10.1 | 7.3 | 3.0 | .8 | 1.9 | .0 |\n| latch: cache buffers chains | 3109.8K | 90.7 | 1.5 | 1.7 | 1.9 | 1.5 | .9 | 1.8 | .0 |\n| latch: cache buffers lru chain | 2205 | 49.0 | 8.1 | 8.2 | 5.4 | 4.4 | 3.5 | 21.4 | .0 |\n| latch: call allocation | 858 | 85.0 | 3.3 | 2.3 | 8.5 | .1 | .3 | .5 |  |\n| latch: checkpoint queue latch | 20 | 10.0 | 20.0 | 5.0 | 5.0 | 15.0 | 5.0 | 40.0 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 7,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| latch: checkpoint queue latch | 20 | 10.0 | 20.0 | 5.0 | 5.0 | 15.0 | 5.0 | 40.0 |  |\n| latch: enqueue hash chains | 2580 | 22.4 | 8.2 | 10.1 | 10.0 | 13.1 | 13.5 | 22.2 | .6 |\n| latch: messages | 34 | 70.6 | 14.7 | 5.9 | 2.9 |  | 2.9 | 2.9 |  |\n| latch: object queue header operation | 2935 | 63.3 | 7.6 | 6.5 | 3.4 | 3.2 | 2.4 | 13.4 | .1 |\n| latch: redo allocation | 344 | 61.0 | 6.4 | 7.0 | 2.9 | 1.7 | 1.7 | 18.9 | .3 |\n| latch: redo writing | 76 | 14.5 | 2.6 | 6.6 | 6.6 | 2.6 | 2.6 | 64.5 |  |\n| latch: row cache objects | 14.6M | 15.4 | .8 | 3.4 | 5.3 | 9.8 | 35.4 | 29.8 | .0 |\n| latch: shared pool | 907 | 67.7 | 6.3 | 5.5 | 3.1 | 2.6 | 2.4 | 12.3 |  |\n| latch: undo global data | 97 | 60.8 | 7.2 | 8.2 | 7.2 | 2.1 | 1.0 | 13.4 |  |\n| library cache load lock | 58 | 77.6 |  |  |  | 20.7 |  | 1.7 |  |\n| library cache lock | 18.4K | .5 | .1 | 1.0 | 2.0 | 3.9 | 16.4 | 56.9 | 19.2 |\n| library cache: mutex X | 119.3K | 65.0 | .8 | .5 | .2 | 19.4 | 10.9 | 3.2 | .0 |\n| log file parallel write | 149.3K | 48.8 | 27.2 | 14.8 | 4.2 | 2.0 | 1.2 | 1.8 | .0 |\n| log file sequential read | 443 | 37.2 | .9 | .9 | 1.1 | 11.1 | 14.2 | 31.4 | 3.2 |\n| log file single write | 44 | 52.3 | 38.6 | 6.8 | 2.3 |  |  |  |  |\n| log file switch completion | 93 | 1.1 | 1.1 | 6.5 | 9.7 | 19.4 | 40.9 | 21.5 |  |\n| log file sync | 48.2K | 27.5 | 31.2 | 22.3 | 7.4 | 3.3 | 2.5 | 5.6 | .1 |\n| os thread startup | 646 |  |  |  |  |  |  | 73.5 | 26.5 |\n| rdbms ipc reply | 14 |  |  | 14.3 |  |  |  | 14.3 | 71.4 |\n| read by other session | 4388.6K | 93.4 | 5.2 | 1.1 | .2 | .0 | .0 | .0 | .0 |\n| reliable message | 3516 | 61.9 | 16.6 | 10.8 | 6.7 | 2.4 | 1.1 | .6 |  |\n| row cache lock | 1503 | 6.8 | .1 | .1 |  | 29.9 | 46.1 | 5.5 | 11.6 |\n| slave exit | 6 | 66.7 |  |  |  |  |  | 33.3 |  |\n| switch logfile command | 5 |  |  |  |  | 60.0 | 40.0 |  |  |\n| undo segment extension | 53 | 18.9 | 1.9 | 1.9 | 1.9 | 18.9 | 17.0 | 39.6 |  |\n| wait list latch free | 11.7K | 47.1 | 46.3 | 4.4 | .8 | .4 | .3 | .7 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 8,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| wait list latch free | 11.7K | 47.1 | 46.3 | 4.4 | .8 | .4 | .3 | .7 |  |\n| DIAG idle wait | 8104 |  |  |  |  |  |  | 99.6 | .4 |\n| SQL*Net message from client | 20.1M | 38.5 | 17.6 | 13.0 | 12.3 | 8.3 | 3.7 | 5.4 | 1.1 |\n| Space Manager: slave idle wait | 3341 |  | .0 |  | .0 | .1 | .3 | 2.1 | 97.4 |\n| Streams AQ: qmn coordinator idle wait | 431 | 42.9 | 6.5 | 3.2 | 1.9 | .5 | .2 |  | 44.8 |\n| Streams AQ: qmn slave idle wait | 193 |  |  |  |  |  |  |  | 100.0 |\n| Streams AQ: waiting for time management or cleanup tasks | 15 | 33.3 |  |  |  |  |  | 33.3 | 33.3 |\n| class slave wait | 495 | 76.6 | 4.4 | 7.3 | 6.3 | 2.8 | 1.0 | 1.6 |  |\n| dispatcher timer | 900 |  |  |  |  |  |  |  | 100.0 |\n| i/o slave wait | 42.4K | 30.9 | .0 | .3 | .1 | 39.4 | 28.1 | 1.2 | .0 |\n| jobq slave wait | 9799 |  | .0 | .0 |  | .0 | .0 | 99.9 |  |\n| pmon timer | 2739 | 33.0 | .3 | .3 | .5 | 1.4 | 2.0 | 28.8 | 33.7 |\n| rdbms ipc message | 198.4K | 27.9 | 3.6 | 4.4 | 6.3 | 11.6 | 11.0 | 14.7 | 20.3 |\n| smon timer | 85 | 4.7 |  |  | 1.2 |  | 2.4 | 7.1 | 84.7 |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nWait Event Histogram Detail (64 msec to 2 sec)\n\nUnits for Total Waits column: K is 1000, M is 1000000, G is 1000000000\n\nUnits for % of Total Waits:     ms is milliseconds    s is 1024 milliseconds (approximately 1 second)\n\n% of Total Waits: total waits for all wait classes, including Idle\n\n% of Total Waits: value of .0 indicates value was <.05%;     value of null is truly 0\n\nOrdered by Event (only non-idle events are displayed)\n\n|  |  | % of Total Waits |\n| Event | Waits 64ms  to 2s | <32ms | <64ms | <1/8s | <1/4s | <1/2s | <1s | <2s | >=2s |\n| Backup: MML commit backup piece | 4 |  |  |  |  | 50.0 |  |  | 50.0 |\n| Backup: MML create a backup piece | 6 |  |  |  |  | 66.7 | 33.3 |  |  |\n| Backup: MML query backup piece | 8 |  |  |  |  |  | 87.5 | 12.5 |  |\n| Backup: MML shutdown | 4 |  |  |  |  |  | 100.0 |  |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 9,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| Backup: MML query backup piece | 8 |  |  |  |  |  | 87.5 | 12.5 |  |\n| Backup: MML shutdown | 4 |  |  |  |  |  | 100.0 |  |  |\n| Backup: MML write backup piece | 27 | 99.9 | .0 | .0 | .0 | .0 |  | .0 | .0 |\n| Disk file operations I/O | 1710 | 99.8 | .1 | .0 | .0 | .0 | .0 | .0 | .0 |\n| LGWR wait for redo copy | 401 | 95.8 | .4 | .4 | .8 | 1.1 | 1.3 | .1 |  |\n| Log archive I/O | 29 | 19.6 | 2.0 | 15.7 | 39.2 |  |  |  | 23.5 |\n| RMAN Tape slave I/O | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| RMAN backup & recovery I/O | 4 | 98.2 | 1.8 |  |  |  |  |  |  |\n| SQL*Net break/reset to client | 41 | 98.8 | .5 | .4 | .2 | .0 | .1 | .0 |  |\n| SQL*Net message to client | 145 | 100.0 | .0 | .0 | .0 | .0 | .0 | .0 |  |\n| SQL*Net more data from client | 79 | 100.0 | .0 | .0 | .0 | .0 | .0 | .0 | .0 |\n| SQL*Net more data to client | 77 | 100.0 | .0 | .0 | .0 | .0 | .0 | .0 | .0 |\n| Wait for Table Lock | 1 |  |  |  |  |  | 100.0 |  |  |\n| buffer busy waits | 1456 | 90.3 | 4.3 | 3.0 | 1.6 | .4 | .4 | .0 |  |\n| buffer deadlock | 1 | 99.9 | .1 |  |  |  |  |  |  |\n| control file parallel write | 116 | 97.0 | 1.1 | .6 | .6 | .5 | .1 | .0 | .0 |\n| control file sequential read | 4 | 100.0 | .0 |  |  |  | .0 |  |  |\n| control file single write | 1 | 98.9 | 1.1 |  |  |  |  |  |  |\n| cursor: mutex S | 9 | 90.7 | 2.1 | 1.0 |  | 3.1 | 3.1 |  |  |\n| cursor: pin S | 376 | 25.7 | .5 | .3 | .0 | .0 | .1 | .2 | 73.2 |\n| cursor: pin S wait on X | 2035 | 2.3 | .8 | .5 | .9 | .8 | 1.2 | 1.9 | 91.6 |\n| db file async I/O submit | 21 | 100.0 | .0 | .0 | .0 |  |  |  |  |\n| db file parallel read | 156 | 98.9 | .7 | .2 | .1 | .1 |  |  |  |\n| db file parallel write | 6003 | 93.2 | 2.0 | 1.4 | 1.3 | 1.3 | .8 | .1 | .0 |\n| db file scattered read | 77 | 98.9 | .2 | .3 | .0 | .1 | .3 | .2 |  |\n| db file sequential read | 84.1K | 99.9 | .0 | .0 | .0 | .0 | .0 | .0 | .0 |\n| direct path read | 5 | 92.2 | 1.6 |  |  | 4.7 | 1.6 |  |  |\n| direct path sync | 15 | 95.5 | 1.2 | .9 | 1.2 | .6 | .6 |  |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 10,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| direct path read | 5 | 92.2 | 1.6 |  |  | 4.7 | 1.6 |  |  |\n| direct path sync | 15 | 95.5 | 1.2 | .9 | 1.2 | .6 | .6 |  |  |\n| direct path write | 56 | 90.1 | 2.6 | 3.9 | 1.6 | 1.8 |  |  |  |\n| enq: HW - contention | 2 | 97.4 | 1.3 |  |  | 1.3 |  |  |  |\n| enq: PR - contention | 17 | 1.7 | 3.4 | 3.4 | 1.7 | 1.7 | 5.1 | 13.6 | 69.5 |\n| enq: RO - fast object reuse | 2 |  | 100.0 |  |  |  |  |  |  |\n| enq: TX - allocate ITL entry | 28 | 41.7 | 6.3 | 16.7 | 35.4 |  |  |  |  |\n| enq: TX - contention | 1 | 90.0 |  |  | 10.0 |  |  |  |  |\n| enq: TX - index contention | 856 | 73.4 | 19.1 | 7.1 | .1 | .1 | .2 |  |  |\n| enq: TX - row lock contention | 150 | 93.7 | 1.1 | .3 | 1.0 | 1.1 | .1 | .0 | 2.6 |\n| enq: WL - contention | 1 |  |  |  |  |  |  | 100.0 |  |\n| imm op | 140 |  | 2.7 | 2.0 |  | 4.8 | 55.1 | 30.6 | 4.8 |\n| inactive session | 1738 | .2 |  |  |  |  | 99.5 | .3 |  |\n| io done | 176 | 98.0 | 1.6 | .2 | .1 | .1 | .0 | .0 |  |\n| kksfbc child completion | 1479 | 2.9 | 95.7 |  | .1 | 1.2 | .1 |  |  |\n| latch activity | 30 |  | 3.3 | 96.7 |  |  |  |  |  |\n| latch free | 863 | 91.9 | 2.1 | 1.0 | 1.0 | 1.9 | 1.9 | .2 |  |\n| latch: active service list | 9 | 97.2 | .3 | .3 |  | 1.3 | .9 |  |  |\n| latch: cache buffer handles | 12.6K | 98.1 | .5 | .4 | .5 | .4 | .1 | .0 |  |\n| latch: cache buffers chains | 54.7K | 98.2 | .6 | .6 | .3 | .2 | .0 | .0 | .0 |\n| latch: cache buffers lru chain | 472 | 78.6 | 3.4 | 3.2 | 4.9 | 5.8 | 4.0 | .0 |  |\n| latch: call allocation | 4 | 99.5 |  |  | .2 | .1 | .1 |  |  |\n| latch: checkpoint queue latch | 8 | 60.0 |  |  | 5.0 | 20.0 | 15.0 |  |  |\n| latch: enqueue hash chains | 587 | 77.2 | 2.7 | 3.1 | 3.3 | 9.0 | 4.1 | .6 |  |\n| latch: messages | 1 | 97.1 | 2.9 |  |  |  |  |  |  |\n| latch: object queue header operation | 398 | 86.4 | 2.2 | 2.1 | 2.8 | 3.7 | 2.7 | .1 |  |\n| latch: redo allocation | 66 | 80.8 | 2.3 | 1.7 | 3.8 | 5.8 | 5.2 | .3 |  |\n| latch: redo writing | 49 | 35.5 | 3.9 | 13.2 | 5.3 | 26.3 | 15.8 |  |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 11,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n| latch: redo writing | 49 | 35.5 | 3.9 | 13.2 | 5.3 | 26.3 | 15.8 |  |  |\n| latch: row cache objects | 4335.7K | 70.2 | 24.0 | 3.1 | 1.2 | 1.2 | .2 | .0 | .0 |\n| latch: shared pool | 112 | 87.7 | 1.8 | 1.1 | 3.2 | 4.3 | 2.0 |  |  |\n| latch: undo global data | 13 | 86.6 |  | 3.1 | 2.1 | 3.1 | 5.2 |  |  |\n| library cache load lock | 1 | 98.3 | 1.7 |  |  |  |  |  |  |\n| library cache lock | 12.5K | 23.8 | 56.0 | .9 | .0 | .0 | .0 | 10.7 | 8.5 |\n| library cache: mutex X | 3877 | 96.8 | 2.4 | .7 | .1 | .0 | .0 | .0 |  |\n| log file parallel write | 2701 | 98.2 | 1.0 | .4 | .3 | .1 | .0 | .0 |  |\n| log file sequential read | 148 | 65.5 | 15.3 | 10.6 | 2.3 | .9 | 2.3 | 2.0 | 1.1 |\n| log file switch completion | 20 | 78.5 | 20.4 | 1.1 |  |  |  |  |  |\n| log file sync | 2742 | 94.3 | 2.2 | 1.3 | 1.3 | .5 | .3 | .1 | .0 |\n| os thread startup | 495 |  |  | 19.2 | 49.4 | 3.7 | 1.2 | 3.1 | 23.4 |\n| rdbms ipc reply | 12 | 14.3 |  |  | 7.1 |  | 7.1 | 71.4 |  |\n| read by other session | 903 | 100.0 | .0 | .0 | .0 | .0 | .0 | .0 | .0 |\n| reliable message | 20 | 99.4 | .1 | .1 | .1 | .1 | .2 |  |  |\n| row cache lock | 106 | 82.9 | .1 | .3 | .4 | 3.5 | 1.1 | 1.6 | 10.0 |\n| slave exit | 2 | 66.7 |  |  |  | 33.3 |  |  |  |\n| undo segment extension | 21 | 60.4 | 11.3 | 7.5 | 5.7 | 3.8 | 11.3 |  |  |\n| wait list latch free | 83 | 99.3 | .3 | .3 | .1 | .0 | .0 |  |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nWait Event Histogram Detail (4 sec to 2 min)\n\nUnits for Total Waits column: K is 1000, M is 1000000, G is 1000000000\n\nUnits for % of Total Waits:    s is 1024 milliseconds (approximately 1 second)    m is 64*1024 milliseconds (approximately 67 seconds or 1.1 minutes)\n\n% of Total Waits: total waits for all wait classes, including Idle\n\n% of Total Waits: value of .0 indicates value was <.05%;     value of null is truly 0\n\nOrdered by Event (only non-idle events are displayed)\n\n|  |  | % of Total Waits |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 12,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n\n\nOrdered by Event (only non-idle events are displayed)\n\n|  |  | % of Total Waits |\n| Event | Waits 4s   to 2m | <2s | <4s | <8s | <16s | <32s | < 1m | < 2m | >=2m |\n| Backup: MML commit backup piece | 4 | 50.0 | 12.5 | 37.5 |  |  |  |  |  |\n| Backup: MML initialization | 2 |  |  | 50.0 |  |  |  | 50.0 |  |\n| Backup: MML write backup piece | 2 | 100.0 |  |  |  |  |  | .0 |  |\n| Disk file operations I/O | 6 | 100.0 | .0 | .0 |  |  |  |  |  |\n| Log archive I/O | 12 | 76.5 | 5.9 | 15.7 | 2.0 |  |  |  |  |\n| SQL*Net more data from client | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| SQL*Net more data to client | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| control file parallel write | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| cursor: pin S | 10.3K | 26.8 | .3 | 1.0 | 3.5 | 2.1 | 6.1 | 18.1 | 42.1 |\n| cursor: pin S wait on X | 26.5K | 8.4 | 2.5 | 3.4 | 9.5 | 6.9 | 12.1 | 45.8 | 11.4 |\n| db file parallel write | 23 | 100.0 | .0 | .0 |  |  |  |  |  |\n| db file sequential read | 6 | 100.0 | .0 |  |  |  |  |  |  |\n| enq: PR - contention | 41 | 30.5 | 20.3 | 18.6 | 28.8 | 1.7 |  |  |  |\n| enq: PV - syncstart | 4 |  | 25.0 |  | 25.0 | 50.0 |  |  |  |\n| enq: TX - row lock contention | 18 | 97.4 | .1 | .2 |  | .0 |  | .1 | 2.1 |\n| imm op | 7 | 95.2 | 4.8 |  |  |  |  |  |  |\n| latch: cache buffers chains | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| latch: row cache objects | 20 | 100.0 | .0 |  |  |  |  |  |  |\n| library cache lock | 1562 | 91.5 | 4.2 | .0 | 4.2 | .0 | .0 | .0 | .0 |\n| log file sequential read | 5 | 98.9 | .9 | .2 |  |  |  |  |  |\n| log file sync | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| os thread startup | 151 | 76.6 | 3.6 | 6.7 | 10.8 | 2.3 |  |  |  |\n| read by other session | 1 | 100.0 | .0 |  |  |  |  |  |  |\n| row cache lock | 151 | 90.0 | .1 | .1 | 8.2 |  | .5 | 1.1 |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nWait Event Histogram Detail (4 min to 1 hr)\n\nUnits for Total Waits column: K is 1000, M is 1000000, G is 1000000000\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 13,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Foreground Wait Events\n\n\n\nBack to Top\n\nWait Event Histogram Detail (4 min to 1 hr)\n\nUnits for Total Waits column: K is 1000, M is 1000000, G is 1000000000\n\nUnits for % of Total Waits:    m is 64*1024 milliseconds (approximately 67 seconds or 1.1 minutes)    h is 4096*1024 milliseconds (approximately 70 minutes or 1.17 hours)\n\n% of Total Waits: total waits for all wait classes, including Idle\n\n% of Total Waits: value of .0 indicates value was <.05%;     value of null is truly 0\n\nOrdered by Event (only non-idle events are displayed)\n\n|  |  | % of Total Waits |\n| Event | Waits 4m  to 1h | <2m | <4m | <8m | <1/4h | <1/2h | < 1h | >=1h |\n| cursor: pin S | 14K | 57.9 | 37.5 | 3.1 | 1.5 |  |  |  |\n| cursor: pin S wait on X | 3757 | 88.6 | 6.5 | 2.8 | 2.0 |  |  |  |\n| enq: TX - row lock contention | 86 | 97.9 | .0 | .1 |  | 2.0 |  |  |\n| library cache lock | 3 | 100.0 | .0 | .0 | .0 |  |  |  |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nService Statistics\n\nordered by DB Time\n\n| Service Name | DB Time (s) | DB CPU (s) | Physical Reads (K) | Logical Reads (K) |\n| SYS$USERS | 7,804,783 | 104,466 | 68,328 | 1,476,912 |\n| HHMLPROD.herohondaconnect.com | 0 | 0 | 0 | 0 |\n| SYS$BACKGROUND | 0 | 0 | 29 | 707 |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nService Wait Class Stats\n\nWait Class info for services in the Service Statistics section.\n\nTotal Waits and Time Waited displayed for the following wait     classes:  User I/O, Concurrency, Administrative, Network\n\nTime Waited (Wt Time) in seconds\n\n| Service Name | User I/O Total Wts | User I/O Wt Time | Concurcy Total Wts | Concurcy Wt Time | Admin Total Wts | Admin Wt Time | Network Total Wts | Network Wt Time |\n| SYS$USERS | 73143049 | 58497 | 17936973 | 7297756 | 5 | 0 | 20621698 | 265 |\n| SYS$BACKGROUND | 23717 | 45 | 1925 | 1704 | 29201 | 400 | 0 | 0 |\n\nBack to Wait Events Statistics\n\nBack to Top\n\nSQL Statistics",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Foreground Wait Events",
+      "chunk_index": 14,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Elapsed Time\n\nSQL ordered by Elapsed Time\n\nResources reported for PL/SQL code includes the resources used by all SQL     statements called by the code.\n\n% Total DB Time is the Elapsed Time of the SQL statement divided     into the Total Database Time multiplied by 100\n\n%Total - Elapsed Time  as a percentage of Total DB time\n\n%CPU   - CPU Time      as a percentage of Elapsed Time\n\n%IO    - User I/O Time as a percentage of Elapsed Time\n\nCaptured SQL account for   28.6% of Total DB Time (s):       7,804,781\n\nCaptured PL/SQL account for    0.0% of Total DB Time (s):       7,804,781\n\n| Elapsed  Time (s) | Executions | Elapsed Time per Exec (s) | %Total | %CPU | %IO | SQL Id | SQL Module | SQL Text |\n| 621,759.57 | 965 | 644.31 | 7.97 | 1.13 | 0.00 | 3jum3y9ruanrj |  | SELECT T64.CONFLICT_ID, T64.LA... |\nSQL_ID: 3jum3y9ruanrj\n| 222,690.68 | 5,520 | 40.34 | 2.85 | 0.81 | 0.00 | 00s2tb65nc368 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 00s2tb65nc368\n| 188,024.58 | 652 | 288.38 | 2.41 | 0.99 | 0.00 | 667a40k5fv2u3 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 667a40k5fv2u3\n| 137,489.73 | 358 | 384.05 | 1.76 | 0.68 | 0.00 | agymt7tv32tt8 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: agymt7tv32tt8\n| 103,474.82 | 617 | 167.71 | 1.33 | 0.96 | 0.00 | cm49uqfqhyuku |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: cm49uqfqhyuku\n| 81,689.13 | 976 | 83.70 | 1.05 | 0.71 | 0.00 | 6bz0ddtmhqfqr |  | SELECT T27.CONFLICT_ID, T27.LA... |\nSQL_ID: 6bz0ddtmhqfqr\n| 53,779.56 | 411 | 130.85 | 0.69 | 0.55 | 0.00 | 0twbjys78zmt3 |  | SELECT T11.CONFLICT_ID, T11.LA... |\nSQL_ID: 0twbjys78zmt3\n| 52,719.18 | 173 | 304.74 | 0.68 | 0.45 | 0.00 | gy65z0dcfqb7j |  | SELECT /*+ ALL_ROWS */ T64.CON... |\nSQL_ID: gy65z0dcfqb7j\n| 44,609.17 | 1,008 | 44.26 | 0.57 | 0.18 | 0.01 | 85vu179mfy9s0 |  | SELECT T23.CONFLICT_ID, T23.LA... |\nSQL_ID: 85vu179mfy9s0\n| 42,492.50 | 181 | 234.77 | 0.54 | 0.22 | 0.00 | 2jubmgag0hsgr |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 2jubmgag0hsgr",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Elapsed Time",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Elapsed Time\n\nSQL_ID: 85vu179mfy9s0\n| 42,492.50 | 181 | 234.77 | 0.54 | 0.22 | 0.00 | 2jubmgag0hsgr |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 2jubmgag0hsgr\nSQL Preview: Back to SQL Statistics\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Elapsed Time",
+      "chunk_index": 1,
+      "type": "AWR",
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by CPU Time\n\nSQL ordered by CPU Time\n\nResources reported for PL/SQL code includes the resources used by all SQL     statements called by the code.\n\n%Total - CPU Time      as a percentage of Total DB CPU\n\n%CPU   - CPU Time      as a percentage of Elapsed Time\n\n%IO    - User I/O Time as a percentage of Elapsed Time\n\nCaptured SQL account for   23.0% of Total CPU Time (s):         104,466\n\nCaptured PL/SQL account for    0.0% of Total CPU Time (s):         104,466\n\n| CPU    Time (s) | Executions | CPU per  Exec (s) | %Total | Elapsed  Time (s) | %CPU | %IO | SQL Id | SQL Module | SQL Text |\n| 6,999.05 | 965 | 7.25 | 6.70 | 621,759.57 | 1.13 | 0.00 | 3jum3y9ruanrj |  | SELECT T64.CONFLICT_ID, T64.LA... |\nSQL_ID: 3jum3y9ruanrj\n| 1,867.84 | 652 | 2.86 | 1.79 | 188,024.58 | 0.99 | 0.00 | 667a40k5fv2u3 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 667a40k5fv2u3\n| 1,812.36 | 5,520 | 0.33 | 1.73 | 222,690.68 | 0.81 | 0.00 | 00s2tb65nc368 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 00s2tb65nc368\n| 1,198.65 | 1,183 | 1.01 | 1.15 | 4,943.58 | 24.25 | 0.31 | dt67yruakr2x9 |  | SELECT T6.CONFLICT_ID, T6.LAST... |\nSQL_ID: dt67yruakr2x9\n| 996.14 | 617 | 1.61 | 0.95 | 103,474.82 | 0.96 | 0.00 | cm49uqfqhyuku |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: cm49uqfqhyuku\n| 936.17 | 358 | 2.61 | 0.90 | 137,489.73 | 0.68 | 0.00 | agymt7tv32tt8 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: agymt7tv32tt8\n| 576.80 | 976 | 0.59 | 0.55 | 81,689.13 | 0.71 | 0.00 | 6bz0ddtmhqfqr |  | SELECT T27.CONFLICT_ID, T27.LA... |\nSQL_ID: 6bz0ddtmhqfqr\n| 547.76 | 46,927 | 0.01 | 0.52 | 4,510.04 | 12.15 | 2.17 | c0awjmvg5djb7 |  | SELECT T52.CONFLICT_ID, T52.LA... |\nSQL_ID: c0awjmvg5djb7\n| 516.98 | 160 | 3.23 | 0.49 | 40,448.75 | 1.28 | 0.00 | g1wz6qyr9401c |  | SELECT T34.CONFLICT_ID, T34.LA... |\nSQL_ID: g1wz6qyr9401c\n| 396.72 | 153 | 2.59 | 0.38 | 39,713.12 | 1.00 | 0.00 | 5k8mmscb540ng |  | SELECT T22.CONFLICT_ID, T22.LA... |\nSQL_ID: 5k8mmscb540ng\nSQL Preview: Back to SQL Statistics\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by CPU Time",
+      "chunk_index": 0,
+      "type": "AWR",
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by CPU Time\n\nSQL_ID: 5k8mmscb540ng\nSQL Preview: Back to SQL Statistics\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by CPU Time",
+      "chunk_index": 1,
+      "type": "AWR",
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by User I/O Wait Time\n\nSQL ordered by User I/O Wait Time\n\nResources reported for PL/SQL code includes the resources used by all SQL     statements called by the code.\n\n%Total - User I/O Time as a percentage of Total User I/O Wait time\n\n%CPU   - CPU Time      as a percentage of Elapsed Time\n\n%IO    - User I/O Time as a percentage of Elapsed Time\n\nCaptured SQL account for   24.0% of Total User I/O Wait Time (s):          58,541\n\nCaptured PL/SQL account for    0.0% of Total User I/O Wait Time (s):          58,541\n\n| User I/O Time (s) | Executions | UIO per  Exec (s) | %Total | Elapsed  Time (s) | %CPU | %IO | SQL Id | SQL Module | SQL Text |\n| 4,294.13 | 206 | 20.85 | 7.34 | 5,506.23 | 6.40 | 77.99 | bxfhn5fy59cnx |  | SELECT T44.CONFLICT_ID, T44.LA... |\nSQL_ID: bxfhn5fy59cnx\n| 2,434.99 | 40 | 60.87 | 4.16 | 3,975.16 | 8.27 | 61.26 | bckg9jsmnpw7k |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: bckg9jsmnpw7k\n| 1,589.16 | 23 | 69.09 | 2.71 | 2,702.17 | 6.86 | 58.81 | cym752unkmg2w |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: cym752unkmg2w\n| 844.82 | 825 | 1.02 | 1.44 | 2,146.39 | 9.67 | 39.36 | ackj4466dt1ba |  | SELECT T11.CONFLICT_ID, T11.LA... |\nSQL_ID: ackj4466dt1ba\n| 615.23 | 7 | 87.89 | 1.05 | 829.09 | 8.14 | 74.21 | fcud65b5j1rz5 |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: fcud65b5j1rz5\n| 546.63 | 15 | 36.44 | 0.93 | 698.33 | 8.17 | 78.28 | 3hyc4tuwtuvuf |  | SELECT /*+ ALL_ROWS */ T45.CON... |\nSQL_ID: 3hyc4tuwtuvuf\n| 509.73 | 19 | 26.83 | 0.87 | 744.36 | 7.82 | 68.48 | 6g46dby3s1qkf |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 6g46dby3s1qkf\n| 472.20 | 11 | 42.93 | 0.81 | 625.96 | 9.67 | 75.44 | 427s6ghkzgc6a |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 427s6ghkzgc6a\n| 431.86 | 37 | 11.67 | 0.74 | 755.93 | 15.25 | 57.13 | 2t2bqxswwt30q |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 2t2bqxswwt30q\n| 421.70 | 27 | 15.62 | 0.72 | 573.30 | 11.92 | 73.56 | 224p33rfhmg0p |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 224p33rfhmg0p",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by User I/O Wait Time",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: SQL ordered by User I/O Wait Time\n\n| 421.70 | 27 | 15.62 | 0.72 | 573.30 | 11.92 | 73.56 | 224p33rfhmg0p |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 224p33rfhmg0p\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Gets\n\nResources reported for PL/SQL code ...\n| 190,130,622 | 1,183 | 160,719.04 | 12.87 | 4,943.58 | 24.2 | .3 | dt67yruakr2x9 |  | SELECT T6.CONFLICT_ID, T6.LAST... |\nSQL_ID: dt67yruakr2x9\n| 96,024,273 | 46,927 | 2,046.25 | 6.50 | 4,510.04 | 12.1 | 2.2 | c0awjmvg5djb7 |  | SELECT T52.CONFLICT_ID, T52.LA... |\nSQL_ID: c0awjmvg5djb7\n| 43,178,199 | 42,308 | 1,020.57 | 2.92 | 2,116.65 | 12.5 | 2.3 | f9bs2ha91p3s3 |  | SELECT T52.CONFLICT_ID, T52.LA... |\nSQL_ID: f9bs2ha91p3s3\n| 34,043,161 | 1,215 | 28,019.06 | 2.30 | 425.83 | 40.8 | .4 | 6as61s8cqg56r |  | SELECT /*+ ALL_ROWS */ T1.CONF... |\nSQL_ID: 6as61s8cqg56r\n| 29,575,431 | 40 | 739,385.78 | 2.00 | 3,975.16 | 8.3 | 61.3 | bckg9jsmnpw7k |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: bckg9jsmnpw7k\n| 26,966,435 | 2,404 | 11,217.32 | 1.83 | 3,174.23 | 7.6 | .2 | 44b2rvqwppu79 | siebmtsh@PRDSAOM1 (TNS V1-V3) | select R.ROW_ID, R.RPT_TYPE, ... |\nSQL_ID: 44b2rvqwppu79\n| 26,954,239 | 825 | 32,671.80 | 1.82 | 2,146.39 | 9.7 | 39.4 | ackj4466dt1ba |  | SELECT T11.CONFLICT_ID, T11.LA... |\nSQL_ID: ackj4466dt1ba\n| 15,540,895 | 2 | 7,770,447.50 | 1.05 | 386.32 | 19.8 | 29.4 | 4hm1hnp00yyg1 |  | SELECT /*+ ALL_ROWS */ T1.CONF... |\nSQL_ID: 4hm1hnp00yyg1\n| 15,425,781 | 37 | 416,913.00 | 1.04 | 755.93 | 15.2 | 57.1 | 2t2bqxswwt30q |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 2t2bqxswwt30q\n| 14,699,826 | 23 | 639,122.87 | 0.99 | 2,702.17 | 6.9 | 58.8 | cym752unkmg2w |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: cym752unkmg2w\nSQL Preview: Back to SQL Statistics\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by User I/O Wait Time",
+      "chunk_index": 1,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics",
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL ordered by Reads\n\n%Total - Physical Reads as a percentage of Total Disk Reads\n\n%CPU   - CPU Time      as a percentage of Elapsed Time\n\n%IO    - User I/O Time as a percentage of Elapsed Time\n\nTotal Disk Reads:      68,345,594\n\nCaptured SQL account for   32.0% of Total\n\n| Physical Reads | Executions | Reads     per Exec | %Total | Elapsed  Time (s) | %CPU | %IO | SQL Id | SQL Module | SQL Text |\n| 6,332,997 | 206 | 30,742.70 | 9.27 | 5,506.23 | 6.40 | 77.99 | bxfhn5fy59cnx |  | SELECT T44.CONFLICT_ID, T44.LA... |\nSQL_ID: bxfhn5fy59cnx\n| 3,055,274 | 40 | 76,381.85 | 4.47 | 3,975.16 | 8.27 | 61.26 | bckg9jsmnpw7k |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: bckg9jsmnpw7k\n| 2,155,960 | 825 | 2,613.28 | 3.15 | 2,146.39 | 9.67 | 39.36 | ackj4466dt1ba |  | SELECT T11.CONFLICT_ID, T11.LA... |\nSQL_ID: ackj4466dt1ba\n| 1,613,441 | 23 | 70,149.61 | 2.36 | 2,702.17 | 6.86 | 58.81 | cym752unkmg2w |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: cym752unkmg2w\n| 870,980 | 7 | 124,425.71 | 1.27 | 829.09 | 8.14 | 74.21 | fcud65b5j1rz5 |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: fcud65b5j1rz5\n| 856,721 | 19 | 45,090.58 | 1.25 | 744.36 | 7.82 | 68.48 | 6g46dby3s1qkf |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 6g46dby3s1qkf\n| 822,168 | 14 | 58,726.29 | 1.20 | 469.88 | 16.92 | 37.19 | g5fy32xzfsqsm |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: g5fy32xzfsqsm\n| 812,576 | 11 | 73,870.55 | 1.19 | 625.96 | 9.67 | 75.44 | 427s6ghkzgc6a |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 427s6ghkzgc6a\n| 769,121 | 11 | 69,920.09 | 1.13 | 504.99 | 10.55 | 60.92 | 3q7z6fgcqwfxx |  | SELECT T34.CONFLICT_ID, T34.LA... |\nSQL_ID: 3q7z6fgcqwfxx\n| 748,444 | 1,760 | 425.25 | 1.10 | 541.37 | 13.23 | 58.76 | f4wzxduzm3c0r |  | SELECT T66.CONFLICT_ID, T66.LA... |\nSQL_ID: f4wzxduzm3c0r\n| 741,060 | 15 | 49,404.00 | 1.08 | 698.33 | 8.17 | 78.28 | 3hyc4tuwtuvuf |  | SELECT /*+ ALL_ROWS */ T45.CON... |\nSQL_ID: 3hyc4tuwtuvuf",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\n| 741,060 | 15 | 49,404.00 | 1.08 | 698.33 | 8.17 | 78.28 | 3hyc4tuwtuvuf |  | SELECT /*+ ALL_ROWS */ T45.CON... |\nSQL_ID: 3hyc4tuwtuvuf\n| 699,313 | 27 | 25,900.48 | 1.02 | 573.30 | 11.92 | 73.56 | 224p33rfhmg0p |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 224p33rfhmg0p\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Physical Reads (UnOptimized)\n\nUnOptimized...\n| 6,332,997 | 6,332,997 | 206 | 30,742.70 | 0.00 | 9.28 | bxfhn5fy59cnx |  | SELECT T44.CONFLICT_ID, T44.LA... |\nSQL_ID: bxfhn5fy59cnx\n| 3,055,274 | 3,055,274 | 40 | 76,381.85 | 0.00 | 4.48 | bckg9jsmnpw7k |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: bckg9jsmnpw7k\n| 2,155,960 | 2,155,960 | 825 | 2,613.28 | 0.00 | 3.16 | ackj4466dt1ba |  | SELECT T11.CONFLICT_ID, T11.LA... |\nSQL_ID: ackj4466dt1ba\n| 1,613,441 | 1,613,441 | 23 | 70,149.61 | 0.00 | 2.36 | cym752unkmg2w |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: cym752unkmg2w\n| 870,980 | 870,980 | 7 | 124,425.71 | 0.00 | 1.28 | fcud65b5j1rz5 |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: fcud65b5j1rz5\n| 856,721 | 856,721 | 19 | 45,090.58 | 0.00 | 1.26 | 6g46dby3s1qkf |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 6g46dby3s1qkf\n| 822,168 | 822,168 | 14 | 58,726.29 | 0.00 | 1.20 | g5fy32xzfsqsm |  | SELECT T31.CONFLICT_ID, T31.LA... |\nSQL_ID: g5fy32xzfsqsm\n| 812,576 | 812,576 | 11 | 73,870.55 | 0.00 | 1.19 | 427s6ghkzgc6a |  | SELECT T32.CONFLICT_ID, T32.LA... |\nSQL_ID: 427s6ghkzgc6a\n| 769,121 | 769,121 | 11 | 69,920.09 | 0.00 | 1.13 | 3q7z6fgcqwfxx |  | SELECT T34.CONFLICT_ID, T34.LA... |\nSQL_ID: 3q7z6fgcqwfxx\n| 748,430 | 748,430 | 1,760 | 425.24 | 0.00 | 1.10 | f4wzxduzm3c0r |  | SELECT T66.CONFLICT_ID, T66.LA... |\nSQL_ID: f4wzxduzm3c0r\n| 741,060 | 741,060 | 15 | 49,404.00 | 0.00 | 1.09 | 3hyc4tuwtuvuf |  | SELECT /*+ ALL_ROWS */ T45.CON... |\nSQL_ID: 3hyc4tuwtuvuf\n| 698,918 | 698,918 | 27 | 25,885.85 | 0.00 | 1.02 | 224p33rfhmg0p |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 224p33rfhmg0p",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 1,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\n| 698,918 | 698,918 | 27 | 25,885.85 | 0.00 | 1.02 | 224p33rfhmg0p |  | SELECT T1.CONFLICT_ID, T1.LAST... |\nSQL_ID: 224p33rfhmg0p\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Executions\n\n%CPU   - CPU Time      as a p...\n| 1,883,115 | 1,881,676 | 1.00 | 686.90 | 20.3 | 1.1 | 0upy84h1ypmaz |  | SELECT SUM (T2.QTY) FROM SIEBE... |\nSQL_ID: 0upy84h1ypmaz\n| 90,018 | 90,017 | 1.00 | 28.67 | 13.7 | 0 | 47r1y8yn34jmj |  | select default$ from col$ wher... |\nSQL_ID: 47r1y8yn34jmj\n| 66,215 | 8,788 | 0.13 | 42.76 | 13.5 | 0 | cm5vu20fhtnq1 |  | select /*+ connect_by_filterin... |\nSQL_ID: cm5vu20fhtnq1\n| 52,005 | 51,994 | 1.00 | 446.16 | 15.2 | 0 | 0ws7ahf1d78qa |  | select SYS_CONTEXT('USERENV', ... |\nSQL_ID: 0ws7ahf1d78qa\n| 50,821 | 38,681 | 0.76 | 37.45 | 22.9 | 6.3 | 81m5u8fnkf8fr |  | SELECT /*+ ALL_ROWS */ T8.CONF... |\nSQL_ID: 81m5u8fnkf8fr\n| 48,371 | 48,371 | 1.00 | 23.05 | 15.2 | 0 | 1bu5pgkzyydjh | siebdev.exe | SELECT VAL FROM SIEBEL.S_SYS_P... |\nSQL_ID: 1bu5pgkzyydjh\n| 48,371 | 48,367 | 1.00 | 32.30 | 14.9 | 0 | 2r1a4p20vykna | siebdev.exe | SELECT UNICD_DATATYPS_FLG FROM... |\nSQL_ID: 2r1a4p20vykna\n| 46,927 | 898,583 | 19.15 | 4,510.04 | 12.1 | 2.2 | c0awjmvg5djb7 |  | SELECT T52.CONFLICT_ID, T52.LA... |\nSQL_ID: c0awjmvg5djb7\n| 43,558 | 0 | 0.00 | 13.70 | 29 | 0 | dhn6hb7d81vkx |  | SELECT T3.CONFLICT_ID, T3.LAST... |\nSQL_ID: dhn6hb7d81vkx\n| 42,655 | 42,647 | 1.00 | 58.84 | 22.5 | .6 | gzugsx54bmnm1 |  | UPDATE SYS.USER_LOG SET TIME=S... |\nSQL_ID: gzugsx54bmnm1\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Parse Calls\n\nTotal Parse Calls:       2,3...\n| 51,997 | 52,005 | 2.22 | 0ws7ahf1d78qa |  | select SYS_CONTEXT('USERENV', ... |\nSQL_ID: 0ws7ahf1d78qa\n| 48,368 | 48,371 | 2.07 | 1bu5pgkzyydjh | siebdev.exe | SELECT VAL FROM SIEBEL.S_SYS_P... |\nSQL_ID: 1bu5pgkzyydjh\n| 48,362 | 48,371 | 2.07 | 2r1a4p20vykna | siebdev.exe | SELECT UNICD_DATATYPS_FLG FROM... |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 2,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics",
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 1bu5pgkzyydjh\n| 48,362 | 48,371 | 2.07 | 2r1a4p20vykna | siebdev.exe | SELECT UNICD_DATATYPS_FLG FROM... |\nSQL_ID: 2r1a4p20vykna\n| 42,654 | 42,655 | 1.82 | gzugsx54bmnm1 |  | UPDATE SYS.USER_LOG SET TIME=S... |\nSQL_ID: gzugsx54bmnm1\n| 42,651 | 42,653 | 1.82 | 1hbq7cqgxsdun |  | SELECT COUNT(*) FROM SYS.USER_... |\nSQL_ID: 1hbq7cqgxsdun\n| 42,590 | 42,594 | 1.82 | 459f3z9u4fb3u |  | select value$ from props$ wher... |\nSQL_ID: 459f3z9u4fb3u\n| 42,540 | 42,538 | 1.82 | 5ur69atw3vfhj |  | select decode(failover_method,... |\nSQL_ID: 5ur69atw3vfhj\n| 40,197 | 40,198 | 1.72 | 0k8522rmdzg4k |  | select privilege# from sysauth... |\nSQL_ID: 0k8522rmdzg4k\n| 40,197 | 66,215 | 1.72 | cm5vu20fhtnq1 |  | select /*+ connect_by_filterin... |\nSQL_ID: cm5vu20fhtnq1\n| 36,113 | 36,113 | 1.54 | f711myt0q6cma | siebsvc@PRDSGW (TNS V1-V3) | insert into sys.aud$( sessioni... |\nSQL_ID: f711myt0q6cma\n| 33,976 | 33,984 | 1.45 | 793ax2w5pq6g6 |  | declare PRAGMA AUTONOMOUS_TRAN... |\nSQL_ID: 793ax2w5pq6g6\n| 25,001 | 25,005 | 1.07 | 4vs91dcv7u1p6 | Toad.exe | insert into sys.aud$( sessioni... |\nSQL_ID: 4vs91dcv7u1p6\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Sharable Memory\n\nOnly Statements with Sha...\n| 3,749,701 | 1,328 | 0.01 | 77b57sjppwn7r |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: 77b57sjppwn7r\n| 2,756,261 | 1,133 | 0.01 | 45w33dzj83sn7 |  | SELECT T64.CONFLICT_ID, T64.LA... |\nSQL_ID: 45w33dzj83sn7\n| 2,679,536 | 46,927 | 0.01 | c0awjmvg5djb7 |  | SELECT T52.CONFLICT_ID, T52.LA... |\nSQL_ID: c0awjmvg5djb7\n| 2,414,981 | 407 | 0.01 | gdjxxk9997wfd |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: gdjxxk9997wfd\n| 2,091,907 | 40 | 0.01 | 80q9mvgjt5f4b |  | SELECT /*+ ALL_ROWS */ T85.CON... |\nSQL_ID: 80q9mvgjt5f4b\n| 1,854,824 | 4 | 0.01 | 9fp2kpt9p5jn4 |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: 9fp2kpt9p5jn4\n| 1,839,201 | 11 | 0.01 | fcgf31591cbst |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: fcgf31591cbst",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 3,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 9fp2kpt9p5jn4\n| 1,839,201 | 11 | 0.01 | fcgf31591cbst |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: fcgf31591cbst\n| 1,838,288 | 3 | 0.01 | 6x85ajaxcz29n |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: 6x85ajaxcz29n\n| 1,822,011 | 93 | 0.01 | 5fvt8ypdnab2a |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 5fvt8ypdnab2a\n| 1,810,022 | 3 | 0.01 | 8kky8xzrcqg39 |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: 8kky8xzrcqg39\n| 1,809,616 | 10 | 0.01 | 2bsn0tfm6c487 |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 2bsn0tfm6c487\n| 1,805,652 | 34 | 0.01 | cd26yzycunh8u |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: cd26yzycunh8u\n| 1,805,650 | 11 | 0.01 | fwg6683mhdbgh |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: fwg6683mhdbgh\n| 1,797,489 | 1 | 0.01 | 7d8dg98j6h98u |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: 7d8dg98j6h98u\n| 1,795,154 | 1 | 0.01 | g7a7q79uq4y1n |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: g7a7q79uq4y1n\n| 1,795,053 | 5 | 0.01 | c4cta77kbfdrr |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: c4cta77kbfdrr\n| 1,782,922 | 1 | 0.01 | avf8brgkabjb0 |  | SELECT T77.CONFLICT_ID, T77.LA... |\nSQL_ID: avf8brgkabjb0\n| 1,782,821 | 4 | 0.01 | 1s8bmtjaaxn72 |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 1s8bmtjaaxn72\n| 1,781,135 | 1 | 0.01 | gvcq0tk50wspy |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: gvcq0tk50wspy\n| 1,775,246 | 2 | 0.01 | 8tb08qjm9dxm4 |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 8tb08qjm9dxm4\n| 1,773,044 | 2 | 0.01 | bu2dbc3fxzum9 |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: bu2dbc3fxzum9\n| 1,773,044 | 2 | 0.01 | cdjzk5urmqt5n |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: cdjzk5urmqt5n\n| 1,760,870 | 1 | 0.01 | 1ja913r3kptzx |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 1ja913r3kptzx\n| 1,754,294 | 1 | 0.01 | 0s19xnkw76f0m |  | SELECT T76.CONFLICT_ID, T76.LA... |\nSQL_ID: 0s19xnkw76f0m\n| 1,671,338 | 71 | 0.01 | 1gn4mcjmc5vx1 |  | SELECT T74.CONFLICT_ID, T74.LA... |\nSQL_ID: 1gn4mcjmc5vx1",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 4,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 0s19xnkw76f0m\n| 1,671,338 | 71 | 0.01 | 1gn4mcjmc5vx1 |  | SELECT T74.CONFLICT_ID, T74.LA... |\nSQL_ID: 1gn4mcjmc5vx1\n| 1,567,492 | 8 | 0.01 | 78d9cj91rgq00 |  | SELECT T69.CONFLICT_ID, T69.LA... |\nSQL_ID: 78d9cj91rgq00\n| 1,563,438 | 45 | 0.01 | 2rd87cxhbukt9 |  | SELECT T69.CONFLICT_ID, T69.LA... |\nSQL_ID: 2rd87cxhbukt9\n| 1,563,438 | 108 | 0.01 | 7m8xzq7kpz63c |  | SELECT T69.CONFLICT_ID, T69.LA... |\nSQL_ID: 7m8xzq7kpz63c\n| 1,555,280 | 36 | 0.01 | d3rhu25tb1w3q |  | SELECT T69.CONFLICT_ID, T69.LA... |\nSQL_ID: d3rhu25tb1w3q\n| 1,530,830 | 2 | 0.01 | cfs40cg9s8w86 |  | SELECT T69.CONFLICT_ID, T69.LA... |\nSQL_ID: cfs40cg9s8w86\n| 1,508,674 | 22 | 0.01 | dk0t8hsccazyy |  | SELECT T68.CONFLICT_ID, T68.LA... |\nSQL_ID: dk0t8hsccazyy\n| 1,459,162 | 32 | 0.01 | 9yhxgngu3ygf9 |  | SELECT T66.CONFLICT_ID, T66.LA... |\nSQL_ID: 9yhxgngu3ygf9\n| 1,444,593 | 34 | 0.01 | dc3vjhxbh7zzs |  | SELECT T65.CONFLICT_ID, T65.LA... |\nSQL_ID: dc3vjhxbh7zzs\n| 1,224,686 | 85 | 0.00 | b4stvupsp8tj8 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: b4stvupsp8tj8\n| 1,220,268 | 72 | 0.00 | 5wapk5qh99b44 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: 5wapk5qh99b44\n| 1,216,312 | 174 | 0.00 | c22z23qq45yda |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: c22z23qq45yda\n| 1,208,154 | 121 | 0.00 | bmbahg72bdpc3 |  | SELECT T57.CONFLICT_ID, T57.LA... |\nSQL_ID: bmbahg72bdpc3\n| 1,199,729 | 471 | 0.00 | 17dg09xbsyqmm |  | SELECT /*+ ALL_ROWS */ T57.CON... |\nSQL_ID: 17dg09xbsyqmm\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nSQL ordered by Version Count\n\nOnly Statements with Versi...\n| 24 | 472 | 3ktacv9r56b51 |  | select owner#, name, namespace... |\nSQL_ID: 3ktacv9r56b51\n| 24 | 472 | 8swypbbr0m372 |  | select order#, columns, types ... |\nSQL_ID: 8swypbbr0m372\n| 23 | 3,948 | 2tkw12w5k68vd |  | select user#, password, datats... |\nSQL_ID: 2tkw12w5k68vd\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nComplete List of SQL Text\n\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 5,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics",
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 2tkw12w5k68vd\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nComplete List of SQL Text\n\n| SQL Id | SQL Text |\n| 00s2tb65nc368 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: 00s2tb65nc368\n| 0k8522rmdzg4k | select privilege# from sysauth$ where (grantee#=:1 or grantee#=1) and privilege#>0 |\nSQL_ID: 0k8522rmdzg4k\n| 0s19xnkw76f0m | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 0s19xnkw76f0m\n| 0twbjys78zmt3 | SELECT T11.CONFLICT_ID,  T11.LAST_UPD,  T11.CREATED,  T11.LAST_UPD_BY,  T11.CREATED_BY,  T11.MODIFI...|\nSQL_ID: 0twbjys78zmt3\n| 0upy84h1ypmaz | SELECT SUM (T2.QTY) FROM SIEBEL.S_PARTMVMT_TYPE T1,  SIEBEL.S_ORDPART_MVMT T2 WHERE T2.PART_MVMT_TY...|\nSQL_ID: 0upy84h1ypmaz\n| 0ws7ahf1d78qa | select SYS_CONTEXT('USERENV',  'SERVER_HOST'),  SYS_CONTEXT('USERENV',  'DB_UNIQUE_NAME'),  SYS_CON...|\nSQL_ID: 0ws7ahf1d78qa\n| 17dg09xbsyqmm | SELECT /*+ ALL_ROWS */ T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED...|\nSQL_ID: 17dg09xbsyqmm\n| 1bu5pgkzyydjh | SELECT VAL FROM SIEBEL.S_SYS_PREF WHERE SYS_PREF_CD='Enterprise DB Server Code Page' |\nSQL_ID: 1bu5pgkzyydjh\n| 1gn4mcjmc5vx1 | SELECT T74.CONFLICT_ID,  T74.LAST_UPD,  T74.CREATED,  T74.LAST_UPD_BY,  T74.CREATED_BY,  T74.MODIFI...|\nSQL_ID: 1gn4mcjmc5vx1\n| 1hbq7cqgxsdun | SELECT COUNT(*) FROM SYS.USER_LOG WHERE NAME=USER |\nSQL_ID: 1hbq7cqgxsdun\n| 1ja913r3kptzx | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 1ja913r3kptzx\n| 1s8bmtjaaxn72 | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 1s8bmtjaaxn72",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 6,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\n| 1s8bmtjaaxn72 | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 1s8bmtjaaxn72\n| 224p33rfhmg0p | SELECT T1.CONFLICT_ID,  T1.LAST_UPD,  T1.CREATED,  T1.LAST_UPD_BY,  T1.CREATED_BY,  T1.MODIFICATION...|\nSQL_ID: 224p33rfhmg0p\n| 2bsn0tfm6c487 | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 2bsn0tfm6c487\n| 2jubmgag0hsgr | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: 2jubmgag0hsgr\n| 2r1a4p20vykna | SELECT UNICD_DATATYPS_FLG FROM SIEBEL.S_APP_VER |\nSQL_ID: 2r1a4p20vykna\n| 2rd87cxhbukt9 | SELECT T69.CONFLICT_ID,  T69.LAST_UPD,  T69.CREATED,  T69.LAST_UPD_BY,  T69.CREATED_BY,  T69.MODIFI...|\nSQL_ID: 2rd87cxhbukt9\n| 2t2bqxswwt30q | SELECT T1.CONFLICT_ID,  T1.LAST_UPD,  T1.CREATED,  T1.LAST_UPD_BY,  T1.CREATED_BY,  T1.MODIFICATION...|\nSQL_ID: 2t2bqxswwt30q\n| 2tkw12w5k68vd | select user#, password, datats#, tempts#, type#, defrole, resource$,  ptime, decode(defschclass, NU...|\nSQL_ID: 2tkw12w5k68vd\n| 3hyc4tuwtuvuf | SELECT /*+ ALL_ROWS */ T45.CONFLICT_ID,  T45.LAST_UPD,  T45.CREATED,  T45.LAST_UPD_BY,  T45.CREATED...|\nSQL_ID: 3hyc4tuwtuvuf\n| 3jum3y9ruanrj | SELECT T64.CONFLICT_ID,  T64.LAST_UPD,  T64.CREATED,  T64.LAST_UPD_BY,  T64.CREATED_BY,  T64.MODIFI...|\nSQL_ID: 3jum3y9ruanrj\n| 3ktacv9r56b51 | select owner#, name, namespace, remoteowner, linkname, p_timestamp, p_obj#,  nvl(property, 0), subn...|\nSQL_ID: 3ktacv9r56b51\n| 3q7z6fgcqwfxx | SELECT T34.CONFLICT_ID,  T34.LAST_UPD,  T34.CREATED,  T34.LAST_UPD_BY,  T34.CREATED_BY,  T34.MODIFI...|\nSQL_ID: 3q7z6fgcqwfxx",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 7,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 3q7z6fgcqwfxx\n| 427s6ghkzgc6a | SELECT T32.CONFLICT_ID,  T32.LAST_UPD,  T32.CREATED,  T32.LAST_UPD_BY,  T32.CREATED_BY,  T32.MODIFI...|\nSQL_ID: 427s6ghkzgc6a\n| 44b2rvqwppu79 | select R.ROW_ID,  R.RPT_TYPE,  A.NAME,  A.ACTION_TYPE,  A.FILE_LOC,  R.PARAM_VAL,  R.ACTL_START_DT,...|\nSQL_ID: 44b2rvqwppu79\n| 459f3z9u4fb3u | select value$ from props$ where name = 'GLOBAL_DB_NAME' |\nSQL_ID: 459f3z9u4fb3u\n| 45w33dzj83sn7 | SELECT T64.CONFLICT_ID,  T64.LAST_UPD,  T64.CREATED,  T64.LAST_UPD_BY,  T64.CREATED_BY,  T64.MODIFI...|\nSQL_ID: 45w33dzj83sn7\n| 47r1y8yn34jmj | select default$ from col$ where rowid=:1 |\nSQL_ID: 47r1y8yn34jmj\n| 4hm1hnp00yyg1 | SELECT /*+ ALL_ROWS */ T1.CONFLICT_ID,  T1.LAST_UPD,  T1.CREATED,  T1.LAST_UPD_BY,  T1.CREATED_BY, ...|\nSQL_ID: 4hm1hnp00yyg1\n| 4vs91dcv7u1p6 | insert into sys.aud$( sessionid, entryid, statement, ntimestamp#,  userid, userhost, terminal, acti...|\nSQL_ID: 4vs91dcv7u1p6\n| 5fvt8ypdnab2a | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 5fvt8ypdnab2a\n| 5k8mmscb540ng | SELECT T22.CONFLICT_ID,  T22.LAST_UPD,  T22.CREATED,  T22.LAST_UPD_BY,  T22.CREATED_BY,  T22.MODIFI...|\nSQL_ID: 5k8mmscb540ng\n| 5ur69atw3vfhj | select decode(failover_method,  NULL,  0 ,  'BASIC',  1,  'PRECONNECT',  2 ,  'PREPARSE',  4 ,  0),...|\nSQL_ID: 5ur69atw3vfhj\n| 5wapk5qh99b44 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: 5wapk5qh99b44\n| 667a40k5fv2u3 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: 667a40k5fv2u3",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 8,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 667a40k5fv2u3\n| 6as61s8cqg56r | SELECT /*+ ALL_ROWS */ T1.CONFLICT_ID,  T1.LAST_UPD,  T1.CREATED,  T1.LAST_UPD_BY,  T1.CREATED_BY, ...|\nSQL_ID: 6as61s8cqg56r\n| 6bz0ddtmhqfqr | SELECT T27.CONFLICT_ID,  T27.LAST_UPD,  T27.CREATED,  T27.LAST_UPD_BY,  T27.CREATED_BY,  T27.MODIFI...|\nSQL_ID: 6bz0ddtmhqfqr\n| 6g46dby3s1qkf | SELECT T32.CONFLICT_ID,  T32.LAST_UPD,  T32.CREATED,  T32.LAST_UPD_BY,  T32.CREATED_BY,  T32.MODIFI...|\nSQL_ID: 6g46dby3s1qkf\n| 6x85ajaxcz29n | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: 6x85ajaxcz29n\n| 77b57sjppwn7r | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: 77b57sjppwn7r\n| 78d9cj91rgq00 | SELECT T69.CONFLICT_ID,  T69.LAST_UPD,  T69.CREATED,  T69.LAST_UPD_BY,  T69.CREATED_BY,  T69.MODIFI...|\nSQL_ID: 78d9cj91rgq00\n| 793ax2w5pq6g6 | declare PRAGMA AUTONOMOUS_TRANSACTION; counter number; begin select count(*) into counter from sys....|\nSQL_ID: 793ax2w5pq6g6\n| 7d8dg98j6h98u | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: 7d8dg98j6h98u\n| 7m8xzq7kpz63c | SELECT T69.CONFLICT_ID,  T69.LAST_UPD,  T69.CREATED,  T69.LAST_UPD_BY,  T69.CREATED_BY,  T69.MODIFI...|\nSQL_ID: 7m8xzq7kpz63c\n| 80q9mvgjt5f4b | SELECT /*+ ALL_ROWS */ T85.CONFLICT_ID,  T85.LAST_UPD,  T85.CREATED,  T85.LAST_UPD_BY,  T85.CREATED...|\nSQL_ID: 80q9mvgjt5f4b\n| 81m5u8fnkf8fr | SELECT /*+ ALL_ROWS */ T8.CONFLICT_ID,  T8.LAST_UPD,  T8.CREATED,  T8.LAST_UPD_BY,  T8.CREATED_BY, ...|\nSQL_ID: 81m5u8fnkf8fr",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 9,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: 81m5u8fnkf8fr\n| 85vu179mfy9s0 | SELECT T23.CONFLICT_ID,  T23.LAST_UPD,  T23.CREATED,  T23.LAST_UPD_BY,  T23.CREATED_BY,  T23.MODIFI...|\nSQL_ID: 85vu179mfy9s0\n| 8kky8xzrcqg39 | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: 8kky8xzrcqg39\n| 8swypbbr0m372 | select order#, columns, types from access$ where d_obj#=:1 |\nSQL_ID: 8swypbbr0m372\n| 8tb08qjm9dxm4 | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: 8tb08qjm9dxm4\n| 9fp2kpt9p5jn4 | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: 9fp2kpt9p5jn4\n| 9yhxgngu3ygf9 | SELECT T66.CONFLICT_ID,  T66.LAST_UPD,  T66.CREATED,  T66.LAST_UPD_BY,  T66.CREATED_BY,  T66.MODIFI...|\nSQL_ID: 9yhxgngu3ygf9\n| ackj4466dt1ba | SELECT T11.CONFLICT_ID,  T11.LAST_UPD,  T11.CREATED,  T11.LAST_UPD_BY,  T11.CREATED_BY,  T11.MODIFI...|\nSQL_ID: ackj4466dt1ba\n| agymt7tv32tt8 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: agymt7tv32tt8\n| avf8brgkabjb0 | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: avf8brgkabjb0\n| b4stvupsp8tj8 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: b4stvupsp8tj8\n| bckg9jsmnpw7k | SELECT T31.CONFLICT_ID,  T31.LAST_UPD,  T31.CREATED,  T31.LAST_UPD_BY,  T31.CREATED_BY,  T31.MODIFI...|\nSQL_ID: bckg9jsmnpw7k\n| bmbahg72bdpc3 | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: bmbahg72bdpc3",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 10,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: bmbahg72bdpc3\n| bu2dbc3fxzum9 | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: bu2dbc3fxzum9\n| bxfhn5fy59cnx | SELECT T44.CONFLICT_ID,  T44.LAST_UPD,  T44.CREATED,  T44.LAST_UPD_BY,  T44.CREATED_BY,  T44.MODIFI...|\nSQL_ID: bxfhn5fy59cnx\n| c0awjmvg5djb7 | SELECT T52.CONFLICT_ID,  T52.LAST_UPD,  T52.CREATED,  T52.LAST_UPD_BY,  T52.CREATED_BY,  T52.MODIFI...|\nSQL_ID: c0awjmvg5djb7\n| c22z23qq45yda | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: c22z23qq45yda\n| c4cta77kbfdrr | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: c4cta77kbfdrr\n| cd26yzycunh8u | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: cd26yzycunh8u\n| cdjzk5urmqt5n | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: cdjzk5urmqt5n\n| cfs40cg9s8w86 | SELECT T69.CONFLICT_ID,  T69.LAST_UPD,  T69.CREATED,  T69.LAST_UPD_BY,  T69.CREATED_BY,  T69.MODIFI...|\nSQL_ID: cfs40cg9s8w86\n| cm49uqfqhyuku | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: cm49uqfqhyuku\n| cm5vu20fhtnq1 | select /*+ connect_by_filtering */ privilege#, level from sysauth$ connect by grantee#=prior privil...|\nSQL_ID: cm5vu20fhtnq1\n| cym752unkmg2w | SELECT T32.CONFLICT_ID,  T32.LAST_UPD,  T32.CREATED,  T32.LAST_UPD_BY,  T32.CREATED_BY,  T32.MODIFI...|\nSQL_ID: cym752unkmg2w",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 11,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: cym752unkmg2w\n| d3rhu25tb1w3q | SELECT T69.CONFLICT_ID,  T69.LAST_UPD,  T69.CREATED,  T69.LAST_UPD_BY,  T69.CREATED_BY,  T69.MODIFI...|\nSQL_ID: d3rhu25tb1w3q\n| dc3vjhxbh7zzs | SELECT T65.CONFLICT_ID,  T65.LAST_UPD,  T65.CREATED,  T65.LAST_UPD_BY,  T65.CREATED_BY,  T65.MODIFI...|\nSQL_ID: dc3vjhxbh7zzs\n| dhn6hb7d81vkx | SELECT T3.CONFLICT_ID,  T3.LAST_UPD,  T3.CREATED,  T3.LAST_UPD_BY,  T3.CREATED_BY,  T3.MODIFICATION...|\nSQL_ID: dhn6hb7d81vkx\n| dk0t8hsccazyy | SELECT T68.CONFLICT_ID,  T68.LAST_UPD,  T68.CREATED,  T68.LAST_UPD_BY,  T68.CREATED_BY,  T68.MODIFI...|\nSQL_ID: dk0t8hsccazyy\n| dt67yruakr2x9 | SELECT T6.CONFLICT_ID,  T6.LAST_UPD,  T6.CREATED,  T6.LAST_UPD_BY,  T6.CREATED_BY,  T6.MODIFICATION...|\nSQL_ID: dt67yruakr2x9\n| f4wzxduzm3c0r | SELECT T66.CONFLICT_ID,  T66.LAST_UPD,  T66.CREATED,  T66.LAST_UPD_BY,  T66.CREATED_BY,  T66.MODIFI...|\nSQL_ID: f4wzxduzm3c0r\n| f711myt0q6cma | insert into sys.aud$( sessionid, entryid, statement, ntimestamp#,  userid, userhost, terminal, acti...|\nSQL_ID: f711myt0q6cma\n| f9bs2ha91p3s3 | SELECT T52.CONFLICT_ID,  T52.LAST_UPD,  T52.CREATED,  T52.LAST_UPD_BY,  T52.CREATED_BY,  T52.MODIFI...|\nSQL_ID: f9bs2ha91p3s3\n| fcgf31591cbst | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: fcgf31591cbst\n| fcud65b5j1rz5 | SELECT T31.CONFLICT_ID,  T31.LAST_UPD,  T31.CREATED,  T31.LAST_UPD_BY,  T31.CREATED_BY,  T31.MODIFI...|\nSQL_ID: fcud65b5j1rz5\n| fwg6683mhdbgh | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: fwg6683mhdbgh",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 12,
+      "type": "AWR",
+      "has_full_sql": true
+    }
+  },
+  {
+    "text": "Section: SQL ordered by Reads\n\nSQL_ID: fwg6683mhdbgh\n| g1wz6qyr9401c | SELECT T34.CONFLICT_ID,  T34.LAST_UPD,  T34.CREATED,  T34.LAST_UPD_BY,  T34.CREATED_BY,  T34.MODIFI...|\nSQL_ID: g1wz6qyr9401c\n| g5fy32xzfsqsm | SELECT T31.CONFLICT_ID,  T31.LAST_UPD,  T31.CREATED,  T31.LAST_UPD_BY,  T31.CREATED_BY,  T31.MODIFI...|\nSQL_ID: g5fy32xzfsqsm\n| g7a7q79uq4y1n | SELECT T77.CONFLICT_ID,  T77.LAST_UPD,  T77.CREATED,  T77.LAST_UPD_BY,  T77.CREATED_BY,  T77.MODIFI...|\nSQL_ID: g7a7q79uq4y1n\n| gdjxxk9997wfd | SELECT T57.CONFLICT_ID,  T57.LAST_UPD,  T57.CREATED,  T57.LAST_UPD_BY,  T57.CREATED_BY,  T57.MODIFI...|\nSQL_ID: gdjxxk9997wfd\n| gvcq0tk50wspy | SELECT T76.CONFLICT_ID,  T76.LAST_UPD,  T76.CREATED,  T76.LAST_UPD_BY,  T76.CREATED_BY,  T76.MODIFI...|\nSQL_ID: gvcq0tk50wspy\n| gy65z0dcfqb7j | SELECT /*+ ALL_ROWS */ T64.CONFLICT_ID,  T64.LAST_UPD,  T64.CREATED,  T64.LAST_UPD_BY,  T64.CREATED...|\nSQL_ID: gy65z0dcfqb7j\n| gzugsx54bmnm1 | UPDATE SYS.USER_LOG SET TIME=SYSDATE WHERE NAME=USER |\nSQL_ID: gzugsx54bmnm1\nSQL Preview: Back to SQL Statistics\n\nBack to Top\n\nInstance Activity Statistics\n\nInstance Activity Stat...",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "SQL ordered by Reads",
+      "chunk_index": 13,
+      "type": "AWR",
+      "has_full_sql": true,
+      "sql_preview": [
+        "Back to SQL Statistics"
+      ]
+    }
+  },
+  {
+    "text": "Section: Back to Segment Statistics\n\nBack to Segment Statistics\n\nBack to Top\n\nDictionary Cache Stats\n\n\"Pct Misses\"  should be very low (< 2% in most cases)\n\n\"Final Usage\" is the number of cache entries being used\n\n| Cache | Get Requests | Pct Miss | Scan Reqs | Pct Miss | Mod Reqs | Final Usage |\n| dc_awr_control | 1,031 | 0.19 | 0 |  | 6 | 1 |\n| dc_constraints | 12 | 83.33 | 0 |  | 12 | 0 |\n| dc_files | 23,440 | 1.25 | 0 |  | 0 | 0 |\n| dc_global_oids | 2,814 | 2.20 | 0 |  | 0 | 13 |\n| dc_histogram_data | 4,631,794 | 0.56 | 0 |  | 1,867 | 7,388 |\n| dc_histogram_defs | 3,107,108 | 0.80 | 0 |  | 2,860 | 4,940 |\n| dc_object_grants | 643 | 3.42 | 0 |  | 0 | 3 |\n| dc_objects | 225,098,558 | 0.00 | 0 |  | 20 | 2,870 |\n| dc_profiles | 53,000 | 0.01 | 0 |  | 0 | 2 |\n| dc_rollback_segments | 88,022 | 0.00 | 0 |  | 744 | 1,003 |\n| dc_segments | 6,176,489 | 0.17 | 0 |  | 80 | 3,042 |\n| dc_sequences | 210 | 5.24 | 0 |  | 210 | 1 |\n| dc_table_scns | 127,731 | 0.02 | 0 |  | 0 | 4 |\n| dc_tablespace_quotas | 60 | 10.00 | 0 |  | 0 | 0 |\n| dc_tablespaces | 138,140 | 0.02 | 0 |  | 0 | 9 |\n| dc_users | 1,830,351 | 0.73 | 0 |  | 40 | 32 |\n| global database name | 55,888 | 0.00 | 0 |  | 0 | 1 |\n| outstanding_alerts | 130 | 13.08 | 0 |  | 6 | 0 |\n| sch_lj_oids | 7 | 28.57 | 0 |  | 0 | 0 |\n| smo rowcache | 2,379 | 7.94 | 0 |  | 0 | 0 |\n\nBack to Top\n\nLibrary Cache Activity\n\n\"Pct Misses\"  should be very low\n\n| Namespace | Get Requests | Pct Miss | Pin Requests | Pct Miss | Reloads | Invali- dations |\n| ACCOUNT_STATUS | 107,558 | 4.12 | 0 |  | 0 | 0 |\n| BODY | 6,188 | 0.89 | 10,120 | 0.81 | 23 | 0 |\n| CLUSTER | 614 | 0.81 | 614 | 0.81 | 0 | 0 |\n| DBLINK | 105,945 | 0.00 | 0 |  | 0 | 0 |\n| EDITION | 52,710 | 0.00 | 104,837 | 0.00 | 0 | 0 |\n| HINTSET OBJECT | 577 | 6.93 | 625 | 12.32 | 1 | 0 |\n| INDEX | 5,966 | 11.85 | 5,320 | 25.88 | 0 | 0 |\n| OBJECT ID | 2 | 100.00 | 0 |  | 0 | 0 |\n| QUEUE | 110 | 0.91 | 331 | 1.81 | 3 | 0 |\n| RULESET | 0 |  | 6 | 33.33 | 2 | 0 |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Segment Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Segment Statistics\n\n| OBJECT ID | 2 | 100.00 | 0 |  | 0 | 0 |\n| QUEUE | 110 | 0.91 | 331 | 1.81 | 3 | 0 |\n| RULESET | 0 |  | 6 | 33.33 | 2 | 0 |\n| SCHEMA | 57,050 | 7.73 | 0 |  | 0 | 0 |\n| SQL AREA | 1,878,393 | 0.81 | 8,882,507 | 0.92 | 1,566 | 69,274 |\n| SQL AREA BUILD | 29,640 | 41.52 | 0 |  | 0 | 0 |\n| SQL AREA STATS | 13,490 | 95.00 | 13,490 | 95.00 | 0 | 0 |\n| SUBSCRIPTION | 12 | 8.33 | 12 | 8.33 | 0 | 0 |\n| TABLE/PROCEDURE | 174,242 | 1.65 | 866,713 | 0.72 | 343 | 1 |\n| TRIGGER | 60,902 | 0.11 | 77,389 | 0.09 | 8 | 0 |\n\nBack to Top",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Segment Statistics",
+      "chunk_index": 1,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\nBack to Memory Statistics\n\nBack to Top\n\nStreams Statistics\n\nStreams CPU/IO Usage\n\nStreams Capture\n\nStreams Capture Rate\n\nStreams Apply\n\nStreams Apply Rate\n\nBuffered Queues\n\nBuffered Queue Subscribers\n\nRule Set\n\nPersistent Queues\n\nPersistent Queues Rate\n\nPersistent Queue Subscribers\n\nBack to Top\n\nStreams CPU/IO Usage\n\nStreams processes ordered by CPU Time, descending\n\n| Session Type | First Logon | CPU time(s) | User IO Wait time(s) | SYS IO Wait time(s) |\n| QMON Slaves | 0125 21:29:50 | 0.20 | 0.09 | 0.00 |\n| QMON Coordinator | 0125 21:29:40 | 0.05 | 0.00 | 0.00 |\n\nBack to Streams Statistics\n\nBack to Top\n\nStreams Capture\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nStreams Capture Rate\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nStreams Apply\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nStreams Apply Rate\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nBuffered Queues\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nBuffered Queue Subscribers\n\nNo data exists for this section of the report.\n\nBack to Streams Statistics\n\nBack to Top\n\nRule Set\n\nRule Sets ordered by Evaluations\n\n* indicates Rule Set activity (re)started between Begin/End snaps\n\nSQL per Eval   - average # of SQL statements executed for non-SQL free evals\n\nCPU(s),Ela(s) per Eval - avg CPU and Elapsed time per evaluation                             includes both SQL free and non-SQL free evals\n\n| Rule | Evals | No-SQL Eval% | SQL Execs | CPU(s) | Ela(s) | Eval /Sec | SQL per Eval | Ela(s) per Eval | CPU(s) per Eval | Reloads |\n| SYS.ALERT_QUE_R | 6 | 0.00 | 0 | 0.11 | 0.46 | 0.00 | 0.00 | 0.08 | 0.02 | 2 |\n\nBack to Streams Statistics\n\nBack to Top\n\nPersistent Queues\n\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 0,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\n\n\nBack to Streams Statistics\n\nBack to Top\n\nPersistent Queues\n\nOrdered by Queue Name\n\n* indicates queue (re)started between Begin/End snaps\n\n%Exp Msgs   - % of msgs enqueued with expiry\n\n%Delay Msgs - % of msgs enqueued with delay\n\n%Trasf Time - % of Enqueue time spent in transformation\n\n%Eval Time  - % of Enqueue time spent in rule evaluation\n\n| Queue Name | Enq Msgs | Deq Msgs | %Exp Msgs | %Delay Msgs | Enq Time(s) | Deq Time(s) | %Transf Time | %Eval Time |\n| SYS.ALERT_QUE(11324) | 6 | 0 | 100.00 | 0.00 | 0.58 | 0.00 | 0.00 | 78.90 |\n| SYS.AQ$_ALERT_QT_E(11323) | 5 | 0 | 0.00 | 0.00 | 0.04 | 0.00 | 0.00 | 0.00 |\n| SYSMAN.MGMT_TASK_Q(451129) | 83 | 83 | 0.00 | 0.00 | 0.98 | 6.46 | 0.00 | 0.00 |\n\nBack to Streams Statistics\n\nBack to Top\n\nPersistent Queues Rate\n\nOrdered by Queue Name\n\n* indicates queue (re)started between Begin/End snaps\n\n| Queue Name | Enqueue Msgs/sec | Dequeue Msgs/sec | Avg Enqueue sec / msg | Avg Dequeue sec / msg |\n| SYS.ALERT_QUE(11324) | 0.00 | 0.00 | 0.10 |  |\n| SYS.AQ$_ALERT_QT_E(11323) | 0.00 | 0.00 | 0.01 |  |\n| SYSMAN.MGMT_TASK_Q(451129) | 0.02 | 0.02 | 0.01 | 0.08 |\n\nBack to Streams Statistics\n\nBack to Top\n\nPersistent Queue Subscribers\n\nOrdered by Queue Name, Subscriber Name\n\n* indicates Subscriber activity (re)started between Begin/End snaps\n\n| Subscriber/Queue | Enqueue Msgs | Dequeue Msgs | Expire Msgs | Enqueue Msgs/sec | Dequeue Msgs/sec | Expire Msgs/sec |\n| HAE_SUB(1)/SYS.ALERT_QUE | 0 | 0 | 0 |  |  |  |\n| HHDMSDB_1830_HHMLPROD(65)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n| HHDMSDB_3936_HHMLPROD(64)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n| HHDMSDB_3937_HHMLPROD(63)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n| HHDMSDB_3938_HHMLPROD(42)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n| HHDMSDB_3939_HHMLPROD(62)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n| HHDMSDB_SVC_1831_HHMLPROD(41)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 1,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\n| HHDMSDB_SVC_1831_HHMLPROD(41)/SYS.ALERT_QUE | 6 | 0 | 5 | 0.00 | 0.00 | 0.00 |\n\nBack to Streams Statistics\n\nBack to Top\n\nResource Limit Stats\n\nNo data exists for this section of the report.\n\nBack to Top\n\nShared Server Statistics\n\nShared Servers Activity\n\nShared Servers Rates\n\nShared Servers Utilization\n\nShared Servers Common Queue\n\nShared Servers Dispatchers\n\nBack to Top\n\nShared Servers Activity\n\nValues represent averages for all samples\n\n| Avg Total Connections | Avg Active Connections | Avg Total Shared Srvrs | Avg Active Shared Srvrs | Avg Total Dispatchers | Avg Active Dispatchers |\n| 0 | 0 | 0 | 0 | 10 | 0 |\n\nBack to Shared Server Statistics\n\nBack to Top\n\nShared Servers Rates\n\n| Common Queue Per Sec | Disp Queue Per Sec | Server Msgs/Sec | Server KB/Sec | Common Queue Total | Disp Queue Total | Server Total Msgs | Server Total(KB) |\n| 0 | 0 | 0 | 0.00 | 0 | 0 | 0 | 0 |\n\nBack to Shared Server Statistics\n\nBack to Top\n\nShared Servers Utilization\n\nNo data exists for this section of the report.\n\nBack to Shared Server Statistics\n\nBack to Top\n\nShared Servers Common Queue\n\nNo data exists for this section of the report.\n\nBack to Shared Server Statistics\n\nBack to Top\n\nShared Servers Dispatchers\n\nOrdered by %Busy, descending\n\nTotal Queued, Total Queue Wait and Avg Queue Wait are for dispatcher queue\n\nName suffixes:       \"(N)\" - dispatcher started between begin and end snapshots      \"(R)\" - dispatcher re-started between begin and end snapshots\n\n| Name | Avg Conns | Total Disp Time (s) | %Busy | %Idle | Total Queued | Total Queue Wait (s) | Avg Queue Wait (ms) |\n| D007 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D008 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D002 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D009 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D003 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D004 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 2,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\n| D003 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D004 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D006 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D001 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D000 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| D005 | 0.00 | 5,370 | 0.00 | 100.00 | 0 | 0 |  |\n| Sum | 0.00 |  |  |  | 0 | 0 |  |\n| Avg | 0.00 |  | 0.00 | 100.00 | 0 | 0 |  |\n| Std | 0.00 |  | 0.00 | 0.00 | 0 | 0 |  |\n\nBack to Shared Server Statistics\n\nBack to Top\n\ninit.ora Parameters\n\ninit.ora Parameters\n\ninit.ora Multi-Valued Parameters\n\nBack to Top\n\ninit.ora Parameters\n\n| Parameter Name | Begin value | End value (if different) |\n| _always_semi_join | OFF |  |\n| _ash_enable | TRUE |  |\n| _ash_size | 2147483648 |  |\n| _b_tree_bitmap_plans | FALSE |  |\n| _memory_broker_stat_interval | 999 |  |\n| _optimizer_max_permutations | 100 |  |\n| _partition_view_enabled | FALSE |  |\n| _shared_io_pool_size | 536870912 |  |\n| audit_file_dest | /oracle/app/oracle/admin/HHMLPROD/adump |  |\n| audit_trail | DB |  |\n| backup_tape_io_slaves | TRUE |  |\n| circuits | 10000 |  |\n| commit_logging | BATCH |  |\n| commit_wait | NOWAIT |  |\n| commit_write | NOWAIT |  |\n| compatible | 11.1.0.0.0 |  |\n| control_file_record_keep_time | 15 |  |\n| control_files | /redo001/oradata/HHMLPROD/control/cntrlHHMLPROD01.dbf,  /redo002/oradata/HHMLPROD/control/cntrlHHMLPROD02.dbf,  /redo003/oradata/HHMLPROD/control/cntrlHHMLPROD03.dbf |  |\n| control_management_pack_access | DIAGNOSTIC+TUNING |  |\n| db_4k_cache_size | 1073741824 |  |\n| db_block_size | 8192 |  |\n| db_cache_size | 40802189312 |  |\n| db_domain | herohondaconnect.com |  |\n| db_file_multiblock_read_count | 32 |  |\n| db_files | 500 |  |\n| db_keep_cache_size | 536870912 |  |\n| db_name | HHMLPROD |  |\n| diagnostic_dest | /oracle/app/oracle |  |\n| dispatchers | (PROTOCOL=TCP)(DISPATCHERS=10) |  |\n| distributed_lock_timeout | 100 |  |\n| enable_ddl_logging | TRUE |  |",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 3,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\n| dispatchers | (PROTOCOL=TCP)(DISPATCHERS=10) |  |\n| distributed_lock_timeout | 100 |  |\n| enable_ddl_logging | TRUE |  |\n| event | 10503 trace name context forever,  level 4000 |  |\n| java_pool_size | 1879048192 |  |\n| job_queue_processes | 1000 |  |\n| large_pool_size | 1073741824 |  |\n| log_archive_dest_1 | LOCATION=/archive/HHMLPROD/archivelog |  |\n| log_archive_format | HHMLPROD_arch_%t_%s_%r.dbf |  |\n| max_dispatchers | 50 |  |\n| max_shared_servers | 0 |  |\n| memory_max_target | 128849018880 |  |\n| memory_target | 123480309760 |  |\n| open_cursors | 2000 |  |\n| optimizer_capture_sql_plan_baselines | FALSE |  |\n| optimizer_dynamic_sampling | 1 |  |\n| optimizer_index_cost_adj | 1 |  |\n| optimizer_use_pending_statistics | FALSE |  |\n| optimizer_use_sql_plan_baselines | TRUE |  |\n| parallel_max_servers | 400 |  |\n| pga_aggregate_target | 32212254720 |  |\n| processes | 6500 |  |\n| query_rewrite_enabled | FALSE |  |\n| remote_login_passwordfile | EXCLUSIVE |  |\n| resource_manager_plan |  |  |\n| sessions | 9856 |  |\n| sga_max_size | 85899345920 |  |\n| sga_target | 78114717696 |  |\n| shared_pool_reserved_size | 2791309312 |  |\n| shared_pool_size | 27917287424 |  |\n| shared_servers | 0 |  |\n| streams_pool_size | 536870912 |  |\n| timed_statistics | TRUE |  |\n| undo_management | AUTO |  |\n| undo_tablespace | UNDOTBS01 |  |\n\nBack to init.ora Parameters\n\nBack to Top\n\ninit.ora Multi-Valued Parameters\n\nThis section only displays parameters that have more one value\n\n'(NULL)' indicates a missing parameter value\n\nA blank in the End Snapshot indicates the same value as the BeginSnapshot\n\n| Parameter Name | Begin value | End value (if different) |\n| control_files | /redo001/oradata/HHMLPROD/control/cntrlHHMLPROD01.dbf |  |\n| control_files | /redo002/oradata/HHMLPROD/control/cntrlHHMLPROD02.dbf |  |\n| control_files | /redo003/oradata/HHMLPROD/control/cntrlHHMLPROD03.dbf |  |\n\nBack to init.ora Parameters\n\nBack to Top\n\nDynamic Remastering Stats\n\n",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 4,
+      "type": "AWR"
+    }
+  },
+  {
+    "text": "Section: Back to Memory Statistics\n\n\n\nBack to init.ora Parameters\n\nBack to Top\n\nDynamic Remastering Stats\n\nNo data exists for this section of the report.\n\nBack to Top\n\nEnd of Report",
+    "metadata": {
+      "db_name": null,
+      "instance": "1",
+      "snap_begin": null,
+      "snap_end": null,
+      "snapshot_id": "snap_1",
+      "section": "Back to Memory Statistics",
+      "chunk_index": 5,
+      "type": "AWR"
     }
   }
 ]
