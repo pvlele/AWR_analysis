@@ -54,3 +54,7 @@ outputs/*
 *.log
 awr_chunks.json
 **/awr_chunks.json
+
+# Added by user request
+app.log
+awr_chunk.json
