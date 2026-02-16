@@ -23,10 +23,12 @@ MANIFEST
 
 # Virtual Environment
 .env
-.venv
+venv
 venv/
 ENV/
 env/
+../venv/*
+../venv
 
 # IDEs
 .vscode/
