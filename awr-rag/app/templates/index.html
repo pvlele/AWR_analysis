@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWR RAG Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .section.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button.secondary {
+            background-color: #95a5a6;
+        }
+
+        button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        button.danger {
+            background-color: #e74c3c;
+        }
+
+        button.danger:hover {
+            background-color: #c0392b;
+        }
+
+        .chat-container {
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .message.user {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .message.bot {
+            background-color: #f1f8e9;
+            border-left: 4px solid #8bc34a;
+        }
+
+        .message pre {
+            white-space: pre-wrap;
+            margin: 5px 0 0;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Markdown Styles */
+        .markdown-body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .markdown-body h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: .3em;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: .3em;
+        }
+
+        .markdown-body p {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body code {
+            padding: .2em .4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27, 31, 35, .05);
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        .markdown-body pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+        }
+
+        .markdown-body pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .markdown-body table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+    </style>
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AWR RAG Analysis</h1>
+
+        <!-- Step 1: Upload -->
+        <div id="uploadSection" class="section">
+            <h3 style="margin-top: 0;">1. Ingest Reports</h3>
+            <div class="form-group">
+                <label for="files">Upload AWR Reports (HTML/Text)</label>
+                <input type="file" id="files" name="files" multiple accept=".html,.txt">
+            </div>
+            <button onclick="ingestFiles()" id="ingestBtn">Process Files <div class="loader" id="ingestLoader"></div>
+            </button>
+            <div id="ingestStatus" style="margin-top: 10px; font-weight: bold;"></div>
+        </div>
+
+        <!-- Step 2: Chat -->
+        <div id="chatSection" class="section disabled">
+            <h3 style="margin-top: 0;">2. Analysis Chat</h3>
+
+            <div style="margin-bottom: 15px;">
+                <label for="modelSelect">Select Model:</label>
+                <select id="modelSelect"
+                    style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%; max-width: 300px;">
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+
+            <div class="chat-container" id="chatHistory"></div>
+
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <input type="text" id="query" placeholder="Ask a question about the reports..."
+                    onkeypress="handleEnter(event)">
+                <button onclick="sendQuery()" id="sendBtn">Send <div class="loader" id="chatLoader"></div></button>
+            </div>
+        </div>
+
+        <div style="text-align: right; margin-top: 20px;">
+            <button onclick="stopServer()" class="danger">Stop Server</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetch models on load
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/config');
+                const data = await response.json();
+                const select = document.getElementById('modelSelect');
+
+                data.models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    if (model === data.default_model) option.selected = true;
+                    select.appendChild(option);
+                });
+            } catch (e) {
+                console.error("Failed to load config:", e);
+            }
+        });
+
+        async function ingestFiles() {
+            const fileInput = document.getElementById('files');
+            const ingestBtn = document.getElementById('ingestBtn');
+            const loader = document.getElementById('ingestLoader');
+            const statusDiv = document.getElementById('ingestStatus');
+
+            if (fileInput.files.length === 0) {
+                alert("Please select at least one file.");
+                return;
+            }
+
+            const formData = new FormData();
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append("files", fileInput.files[i]);
+            }
+
+            ingestBtn.disabled = true;
+            loader.style.display = 'inline-block';
+            statusDiv.textContent = "Processing files... this may take a moment.";
+            statusDiv.style.color = "#333";
+
+            try {
+                const response = await fetch('/ingest', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                loader.style.display = 'none';
+                ingestBtn.disabled = false;
+
+                if (response.ok) {
+                    statusDiv.innerHTML = `${data.message} <br> <small>Processed: ${data.files.join(', ')}</small>`;
+                    statusDiv.style.color = "green";
+                    enableChat();
+                } else {
+                    statusDiv.textContent = `Error: ${data.error || 'Unknown error'}`;
+                    statusDiv.style.color = "red";
+                }
+
+            } catch (error) {
+                loader.style.display = 'none';
+                ingestBtn.disabled = false;
+                statusDiv.textContent = `Network Error: ${error.message}`;
+                statusDiv.style.color = "red";
+            }
+        }
+
+        function enableChat() {
+            document.getElementById('chatSection').classList.remove('disabled');
+            document.getElementById('chatHistory').style.display = 'block';
+            document.getElementById('query').focus();
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendQuery();
+        }
+
+        async function sendQuery() {
+            const queryInput = document.getElementById('query');
+            const chatHistory = document.getElementById('chatHistory');
+            const sendBtn = document.getElementById('sendBtn');
+            const loader = document.getElementById('chatLoader');
+
+            const question = queryInput.value.trim();
+            if (!question) return;
+
+            // Add User Message
+            appendMessage("User", question, "user");
+            queryInput.value = "";
+
+            sendBtn.disabled = true;
+            loader.style.display = 'inline-block';
+
+            const formData = new FormData();
+            formData.append("query", question);
+
+            const model = document.getElementById('modelSelect').value;
+            if (model) formData.append("model", model);
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                loader.style.display = 'none';
+                sendBtn.disabled = false;
+
+                if (response.ok) {
+                    appendMessage("AI (" + (data.model_used || "Default") + ")", data.answer, "bot");
+                } else {
+                    appendMessage("System", `Error: ${data.error}`, "bot");
+                }
+
+                // Scroll to bottom
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            } catch (error) {
+                loader.style.display = 'none';
+                sendBtn.disabled = false;
+                appendMessage("System", `Network Error: ${error.message}`, "bot");
+            }
+        }
+
+        function appendMessage(sender, text, type) {
+            const history = document.getElementById('chatHistory');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+
+            // Render Markdown if it's a bot message, otherwise plain text or allow markdown for user too
+            // For safety/style, usually user input is kept as text, bot output as markdown
+            const content = type === 'bot' ? marked.parse(text) : `<pre>${text}</pre>`;
+
+            div.innerHTML = `<strong>${sender}:</strong> <div class="markdown-body">${content}</div>`;
+            history.appendChild(div);
+            history.scrollTop = history.scrollHeight;
+        }
+
+        async function stopServer() {
+            if (!confirm("Are you sure you want to stop the server?")) return;
+            try {
+                await fetch('/shutdown', { method: 'POST' });
+                document.body.innerHTML = "<h1>Server Stopped</h1><p>You can close this tab.</p>";
+            } catch (e) {
+                alert("Error: " + e.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

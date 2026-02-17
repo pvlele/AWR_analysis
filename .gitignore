@@ -10,6 +10,7 @@
 !*.ps1
 !*.md
 !*.txt
+!*.html
 
 # --- Allow Config Files ---
 !.gitignore
