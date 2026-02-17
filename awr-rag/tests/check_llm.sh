@@ -31,10 +31,19 @@ EOF
 echo "Sending POST request to $URL..."
 echo "Payload: $DATA"
 
+# Load environment variables
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+PROJECT_ROOT=$(dirname "$SCRIPT_DIR")
+if [ -f "$PROJECT_ROOT/.env" ]; then
+    export $(grep -v '^#' "$PROJECT_ROOT/.env" | xargs)
+fi
+
+echo "Using Token: $TOKEN"
+
 # Send request
 curl -s \
     -H "Content-Type: application/json" \
-    -H "Authorization: Bearer my-token1" \
+    -H "Authorization: Bearer $TOKEN" \
     -H "User-Agent: AWR-RAG-Check/1.0" \
     -d "$DATA" "$URL" | head -n 20
 echo "" # Newline for formatting

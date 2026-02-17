@@ -16,12 +16,12 @@ load_dotenv()
 
 # Configuration
 TEST_MODELS = [
-    "ai/gemma3:4B-Q4_0",
-    "ai/llama3.1:8B-Q4_K_M"
+    "docker.io/ai/gemma3:4B",
+    "docker.io/ai/llama3.1:8B-Q4_K_M"
     # "llama3:8b", # Add other models here if available
 ]
 QUESTION = "Why was the database slow?"
-TEST_FILE = "data/raw/awr_report.html"
+TEST_FILE = "data/raw/OLTP_AWR_5PM_6PM_27_JAN_2015.HTML"
 
 # Monitor Class
 class ResourceMonitor(threading.Thread):

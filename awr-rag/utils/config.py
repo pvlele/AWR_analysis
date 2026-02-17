@@ -29,7 +29,7 @@ class Config:
     # Request Headers
     HEADERS = {
         "Authorization": f"Bearer {os.getenv('TOKEN', '')}",
-        # "User-Agent": "AWR-RAG-Client/1.0"
+        "Content-Type": "application/json"
     }
 
     # Ingestion Settings

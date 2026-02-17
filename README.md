@@ -135,3 +135,9 @@ Run the benchmark script to test ingestion and inference speed:
 ```bash
 .venv/bin/python tests/benchmark.py
 ```
+
+### Scripts in `tests/` directory
+
+- **`check_llm.sh`**: Verifies connectivity to the configured LLM endpoint (via proxy/app URL) using `curl`.
+- **`verify_ollama.py`**: Runs a full Python integration test (config loading, prompt construction, error handling) to ensure the app logic works with the LLM.
+- **`benchmark.py`**: Measures performance of report ingestion (load/split/chunk) and generation speed/resource usage across different models.
