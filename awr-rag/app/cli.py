@@ -27,108 +27,128 @@ def main():
         required=False
     )
     parser.add_argument("-q", "--query", type=str, help="Analysis question", required=False)
-    # Maintain backward compatibility if possible or just rely on args
+    parser.add_argument("--no-ingest", action="store_true", help="Skip ingestion and use existing vector store.", required=False)
+    parser.add_argument("--model", type=str, help=f"Model to use (default: {Config.MODEL_NAME})", required=False)
     
     args = parser.parse_args()
     
     files = args.files
     question = args.query
+    skip_ingest = args.no_ingest
+    model_name = args.model or Config.MODEL_NAME
     
-    # 1. If no files provided, default to 'data/raw' directory
-    if not files:
-        default_dir = "data/raw"
-        if os.path.isdir(default_dir):
-            logger.info(f"No files specified. Scanning default directory: {default_dir}")
-            files = [default_dir]
-        else:
-            logger.error(f"No files specified and default directory '{default_dir}' not found.")
-            parser.print_help()
-            sys.exit(1)
-
-    # 2. Expand directories in 'files' list
+    # 1. Expand files IF NOT skipping ingest
     expanded_files = []
-    for path in files:
-        if os.path.isfile(path):
-            expanded_files.append(path)
-        elif os.path.isdir(path):
-            logger.info(f"Scanning directory: {path}")
-            for root, dirs, filenames in os.walk(path):
-                for filename in filenames:
-                    if filename.lower().endswith(('.html', '.txt')):
-                        full_path = os.path.join(root, filename)
-                        expanded_files.append(full_path)
-        else:
-            logger.warning(f"Path not found: {path}")
+    
+    if not skip_ingest:
+        # If no files provided and not skipping ingest, default to 'data/raw'
+        if not files:
+            default_dir = "data/raw"
+            if os.path.isdir(default_dir):
+                logger.info(f"No files specified. Scanning default directory: {default_dir}")
+                files = [default_dir]
+            else:
+                logger.error(f"No files specified and default directory '{default_dir}' not found.")
+                parser.print_help()
+                sys.exit(1)
+
+        # Expand directories
+        for path in files:
+            if os.path.isfile(path):
+                expanded_files.append(path)
+            elif os.path.isdir(path):
+                logger.info(f"Scanning directory: {path}")
+                for root, dirs, filenames in os.walk(path):
+                    for filename in filenames:
+                        if filename.lower().endswith(('.html', '.txt')):
+                            full_path = os.path.join(root, filename)
+                            expanded_files.append(full_path)
+            else:
+                logger.warning(f"Path not found: {path}")
+                
+        if not expanded_files:
+            logger.error("No valid AWR files (html/txt) found.")
+            sys.exit(1)
             
-    if not expanded_files:
-        logger.error("No valid AWR files (html/txt) found.")
-        sys.exit(1)
-        
-    logger.info(f"Found {len(expanded_files)} files to process: {expanded_files}")
+        logger.info(f"Found {len(expanded_files)} files to process: {expanded_files}")
 
     logger.info("Starting AWR Analysis...")
-    try:
-        # Iterate files and ingest individually
-        all_chunks = []
-        file_snapshot_map = [] # Track which file maps to which snapshot ID
+    
+    file_snapshot_map = [] # Track which file maps to which snapshot ID
 
-        for idx, file_path in enumerate(expanded_files):
-            try:
-                logger.info(f"Ingesting {file_path}...")
-                
-                # 1. Load content for metadata extraction
-                raw_text = load_awr(file_path)
-                
-                # 2. Extract metadata
-                meta = extract_metadata(raw_text)
-                
-                # Generate a simple snapshot ID based on index or file name
-                # Required for comparison identification
-                snap_id = f"snap_{idx+1}"
-                file_snapshot_map.append(snap_id)
+    if not skip_ingest:
+        logger.info("Ingestion Mode: Active")
+        try:
+            # Iterate files and ingest individually
+            all_chunks = []
 
-                # 3. Map to expected keys
-                ingest_meta = {
-                    "db_name": meta.get("db_name", "UNKNOWN"),
-                    "instance": "1",
-                    "snap_begin": meta.get("start_time"),
-                    "snap_end": meta.get("end_time"),
-                    "snapshot_id": snap_id 
-                }
-                
-                # 4. Ingest
-                file_chunks = ingest_awr(file_path, ingest_meta)
-                all_chunks.extend(file_chunks)
-                
-            except Exception as e:
-                logger.error(f"Failed to ingest {file_path}: {e}")
+            for idx, file_path in enumerate(expanded_files):
+                try:
+                    logger.info(f"Ingesting {file_path}...")
+                    
+                    # 1. Load content for metadata extraction
+                    raw_text = load_awr(file_path)
+                    
+                    # 2. Extract metadata
+                    meta = extract_metadata(raw_text)
+                    
+                    # Generate a simple snapshot ID based on index or file name
+                    snap_id = f"snap_{idx+1}"
+                    file_snapshot_map.append(snap_id)
 
-        if not all_chunks:
-            logger.error("No chunks generated from input files.")
+                    # 3. Map to expected keys
+                    ingest_meta = {
+                        "db_name": meta.get("db_name", "UNKNOWN"),
+                        "instance": "1",
+                        "snap_begin": meta.get("start_time"),
+                        "snap_end": meta.get("end_time"),
+                        "snapshot_id": snap_id 
+                    }
+                    
+                    # 4. Ingest
+                    file_chunks = ingest_awr(file_path, ingest_meta)
+                    all_chunks.extend(file_chunks)
+                    
+                except Exception as e:
+                    logger.error(f"Failed to ingest {file_path}: {e}")
+
+            if not all_chunks:
+                logger.error("No chunks generated from input files.")
+                return
+
+            chunks = all_chunks
+                
+        except Exception as e:
+            logger.error(f"Ingestion failed: {e}")
             return
 
-        chunks = all_chunks
+        try:
+            embedder = Embedder()
+            # If ingesting fresh data, we recreate the collection
+            store = VectorStore(recreate=True)
+
+            logger.info("Generating embeddings...")
+            embeddings = embedder.embed([c["text"] for c in chunks])
+            store.upsert(embeddings, chunks)
             
-    except Exception as e:
-        logger.error(f"Ingestion failed: {e}")
-        return
-
-    try:
-        embedder = Embedder()
-        store = VectorStore(recreate=True)
-
-        logger.info("Generating embeddings...")
-        embeddings = embedder.embed([c["text"] for c in chunks])
-        store.upsert(embeddings, chunks)
-        
-    except Exception as e:
-        logger.error(f"Embedding/Storage failed: {e}")
-        return
+        except Exception as e:
+            logger.error(f"Embedding/Storage failed: {e}")
+            return
+            
+    else:
+        logger.info("Ingestion Mode: Skipped (Using existing Vector Store)")
+        try:
+            embedder = Embedder()
+            # If skipping ingest, DO NOT recreate collection. Reuse existing.
+            store = VectorStore(recreate=False) 
+        except Exception as e:
+            logger.error(f"Failed to initialize store/embedder for query mode: {e}")
+            return
 
     # Interactive Loop
     if question:
         # Initial question if provided
-        process_question(question, store, embedder, file_snapshot_map)
+        process_question(question, store, embedder, file_snapshot_map, model_name)
     else:
         print("\nReady for analysis. Type 'exit' or 'quit' to stop.\n")
 
@@ -143,7 +163,7 @@ def main():
             if not user_input:
                 continue
 
-            process_question(user_input, store, embedder, file_snapshot_map)
+            process_question(user_input, store, embedder, file_snapshot_map, model_name)
         
         except KeyboardInterrupt:
             print("\nExiting...")
@@ -151,7 +171,7 @@ def main():
         except Exception as e:
             logger.error(f"Error processing question: {e}")
 
-def process_question(question, store, embedder, snapshot_ids):
+def process_question(question, store, embedder, snapshot_ids, model_name=None):
     queries = rewrite(question)
     logger.info(f"Generated queries: {queries}")
 
@@ -188,7 +208,7 @@ def process_question(question, store, embedder, snapshot_ids):
 
     logger.info(f"Retrieved {count} chunks.")
 
-    answer = analyze(question, results)
+    answer = analyze(question, results, model_name=model_name)
     
     save_report(answer, question)
 

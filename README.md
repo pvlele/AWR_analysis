@@ -80,14 +80,31 @@ You can also run it directly via Python:
 To analyze specific files instead of scanning the default directory, use the `--files` argument:
 
 *   **Single File:**
-    ```bash
-    .venv/bin/python -m app.cli --files /path/to/report.html
-    ```
+### 3. Run the CLI
+The CLI supports ingesting files and answering questions. It now supports persistent storage, so you don't need to re-ingest every time.
 
-*   **Multiple Files:**
-    ```bash
-    .venv/bin/python -m app.cli --files report1.html report2.txt /path/to/another/report.html
-    ```
+**Basic Usage (Ingest & Analyze):**
+```bash
+python -m app.cli --files data/raw/my_report.html -q "What are the top wait events?"
+```
+
+**Query Only (Skip Ingestion):**
+If you have already ingested data, use `--no-ingest` to query the existing vector database.
+```bash
+python -m app.cli --no-ingest -q "Show me the IO statistics"
+```
+
+**Specify Model:**
+You can override the default model defined in `config.py` using the `--model` flag.
+```bash
+python -m app.cli --no-ingest --model "docker.io/ai/gemma3:4B" -q "Summarize the load profile"
+```
+
+**Comparison Mode:**
+To compare two snapshots, pass both files (or a directory containing them). The tool detects if you are asking for a comparison.
+```bash
+python -m app.cli --files snap1.html snap2.html -q "Compare these two snapshots"
+```
 
 ### 3. Troubleshooting
 
