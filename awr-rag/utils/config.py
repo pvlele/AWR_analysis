@@ -45,6 +45,9 @@ class Config:
     # Offline Mode Settings
     HF_HUB_OFFLINE = 1
     TRANSFORMERS_OFFLINE = 1
+    
+    # Web Settings
+    UPLOAD_DIR = "data/uploads"
 
 # Set environment variables for libraries that read them directly
 os.environ["HF_HUB_OFFLINE"] = str(Config.HF_HUB_OFFLINE)

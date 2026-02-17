@@ -18,6 +18,7 @@ from retrieval.query_rewriter import rewrite
 from retrieval.retriever import Retriever
 from reasoning.analyzer import analyze
 from utils.logger import setup_logger
+from utils.config import Config
 
 logger = setup_logger("webapp")
 
@@ -27,8 +28,7 @@ app = FastAPI(title="AWR RAG Analysis")
 templates = Jinja2Templates(directory="app/templates")
 
 # Ensure temp directory for uploads exists
-UPLOAD_DIR = "data/uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(Config.UPLOAD_DIR, exist_ok=True)
 
 # Global state for interactive mode
 store = None
@@ -54,7 +54,7 @@ async def ingest_files(files: List[UploadFile] = File(...)):
     try:
         # 1. Save uploaded files
         for file in files:
-            file_path = os.path.join(UPLOAD_DIR, file.filename)
+            file_path = os.path.join(Config.UPLOAD_DIR, file.filename)
             with open(file_path, "wb") as buffer:
                 shutil.copyfileobj(file.file, buffer)
             saved_file_paths.append(file_path)
