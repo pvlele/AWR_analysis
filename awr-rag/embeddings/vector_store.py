@@ -1,9 +1,13 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct, VectorParams, Distance
+from utils.config import Config
 
 class VectorStore:
     def __init__(self, collection_name="awr", recreate=True):
-        self.client = QdrantClient(":memory:")
+        if hasattr(Config, "VECTOR_STORE_PATH") and Config.VECTOR_STORE_PATH:
+             self.client = QdrantClient(path=Config.VECTOR_STORE_PATH)
+        else:
+             self.client = QdrantClient(":memory:")
         self.collection_name = collection_name
         self.recreate_on_next_upsert = recreate
         self._current_dimension = None

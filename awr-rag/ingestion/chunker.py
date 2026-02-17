@@ -2,31 +2,7 @@ import re
 from bs4 import BeautifulSoup
 from utils.config import Config
 
-def _table_to_markdown(table) -> str:
-    """
-    Convert HTML table to markdown-like text (pipe separated).
-    Copied from awr_parser to handle raw HTML chunks.
-    """
-    lines = []
-    rows = table.find_all('tr')
-    for tr in rows:
-        cells = tr.find_all(['th', 'td'])
-        if not cells:
-            continue
-        row_values = []
-        truncated = False
-        for cell in cells:
-            text = cell.get_text(separator=" ", strip=True)
-            text = text.replace("|", "/").replace("\n", " ")
-            if len(text) > 100:
-                text = text[:100] + "..."
-                truncated = True
-            row_values.append(text)
-        row_text = "| " + " | ".join(row_values) + " |"
-        lines.append(row_text)
-        if truncated:
-            lines.append("HAS_FULL_SQL_FLAG: True")
-    return "\n".join(lines)
+from utils.text_utils import table_to_markdown
 
 def _clean_html_fragment(text: str) -> str:
     """
@@ -42,7 +18,7 @@ def _clean_html_fragment(text: str) -> str:
              return text # No tables, maybe just return text
              
         for table in soup.find_all("table"):
-            markdown_table = _table_to_markdown(table)
+            markdown_table = table_to_markdown(table)
             replacement = f"\n{markdown_table}\n"
             table.replace_with(soup.new_string(replacement))
             
@@ -87,8 +63,8 @@ def _process_sql_section(text: str, section_name: str) -> str:
                 new_parts = []
                 truncated_in_line = False
                 for p in parts:
-                    if len(p) > 100:
-                        new_parts.append(p[:100] + "...")
+                    if len(p) > Config.SQL_PREVIEW_LENGTH:
+                        new_parts.append(p[:Config.SQL_PREVIEW_LENGTH] + "...")
                         truncated_in_line = True
                     else:
                         new_parts.append(p)
@@ -100,8 +76,8 @@ def _process_sql_section(text: str, section_name: str) -> str:
             if current_sql_buffer:
                 full_sql = "\n".join(current_sql_buffer).strip()
                 if full_sql:
-                    if len(full_sql) > 100:
-                        preview = full_sql[:100] + "..."
+                    if len(full_sql) > Config.SQL_PREVIEW_LENGTH:
+                        preview = full_sql[:Config.SQL_PREVIEW_LENGTH] + "..."
                         new_lines.append(f"SQL Preview: {preview}")
                         new_lines.append("HAS_FULL_SQL_FLAG: True")
                     else:
@@ -120,8 +96,8 @@ def _process_sql_section(text: str, section_name: str) -> str:
                      if current_sql_buffer:
                         full_sql = "\n".join(current_sql_buffer).strip()
                         if full_sql:
-                            if len(full_sql) > 100:
-                                preview = full_sql[:100] + "..."
+                            if len(full_sql) > Config.SQL_PREVIEW_LENGTH:
+                                preview = full_sql[:Config.SQL_PREVIEW_LENGTH] + "..."
                                 new_lines.append(f"SQL Preview: {preview}")
                                 new_lines.append("HAS_FULL_SQL_FLAG: True")
                             else:
@@ -137,8 +113,8 @@ def _process_sql_section(text: str, section_name: str) -> str:
     if current_sql_buffer:
         full_sql = "\n".join(current_sql_buffer).strip()
         if full_sql:
-            if len(full_sql) > 100:
-                preview = full_sql[:100] + "..."
+            if len(full_sql) > Config.SQL_PREVIEW_LENGTH:
+                preview = full_sql[:Config.SQL_PREVIEW_LENGTH] + "..."
                 new_lines.append(f"SQL Preview: {preview}")
                 new_lines.append("HAS_FULL_SQL_FLAG: True")
             else:
@@ -227,104 +203,151 @@ def create_chunks(sections: dict, metadata: dict) -> list:
             else:
                 lines.append(l)
         
-        # Identify Sticky Header (first line starting with |)
-        sticky_header = None
-        for l in lines[:10]:
-            if l.strip().startswith("|"):
-                sticky_header = l
-                break
-        
-        current_chunk_lines = []
-        current_char_count = 0
-        chunk_idx = 0
-        
-        i = 0
-        while i < len(lines):
-            line = lines[i]
-            line_len = len(line) + 1 # +1 for newline
+def _create_chunks_from_lines(lines: list, section: str, metadata: dict, max_char: int, overlap: int) -> list:
+    chunks = []
+    
+    # Identify Sticky Header (first line starting with |)
+    sticky_header = None
+    for l in lines[:10]:
+        if l.strip().startswith("|"):
+            sticky_header = l
+            break
             
-            # If adding this line exceeds max char, flush current chunk
-            if current_char_count + line_len > MAX_CHAR:
-                # Need to flush if we have content
-                if current_chunk_lines:
-                    chunk_text = "\n".join(current_chunk_lines)
-                    final_text, final_meta = _finalize_chunk(chunk_text, {
-                        **metadata,
-                        "section": section,
-                        "chunk_index": chunk_idx,
-                        "type": "AWR"
-                    })
-                    chunks.append({
-                        "text": final_text,
-                        "metadata": final_meta
-                    })
-                    chunk_idx += 1
+    current_chunk_lines = []
+    current_char_count = 0
+    chunk_idx = 0
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        line_len = len(line) + 1 # +1 for newline
+        
+        # If adding this line exceeds max char, flush current chunk
+        if current_char_count + line_len > max_char:
+            # Need to flush if we have content
+            if current_chunk_lines:
+                chunk_text = "\n".join(current_chunk_lines)
+                final_text, final_meta = _finalize_chunk(chunk_text, {
+                    **metadata,
+                    "section": section,
+                    "chunk_index": chunk_idx,
+                    "type": "AWR"
+                })
+                chunks.append({
+                    "text": final_text,
+                    "metadata": final_meta
+                })
+                chunk_idx += 1
+                
+                # Calculate overlap by backtracking
+                backtrack_chars = 0
+                overlap_lines = []
+                j = i - 1
+                while j >= 0:
+                    l = lines[j]
+                    l_len = len(l) + 1
                     
-                    # Calculate overlap by backtracking
-                    backtrack_chars = 0
-                    overlap_lines = []
-                    j = i - 1
-                    while j >= 0:
-                        l = lines[j]
-                        l_len = len(l) + 1
-                        
-                        if backtrack_chars + l_len > OVERLAP and backtrack_chars > 0:
-                            break
+                    if backtrack_chars + l_len > overlap and backtrack_chars > 0:
+                        break
 
-                        backtrack_chars += l_len
-                        overlap_lines.insert(0, l)
-                        
-                        if backtrack_chars >= OVERLAP:
-                            break
-                        j -= 1
+                    backtrack_chars += l_len
+                    overlap_lines.insert(0, l)
                     
-                    current_chunk_lines = list(overlap_lines)
-                    current_char_count = backtrack_chars
-                    
-                    # Add sticky header if applicable
-                    if sticky_header:
-                        if sticky_header not in current_chunk_lines:
-                            h_len = len(sticky_header) + 1
-                            if current_char_count + h_len <= MAX_CHAR:
-                                current_chunk_lines.insert(0, sticky_header)
-                                current_char_count += h_len
+                    if backtrack_chars >= overlap:
+                        break
+                    j -= 1
+                
+                current_chunk_lines = list(overlap_lines)
+                current_char_count = backtrack_chars
+                
+                # Add sticky header if applicable
+                if sticky_header:
+                    if sticky_header not in current_chunk_lines:
+                        h_len = len(sticky_header) + 1
+                        if current_char_count + h_len <= max_char:
+                            current_chunk_lines.insert(0, sticky_header)
+                            current_char_count += h_len
 
-                    # Handle overflow on single line
-                    if current_char_count + line_len > MAX_CHAR:
-                         # Retry with just sticky header + line
-                         current_chunk_lines = []
-                         current_char_count = 0
-                         if sticky_header:
-                             current_chunk_lines.append(sticky_header)
-                             current_char_count += len(sticky_header) + 1
-                         
-                         if current_char_count + line_len > MAX_CHAR:
-                             pass
-                    
-                    current_chunk_lines.append(line)
-                    current_char_count += line_len
-                    i += 1
-                else:
-                    current_chunk_lines.append(line)
-                    current_char_count += line_len
-                    i += 1
+                # Handle overflow on single line
+                if current_char_count + line_len > max_char:
+                     # Retry with just sticky header + line
+                     current_chunk_lines = []
+                     current_char_count = 0
+                     if sticky_header:
+                         current_chunk_lines.append(sticky_header)
+                         current_char_count += len(sticky_header) + 1
+                     
+                     if current_char_count + line_len > max_char:
+                         pass
+                
+                current_chunk_lines.append(line)
+                current_char_count += line_len
+                i += 1
             else:
                 current_chunk_lines.append(line)
                 current_char_count += line_len
                 i += 1
-                
-        # Flush the last chunk
-        if current_chunk_lines:
-            chunk_text = "\n".join(current_chunk_lines)
-            final_text, final_meta = _finalize_chunk(chunk_text, {
+        else:
+            current_chunk_lines.append(line)
+            current_char_count += line_len
+            i += 1
+            
+    # Flush the last chunk
+    if current_chunk_lines:
+        chunk_text = "\n".join(current_chunk_lines)
+        final_text, final_meta = _finalize_chunk(chunk_text, {
+            **metadata,
+            "section": section,
+            "chunk_index": chunk_idx,
+            "type": "AWR"
+        })
+        chunks.append({
+            "text": final_text,
+            "metadata": final_meta
+        })
+
+    return chunks
+
+def create_chunks(sections: dict, metadata: dict) -> list:
+    chunks = []
+    MAX_CHAR = Config.CHUNK_SIZE
+    OVERLAP = Config.CHUNK_OVERLAP
+
+    for section, text in sections.items():
+        # Pre-process SQL sections to optimize tokens
+        text = _process_sql_section(text, section)
+        
+        text = text.strip()
+        if not text:
+            continue
+            
+        # Check if text is small enough
+        if len(text) <= MAX_CHAR:
+             final_text, final_meta = _finalize_chunk(text, {
                 **metadata,
                 "section": section,
-                "chunk_index": chunk_idx,
+                "chunk_index": 0,
                 "type": "AWR"
-            })
-            chunks.append({
+             })
+             chunks.append({
                 "text": final_text,
                 "metadata": final_meta
             })
+             continue
+
+        # Pre-process lines to split overly long lines
+        raw_lines = text.splitlines()
+        lines = []
+        for l in raw_lines:
+            if len(l) > MAX_CHAR:
+                # Split huge line into chunks of MAX_CHAR
+                for k in range(0, len(l), MAX_CHAR):
+                    lines.append(l[k:k+MAX_CHAR])
+            else:
+                lines.append(l)
+        
+        # Use helper for complex loop
+        section_chunks = _create_chunks_from_lines(lines, section, metadata, MAX_CHAR, OVERLAP)
+        chunks.extend(section_chunks)
 
     return chunks

@@ -35,6 +35,7 @@ class Config:
     # Ingestion Settings
     CHUNK_SIZE = 2000
     CHUNK_OVERLAP = 150
+    SQL_PREVIEW_LENGTH = 100
 
     # Retrieval Settings
     RETRIEVAL_LIMIT = 8

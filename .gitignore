@@ -1,65 +1,46 @@
-# Python
+# --- Deny All ---
+*
+
+# --- Whitelist Directories to Allow Recursion ---
+!*/
+
+# --- Whitelist Allowed Extensions ---
+!*.py
+!*.sh
+!*.ps1
+!*.md
+!*.txt
+
+# --- Allow Config Files ---
+!.gitignore
+!requirements.txt
+
+# --- Explicitly Re-Ignore Build/Env/Data Directories ---
+# (To prevent tracking venv, caches, and generated data)
+.venv/
+venv/
+env/
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
+.pytest_cache/
+.coverage
+htmlcov/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
+build/
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# Virtual Environment
+# --- Ignore Secrets & Local Config ---
 .env
-venv/
-venv
-ENV/
-env/
-.venv/
 
-# Agent
+# --- Ignore Project Data & Logs ---
+awr-rag/data/
+awr-rag/logs/
+awr-rag/outputs/
+qdrant_data/
 .agent/
-
-# IDEs
+.git/
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# Project Data (awr-rag)
-awr-rag/data/raw/*
-!awr-rag/data/raw/.gitkeep
-awr-rag/data/processed/*
-!awr-rag/data/processed/.gitkeep
-awr-rag/data/embeddings/*
-!awr-rag/data/embeddings/.gitkeep
-
-# System
 .DS_Store
-Thumbs.db
-
-# Outputs
-awr-rag/outputs/*
-
-# Logs and generated files
-*.txt
-*.html
-*.log
 awr_chunks.json
-**/awr_chunks.json
-
-# Specific files
-app.log
-awr_chunk.json
+awr-rag/data/processed/awr_chunks.json
