@@ -44,3 +44,4 @@ qdrant_data/
 .DS_Store
 awr_chunks.json
 awr-rag/data/processed/awr_chunks.json
+awr-rag/data/processed/awr_chunks.json
