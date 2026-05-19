@@ -2,9 +2,9 @@ import re
 
 AWR_SECTIONS = [
     "Load Profile",
-    "Instance Efficiency Percentages",
-    "Top 10 Foreground Events by Total Wait Time",
-    "Top 5 Timed Foreground Events",
+    "Efficiency Percentages",
+    "Top 10 Foreground Events",
+    "Top 5 Timed",
     "Top Timed Events",
     "Time Model Statistics",
     "Foreground Wait Class",
@@ -16,8 +16,10 @@ AWR_SECTIONS = [
     "IO Statistics",
     "Segment Statistics",
     "Memory Statistics",
-    "Dictionary Cache Statistics",
-    "Library Cache Statistics"
+    "Dictionary Cache",
+    "Library Cache",
+    "Global Cache",
+    "Exadata"
 ]
 
 def split_sections(awr_text: str) -> dict:

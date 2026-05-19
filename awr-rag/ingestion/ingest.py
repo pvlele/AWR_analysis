@@ -19,7 +19,7 @@ def ingest_awr(file_path: str, metadata: dict):
             "instance": metadata.get("instance", 1),
             "snap_begin": metadata.get("snap_begin"),
             "snap_end": metadata.get("snap_end"),
-            "snapshot_id": metadata.get("snapshot_id", "UNKNOWN"), # Unique ID for comparison
+            "filename": metadata.get("filename", "UNKNOWN"), # Unique ID for comparison
         }
     )
 

@@ -26,14 +26,14 @@ class Retriever:
         self.embedder = Embedder()
         self.max_chunks = max_chunks
 
-    def retrieve(self, queries: list, snapshot_ids: list = None) -> list:
+    def retrieve(self, queries: list, filenames: list = None) -> list:
         # Detect intent from the queries
         combined_text = " ".join(queries)
         intent = detect_intent(combined_text)
         is_comparison = False
         
         # Check if we are in comparison mode
-        if snapshot_ids and len(snapshot_ids) == 2:
+        if filenames and len(filenames) == 2:
             is_comparison = True
 
         if is_comparison:
@@ -97,12 +97,12 @@ class Retriever:
         
         results_by_snapshot = {}
         if is_comparison:
-             results_by_snapshot = {sid: [] for sid in snapshot_ids}
+             results_by_snapshot = {sid: [] for sid in filenames}
 
         for h in collected_unique:
             section = h.payload["metadata"]["section"]
             title = section.lower() if section else ""
-            sid = h.payload["metadata"].get("snapshot_id")
+            sid = h.payload["metadata"].get("filename")
 
             # Intent-based Restriction
             keep = True

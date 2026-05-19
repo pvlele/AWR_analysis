@@ -93,16 +93,16 @@ def main():
                     meta = extract_metadata(raw_text)
                     
                     # Generate a simple snapshot ID based on index or file name
-                    snap_id = f"snap_{idx+1}"
-                    file_snapshot_map.append(snap_id)
+                    filename = os.path.basename(file_path)
+                    file_snapshot_map.append(filename)
 
                     # 3. Map to expected keys
                     ingest_meta = {
-                        "db_name": meta.get("db_name", "UNKNOWN"),
-                        "instance": "1",
+                        "db_name": meta.get("db_name") or "UNKNOWN",
+                        "instance": meta.get("instance") or "1",
                         "snap_begin": meta.get("start_time"),
                         "snap_end": meta.get("end_time"),
-                        "snapshot_id": snap_id 
+                        "filename": filename 
                     }
                     
                     # 4. Ingest
@@ -171,7 +171,7 @@ def main():
         except Exception as e:
             logger.error(f"Error processing question: {e}")
 
-def process_question(question, store, embedder, snapshot_ids, model_name=None):
+def process_question(question, store, embedder, filenames, model_name=None):
     queries = rewrite(question)
     logger.info(f"Generated queries: {queries}")
 
@@ -179,11 +179,11 @@ def process_question(question, store, embedder, snapshot_ids, model_name=None):
     from retrieval.retriever import is_comparison_question
     
     # Check modification for comparison
-    use_comparison = is_comparison_question(question) and len(snapshot_ids) == 2
+    use_comparison = is_comparison_question(question) and len(filenames) == 2
     
     if use_comparison:
-        print(f"Comparison mode detected between {snapshot_ids[0]} and {snapshot_ids[1]}")
-        results = retriever.retrieve(queries, snapshot_ids=snapshot_ids)
+        print(f"Comparison mode detected between {filenames[0]} and {filenames[1]}")
+        results = retriever.retrieve(queries, filenames=filenames)
         # Results is a dict
         
         print("\nRetrieved chunks for Comparison:")

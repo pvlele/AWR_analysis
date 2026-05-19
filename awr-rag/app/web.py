@@ -63,16 +63,20 @@ async def ingest_files(files: List[UploadFile] = File(...)):
 
         # 2. Ingest
         all_chunks = []
-        for file_path in saved_file_paths:
+        for idx, file_path in enumerate(saved_file_paths):
             try:
                 raw_text = load_awr(file_path)
                 meta = extract_metadata(raw_text)
                 
+                # Generate a unique snapshot_id for comparison later
+                filename = os.path.basename(file_path)
+                
                 ingest_meta = {
-                    "db_name": meta.get("db_name", "UNKNOWN"),
-                    "instance": "1",
+                    "db_name": meta.get("db_name") or "UNKNOWN",
+                    "instance": meta.get("instance") or "1",
                     "snap_begin": meta.get("start_time"),
-                    "snap_end": meta.get("end_time")
+                    "snap_end": meta.get("end_time"),
+                    "filename": filename
                 }
                 
                 file_chunks = ingest_awr(file_path, ingest_meta)
@@ -120,7 +124,16 @@ async def chat(query: str = Form(...), model: str = Form(None)):
         # 4. Retrieval
         queries = rewrite(query)
         retriever = Retriever(store)
-        results = retriever.retrieve(queries)
+        from retrieval.retriever import is_comparison_question
+        
+        # Enable comparison mode if comparing exactly 2 files
+        use_comparison = is_comparison_question(query) and len(processed_files_list) == 2
+        
+        if use_comparison:
+            logger.info(f"Comparison mode activated for {processed_files_list}")
+            results = retriever.retrieve(queries, filenames=processed_files_list)
+        else:
+            results = retriever.retrieve(queries)
         
         # 5. Analysis
         # Use provided model or default

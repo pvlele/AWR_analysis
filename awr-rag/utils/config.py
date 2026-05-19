@@ -8,11 +8,10 @@ class Config:
     # MODEL_BASE_URL = "http://localhost:11434/api/chat"
     MODEL_BASE_URL = "http://localhost:12435/v1/"
     MODEL_API_PATH = "chat/completions"
-    MODEL_NAME = "docker.io/ai/llama3.1:8B-Q4_K_M"
+    MODEL_NAME = "docker.io/ai/gemma3:4B"
     AVAILABLE_MODELS = [
         "docker.io/ai/llama3.1:8B-Q4_K_M",
-        "docker.io/ai/gemma3:4B",
-        "docker.io/ai/smollm2:latest"
+        "docker.io/ai/gemma3:4B"
     ]
     TIMEOUT = 1200
     
@@ -33,13 +32,13 @@ class Config:
     }
 
     # Ingestion Settings
-    CHUNK_SIZE = 2000
-    CHUNK_OVERLAP = 150
+    CHUNK_SIZE = 1000
+    CHUNK_OVERLAP = 100
     SQL_PREVIEW_LENGTH = 100
 
     # Retrieval Settings
-    RETRIEVAL_LIMIT = 8
-    QUERIES_PER_SEARCH = 10
+    RETRIEVAL_LIMIT = 4
+    QUERIES_PER_SEARCH = 6
     VECTOR_STORE_PATH = "./qdrant_data"
 
     # Offline Mode Settings

@@ -5,7 +5,7 @@ from utils.text_utils import table_to_markdown
 def load_awr(file_path: str) -> str:
     path = Path(file_path)
 
-    if path.suffix.lower() == ".html":
+    if "html" in path.suffix.lower():
         return _parse_html(path)
     else:
         return path.read_text(encoding="utf-8", errors="ignore")
